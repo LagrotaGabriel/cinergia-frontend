@@ -1,0 +1,92 @@
+@import '../../../dist/variables.scss';
+
+.container {
+    background-color: $dark-black;
+    height: calc(100vh - 56px);
+    padding: 0;
+}
+
+.sidenav {
+    height: 100%;
+    background-color: $light-black;
+    width: 3.5rem;
+    padding: 0.5rem 0;
+}
+
+/* CONTAINER ENVOLVENDO O ÍCONE, O NOME E O STATUS DO USUÁRIO */
+.avatar_container {
+    display: flex;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+/* ITEM ENVOLVENDO ÍCONE E TEXTO DO ÍCONE */
+.sidenav_item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+/* ÍCONE DO MENU LATERAL */
+.sidenav_icon {
+    padding: 0;
+    width: 1.5rem;
+    color: $light-grey;
+    margin: 0;
+}
+
+/* TEXTO DOS ÍCONES MENU LATERAL */
+.icon_text {
+    float: flex;
+    margin: 0;
+    color: $light-grey;
+    font-size: 1rem;
+    pointer-events: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+/* PROPRIEDADE DO ITEM LATERAL ATIVO */
+.titulo_item_ativo, .icone_ativo {
+    color: $light-white;
+}
+
+/* CONTEUDO PRINCIPAL */
+.conteudo {
+    padding: 1.5rem 2.5rem;
+}
+
+@media (max-width: 850px) {
+    .conteudo {
+        padding: 1.5rem 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .conteudo {
+        padding: 1.3rem 1.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .conteudo {
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .conteudo {
+        padding: 0.80rem 1.2rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .conteudo {
+        padding: 0.50rem 1rem;
+    }
+}

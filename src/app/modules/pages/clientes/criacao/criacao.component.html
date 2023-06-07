@@ -1,0 +1,55 @@
+<div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8">
+
+    <h1 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        {{ titulo }}
+    </h1>
+
+    <hr class="hr">
+
+    <mat-horizontal-stepper (selectionChange)="mudaPasso($event)" linear #stepper>
+
+        <ng-template matStepperIcon="edit">
+            <i class="fa fa-check"></i>
+        </ng-template>
+
+        <ng-template matStepperIcon="number">
+            <i class="fa fa-fire"></i>
+        </ng-template>
+
+        <!-- PRIMEIRA ETAPA: CADASTRO DE DADOS DO CLIENTE -->
+        <mat-step [stepControl]="dadosCliente" editable="true">
+            <ng-template matStepLabel>
+                <span>Dados</span>
+            </ng-template>
+            <app-dados-pessoais [stepAtual]="stepAtual" [setupDadosAtualizacao]="clientePreAtualizacao ? clientePreAtualizacao : null"
+                (emissorDeEnderecoEncontradoNoCnpj)="recebeEnderecoEncontradoNoCnpj($event)"
+                (emissorDeTelefoneEncontradoNoCnpj)="recebeTelefoneEncontradoNoCnpj($event)"
+                (emissorDeDadosPessoaisDoCliente)="recebeFormGroupDadosPessoais($event)"></app-dados-pessoais>
+        </mat-step>
+
+        <!-- SEGUNDA ETAPA: CADASTRO DE TELEFONE -->
+        <mat-step [stepControl]="dadosTelefone" editable="true">
+            <ng-template matStepLabel>
+                <span>Telefone</span>
+            </ng-template>
+            <app-dados-telefone [stepAtual]="stepAtual"
+                [setupTelefoneAtualizacao]="clientePreAtualizacao ? clientePreAtualizacao.telefone : null"
+                [telefoneEncontradoNoCnpj]="telefoneBuscadoCnpj"
+                (emissorDeDadosDeTelefoneDoCliente)="recebeFormGroupDadosTelefone($event)"></app-dados-telefone>
+        </mat-step>
+
+        <!-- TERCEIRA ETAPA: CADASTRO DE ENDEREÇO -->
+        <mat-step [stepControl]="dadosEndereco" editable="true">
+            <ng-template matStepLabel>
+                <span>Endereço</span>
+            </ng-template>
+            <app-dados-endereco [stepAtual]="stepAtual"
+                [setupEnderecoAtualizacao]="clientePreAtualizacao ? clientePreAtualizacao.endereco : null"
+                [enderecoEncontradoNoCnpj]="enderecoBuscadoCnpj"
+                (emissorDeSolicitacaoDeEnvioDeFormulario)="direcionaEnvioDeFormulario()"
+                (emissorDeDadosDeEnderecoDoCliente)="recebeFormGroupDadosEndereco($event)"></app-dados-endereco>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+
+</div>

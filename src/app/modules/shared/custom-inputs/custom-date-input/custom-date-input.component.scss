@@ -1,0 +1,16 @@
+@import "../../../../../../node_modules/rfs/scss";
+@import '../../../../../dist/variables.scss';
+@import '../styles/custom-inputs.scss';
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.emptyDate {
+    color: transparent !important;
+}
+
+.emptyDate:focus {
+    transition: 0.5s;
+    color: $primary-color !important;
+}

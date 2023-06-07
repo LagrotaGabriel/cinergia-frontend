@@ -1,0 +1,18 @@
+<app-titulo [texto]="'Clientes cadastrados'" [@fadeInOut]></app-titulo>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 container">
+    <app-cabecalho (emissorDeBuscaFormControl)="recebeBuscaFormControl($event)" [@fadeInOut]
+        (emissorDeObjetoPageableAposTypeAhead)="recebeObjetoPageableInfoAtualizadoPosTypeAhead($event)"
+        (emissorDePageSizeComQuantidadeDeItensPorPaginaAlterada)="recebeQtdItensPorPaginaAlterada($event)"
+        (emissorDeSolicitacaoDeAtualizacaoDeTabela)="recebeSolicitacaoDeAtualizacaoDaTabela()"
+        (emissorDeSolicitacaoDeExclusaoEmMassaDeItens)="recebeSolicitacaoDeExclusaoDeClientesEmMassa($event)"
+        (emissorDeSolicitacaoDeRelatorio)="recebeSolicitacaoDeRelatorio($event)" [pageableObject]="clientePageObject"
+        [itensSelecionadosNaTabela]="clientesSelecionadosNaTabela" [modulo]="'clientes'"></app-cabecalho>
+
+    <app-tabela (emiteSolicitacaoDeExclusaoDoItem)="recebeSolicitacaoDeExclusao($event)"
+        (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
+        [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="clientePageObject?.content" [modulo]="'clientes'"></app-tabela>
+
+    <app-paginacao [pageObject]="clientePageObject" (emissorDePageNumberAtualizado)="recebePageNumberAtualizado($event)"
+        [@fadeInOut]></app-paginacao>
+</div>

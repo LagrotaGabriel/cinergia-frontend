@@ -1,0 +1,21 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+@import '../styles/custom-inputs.scss';
+
+option,
+select {
+    background: $dark-black !important;
+    color: $primary-color !important;
+    border: 1px solid $dark-grey !important;
+    font-family: $font-poppins !important;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    padding-right: 2rem;
+}
+
+option:focus,
+select:focus {
+    border: 1px solid $primary-color !important;
+    outline: none;
+}

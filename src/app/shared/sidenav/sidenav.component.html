@@ -1,0 +1,36 @@
+<app-header [sideNavDetails]="sideNavDetails" (enviaAlteracaoEstadoSidebar)="alteraEstadoSidebar($event)"></app-header>
+
+<mat-drawer-container class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+  (window:resize)="onResize($event)" (backdropClick)="fechaMenuClicandoNoBackground()"
+  [hasBackdrop]="sideNavDetails.ofuscaConteudo" autosize>
+
+  <mat-drawer #sidenav id="sidenav" [mode]="sideNavDetails.tipoSidebar" class="sidenav mat-elevation-z8"
+    [opened]="sideNavDetails.estadoSidebar">
+
+    <div #inicio="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/']"
+      [routerLinkActiveOptions]="{ exact: true }" routerLinkActive tabindex="-1" matRipple>
+      <mat-icon fontIcon="home" class="sidenav_icon" [ngClass]="{'icone_ativo': inicio.isActive }"></mat-icon>
+    </div>
+
+    <div #cliente="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/clientes']"
+      routerLinkActive tabindex="-1" matRipple>
+      <mat-icon fontIcon="person" class="sidenav_icon" [ngClass]="{'icone_ativo': cliente.isActive }"></mat-icon>
+    </div>
+
+    <div #faturamento="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()"
+      [routerLink]="['/faturamento']" routerLinkActive tabindex="-1" matRipple>
+      <mat-icon fontIcon="auto_graph" class="sidenav_icon"
+        [ngClass]="{'icone_ativo': faturamento.isActive }"></mat-icon>
+    </div>
+
+    <div #assinaturas="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/assinaturas']"
+      routerLinkActive tabindex="-1" matRipple>
+      <mat-icon fontIcon="paid" class="sidenav_icon" [ngClass]="{'icone_ativo': assinaturas.isActive }"></mat-icon>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content class="conteudo">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+
+</mat-drawer-container>

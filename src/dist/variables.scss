@@ -1,0 +1,83 @@
+//$primary-color: #8343b8;
+//$secondary-color: #e83c78;
+
+$primary-color: #7c7af7;
+$secondary-color: #46409c;
+
+$primary-color: #4a47d1;
+$primary-color-disabled: #4947d171;
+$primary-color-dark: #3e3cb3;
+$primary-color-darker: #2b299c;
+$secondary-color: #1d97c7;
+
+//$primary-color: #887f4d;
+//$secondary-color: #4b4a20;
+
+//$primary-color: #c53e49;
+//$secondary-color: #99011b;
+
+$dark-white: #C3C8C8;
+$light-white: #FFF;
+
+$darker-grey: #19191d;
+$dark-grey: #333;
+$medium-grey: #444444;
+$light-grey: #949494;
+
+$dark-black: #15161a;
+$medium-black: #242424;
+$light-black: #1E2026;
+$light-black-hover: #272930;
+
+$online-green: #00ff2a;
+$red: rgb(179, 51, 51);
+$strong-red: rgb(206, 35, 35);
+
+$common: #b1bdf1;
+$strong-common: #0b40d4;
+$dark-common: #1c3475;
+
+$success: #c6f89d;
+$dark-success: #1d852e;
+$strong-success:  #00ff2a;
+
+$warn: #ddcf54;
+$strong-warn: #f5de10;
+
+$error: rgb(179, 51, 51);
+$strong-error: rgb(221, 28, 28);
+
+$font-poppins: 'Poppins', sans-serif;
+$font-roboto:  'Roboto Flex', sans-serif;
+
+.success_text { 
+    border: 1px solid #1d852e;
+    color: #1d852e;
+    padding: 0.1rem 0.4rem;
+    font-weight: 400;
+    background-color: #e1ffc8;
+}
+
+.warn_text { 
+    border: 1px solid #70681a;
+    color: #70681a;
+    padding: 0.1rem 0.4rem;
+    font-weight: 400;
+    background-color: #fdf6b7;
+}
+
+.error_text { 
+    border: 1px solid #922828;
+    color: #922828;
+    padding: 0.1rem 0.4rem;
+    font-weight: 400;
+    background-color: #ffd2d2;
+}
+
+.common_text { 
+    border: 1px solid #1c3475;
+    color: #1c3475;
+    padding: 0.1rem 0.4rem;
+    font-weight: 400;
+    background-color: #bec9fc;
+}

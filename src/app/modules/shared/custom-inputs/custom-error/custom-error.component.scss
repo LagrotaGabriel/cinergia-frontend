@@ -1,0 +1,31 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+.error_message_container,
+.error_message {
+    margin: 0;
+    padding: 0;
+}
+
+.error_message {
+    color: $strong-red;
+    font-weight: 400;
+    font-size: 0.6rem;
+    position: absolute;
+    right: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (max-width: 576px) {
+    .error_message {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .error_message {
+        font-size: 0.6rem;
+    }
+}
