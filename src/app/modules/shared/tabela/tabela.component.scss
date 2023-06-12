@@ -100,17 +100,28 @@ input[type=checkbox] {
     background: $primary-color-dark;
 }
 
+.load-bar-tabela {
+    margin: 2rem auto;
+    margin-bottom: 1.5rem;
+}
+
 @media (max-width: 1200px) {
 
 }
 
 @media (max-width: 992px) {
+    tr td, tr th{
+        font-size: 0.8rem !important;
+    }
     .lg {
         display: none;
     }
 }
 
 @media (max-width: 768px) {
+    tr td, tr th{
+        font-size: 0.7rem !important;
+    }
     .md {
         display: none;
     }

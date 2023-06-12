@@ -23,6 +23,10 @@ export class TabelaComponent {
   @Output() emiteAlteracaoDoEstadoDeCheckDaTabela = new EventEmitter<any>();
   @Output() emiteSolicitacaoDeExclusaoDoItem = new EventEmitter<number>();
 
+  ngAfterViewInit(): void {
+    console.log(this.objetos);
+  }
+
   ngDoCheck(): void {
     localStorage.setItem('itensSelecionadosNaTabela', JSON.stringify(this.itensSelecionadosNaTabela));
     this.ajustaCheckDeObjetosNaTabelaComBaseNoCheckAll();
@@ -39,7 +43,7 @@ export class TabelaComponent {
       hidden: tbody.hidden,
       maxLength: tbody.maxLength
     };
-    
+
     return td;
   }
 

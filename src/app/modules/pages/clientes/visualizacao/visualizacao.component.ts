@@ -78,7 +78,7 @@ export class VisualizacaoComponent {
       },
       {
         campo: 'CPF/CNPJ',
-        hidden: 'md'
+        hidden: null
       },
       {
         campo: 'Telefone',
@@ -86,7 +86,7 @@ export class VisualizacaoComponent {
       },
       {
         campo: 'E-mail',
-        hidden: 'lg'
+        hidden: null
       });
 
     return thsTabela;
@@ -102,7 +102,7 @@ export class VisualizacaoComponent {
       },
       {
         campo: 'cpfCnpj',
-        hidden: 'md',
+        hidden: null,
         maxLength: 14
       },
       {
@@ -112,7 +112,7 @@ export class VisualizacaoComponent {
       },
       {
         campo: 'email',
-        hidden: 'lg',
+        hidden: null,
         maxLength: 18
       });
 

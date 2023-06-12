@@ -1,8 +1,8 @@
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 table_container table-responsive">
 
-    <table class="table table-borderless table-hover" *ngIf="objetos != null && objetos?.length > 0, else tabelaVazia">
+    <table class="table table-borderless table-hover" *ngIf="objetos != null, else loadBarTabela">
 
-        <thead>
+        <thead *ngIf="objetos != null && objetos?.length > 0">
 
             <tr>
 
@@ -22,52 +22,56 @@
 
         </thead>
 
-        <tbody>
+        <tbody *ngIf="objetos != null; else: loadBarTabela">
 
-            <tr *ngFor="let objeto of objetos; let i = index">
+            <ng-container *ngIf="objetos?.length > 0, else tabelaVazia">
+                <tr *ngFor="let objeto of objetos; let i = index">
 
-                <th scope="row" class="content_checkbox align-middle">
-                    <input (click)="alteraEstadoCheckTabela(i)" [checked]="objeto.checked" type="checkbox"
-                        class="checkbox">
-                </th>
+                    <th scope="row" class="content_checkbox align-middle">
+                        <input (click)="alteraEstadoCheckTabela(i)" [checked]="objeto.checked" type="checkbox"
+                            class="checkbox">
+                    </th>
 
-                <td *ngFor="let tbody of tbodies" class="td_content align-middle" [class]="tbody.hidden">
-                    <ng-container *ngIf="obtemTd(objeto, tbody) as tdContent">
-                        <span>
-                            {{ tdContent.campo }}
-                        </span>
-                    </ng-container>
-                </td>
+                    <td *ngFor="let tbody of tbodies" class="td_content align-middle" [class]="tbody.hidden">
+                        <ng-container *ngIf="obtemTd(objeto, tbody) as tdContent">
+                            <span>
+                                {{ tdContent.campo }}
+                            </span>
+                        </ng-container>
+                    </td>
 
-                <th scope="row" class="content_acoes align-middle">
-                    <div class="icon_container">
-                        <mat-icon fontIcon="more_vert"
-                            class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"
-                            data-toggle="dropdown"></mat-icon>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)">
-                                Editar
-                            </a>
-                            <a class="dropdown-item" (click)="excluiItem(objeto.id)">
-                                Excluir
-                            </a>
+                    <th scope="row" class="content_acoes align-middle">
+                        <div class="icon_container">
+                            <mat-icon fontIcon="more_vert"
+                                class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"
+                                data-toggle="dropdown"></mat-icon>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)">
+                                    Editar
+                                </a>
+                                <a class="dropdown-item" (click)="excluiItem(objeto.id)">
+                                    Excluir
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </th>
+                    </th>
+
+                </tr>
+            </ng-container>
 
         </tbody>
 
-        <ng-template #loadBarTabela>
-            <mat-progress-bar class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 load-bar-tabela"
-                mode="indeterminate"></mat-progress-bar>
+        <ng-template #tabelaVazia>
+            <div class="tabela_vazia_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                Nenhum item encontrado
+            </div>
         </ng-template>
 
     </table>
 
-    <ng-template #tabelaVazia>
-        <div class="tabela_vazia_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            Nenhum item encontrado
-        </div>
+    <ng-template #loadBarTabela>
+        <mat-progress-bar class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 load-bar-tabela"
+            mode="indeterminate"></mat-progress-bar>
     </ng-template>
 
 </div>
