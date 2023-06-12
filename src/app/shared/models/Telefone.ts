@@ -1,5 +1,5 @@
-export interface Telefone {
-    prefixo?: string,
-    numero?: string,
-    tipoTelefone?: string
+export class Telefone {
+    prefixo?: string;
+    numero?: string;
+    tipoTelefone?: string;
 }

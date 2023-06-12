@@ -10,8 +10,8 @@
                     <input (click)="checkAll()" [checked]="botaoCheckAllHabilitado" type="checkbox">
                 </th>
 
-                <th *ngFor="let thead of theads" scope="col" class="th_content align-middle">
-                    {{ thead }}
+                <th *ngFor="let thead of theads" scope="col" class="th_content align-middle" [class]="thead.hidden">
+                    {{ thead.campo }}
                 </th>
 
                 <th scope="col" class="header_acoes align-middle">
@@ -31,8 +31,12 @@
                         class="checkbox">
                 </th>
 
-                <td *ngFor="let tbody of tbodies" class="td_content align-middle">
-                    {{ obtemTd(objeto, tbody) }}
+                <td *ngFor="let tbody of tbodies" class="td_content align-middle" [class]="tbody.hidden">
+                    <ng-container *ngIf="obtemTd(objeto, tbody) as tdContent">
+                        <span>
+                            {{ tdContent.campo }}
+                        </span>
+                    </ng-container>
                 </td>
 
                 <th scope="row" class="content_acoes align-middle">
@@ -61,7 +65,7 @@
     </table>
 
     <ng-template #tabelaVazia>
-        <div class="tabela_vazia_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+        <div class="tabela_vazia_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             Nenhum item encontrado
         </div>
     </ng-template>

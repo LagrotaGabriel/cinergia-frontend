@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { TableTd } from '../models/TableTd';
+import { TableTh } from '../models/TableTh';
 
 @Component({
   selector: 'app-tabela',
@@ -10,8 +12,8 @@ export class TabelaComponent {
 
   constructor(private router: Router) { }
 
-  @Input() theads: string[];
-  @Input() tbodies: string[];
+  @Input() theads: TableTh[];
+  @Input() tbodies: TableTd[];
   @Input() objetos: any[];
   @Input() modulo: string;
 
@@ -26,15 +28,19 @@ export class TabelaComponent {
     this.ajustaCheckDeObjetosNaTabelaComBaseNoCheckAll();
   }
 
-  obtemTd(objeto: any, tbody: string): string {
+  obtemTd(objeto: any, tbody: TableTd): TableTd {
+    let valorCampo = objeto[tbody.campo] || '-';
 
-    let tdString: string;
-    tdString = objeto[tbody] || '-'
+    if (tbody.campo == 'telefone' && objeto['telefone'] != null)
+      valorCampo = '(' + (objeto['telefone'].prefixo) + ')' + ' ' + (objeto['telefone'].numero);
 
-    if (tbody == 'telefone' && objeto['telefone'] != null)
-      tdString = '(' + (objeto['telefone'].prefixo) + ')' + ' ' + (objeto['telefone'].numero);
-
-    return tdString;
+    let td: TableTd = {
+      campo: valorCampo,
+      hidden: tbody.hidden,
+      maxLength: tbody.maxLength
+    };
+    
+    return td;
   }
 
   checkAll() {

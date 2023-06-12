@@ -6,6 +6,8 @@ import { ClientePageObject } from '../models/ClientePageObject';
 import { ClienteResponse } from '../models/ClienteResponse';
 import { Subscription } from 'rxjs';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
+import { TableTd } from 'src/app/modules/shared/models/TableTd';
+import { TableTh } from 'src/app/modules/shared/models/TableTh';
 
 @Component({
   selector: 'app-visualizacao',
@@ -29,9 +31,10 @@ export class VisualizacaoComponent {
 
   constructor(private clienteService: ClienteService, private _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.invocaRequisicaoHttpGetParaAtualizarObjetos();
     if (this.clientePageObject != null && this.clientePageObject != undefined) this.clientePageObject.pageNumber = 0;
+
   }
 
   ngOnDestroy(): void {
@@ -66,15 +69,53 @@ export class VisualizacaoComponent {
     })
   }
 
-  obtemThsTabela(): string[] {
-    let thsTabela: string[] = []
-    thsTabela.push('Nome', 'CPF/CNPJ', 'Telefone', 'E-mail');
+  obtemThsTabela(): TableTh[] {
+    let thsTabela: TableTh[] = []
+    thsTabela.push(
+      {
+        campo: 'Nome',
+        hidden: null
+      },
+      {
+        campo: 'CPF/CNPJ',
+        hidden: 'md'
+      },
+      {
+        campo: 'Telefone',
+        hidden: null
+      },
+      {
+        campo: 'E-mail',
+        hidden: 'lg'
+      });
+
     return thsTabela;
   }
 
-  obtemTdsTabela(): string[] {
-    let tdsTabela: string[] = []
-    tdsTabela.push('nome', 'cpfCnpj', 'telefone', 'email');
+  obtemTdsTabela(): TableTd[] {
+    let tdsTabela: TableTd[] = []
+    tdsTabela.push(
+      {
+        campo: 'nome',
+        hidden: null,
+        maxLength: 18
+      },
+      {
+        campo: 'cpfCnpj',
+        hidden: 'md',
+        maxLength: 14
+      },
+      {
+        campo: 'telefone',
+        hidden: null,
+        maxLength: 15
+      },
+      {
+        campo: 'email',
+        hidden: 'lg',
+        maxLength: 18
+      });
+
     return tdsTabela;
   }
 
