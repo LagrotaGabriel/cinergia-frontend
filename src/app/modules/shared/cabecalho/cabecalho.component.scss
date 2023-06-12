@@ -1,6 +1,11 @@
 @import '../../../../dist/variables.scss';
 @import "../../../../../node_modules/rfs/scss.scss";
 
+div {
+    margin: 0;
+    padding: 0;
+}
+
 .quantidade_exibida {
     font-family: $font-poppins;
     padding: 0;
@@ -27,17 +32,14 @@
 
 .bt_header_upper_container  {
     padding: 0;
+    margin: 0;
     display: flex;
-    justify-content: right;
-}
-
-.bt_header_container {
-    padding-left: 0.8rem;
+    justify-content: space-between;
 }
 
 .page_size_container {
     padding-left: 0;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
 }
 
 .icon_container {
@@ -61,14 +63,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 0.5rem;
 }
 
 .bt_header_novo {
-    padding: 0rem 0.6rem;
+    padding: 0rem 0.5rem;
+    display: flex;
+    align-items: center;
+    animation: pulse 1.5s infinite;
     border: 1px solid $primary-color;
     background-color: $primary-color;
     color: $dark-white;
-    animation: pulse 1.5s infinite;
+}
+
+.bt_header_relatorio, .bt_header_exclusao {
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+    border: 1px solid $primary-color;
+    background-color: $primary-color;
+    color: $dark-white;
 }
 
 .bt_header_select {
@@ -87,6 +100,14 @@
     transition: 0.3s;
 }
 
+.header_icon_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 1rem;
+}
+
 .header_icon {
     font-size: 1.5rem;
 }
@@ -100,10 +121,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: $font-poppins;
-    font-size: 0.9rem;
+    font-family: $font-roboto;
     font-weight: 500;
     margin: 0;
+    padding: 0 1rem;
+    font-size: 0.9rem;
 }
 
 .matBadgeInactive {
@@ -166,26 +188,26 @@
 }
 
 @media (max-width: 768px) {
-    .thead_info_icon_container  {
-        padding: 0 0.8rem;
-    }
     .bt_header {
         border-radius: 5px;
+    }
+    .text_novo, .bt_header_select, .input_busca {
+        font-size: 0.8rem;
+    }
+    .quantidade_exibida {
+        font-size: 0.7rem;
     }
     .header_icon {
         font-size: 1.3rem;
     }
-    .input_busca {
-        font-size: 0.8rem;
-    }
 }
 
 @media (max-width: 576px) {
-    .quantidade_exibida {
+    .text_novo, .bt_header_select, .input_busca {
         font-size: 0.7rem;
     }
-    .input_busca {
-        font-size: 0.7rem;
+    .quantidade_exibida {
+        font-size: 0.6rem;
     }
     .input_filtro_container  {
         margin-top: 0.5rem;
@@ -194,27 +216,23 @@
         padding: 0.3rem 0.8rem;
         font-size: 0.8rem;
     }
-    .bt_header_container {
-        padding-left: 0.5rem;
-    }
 }
 
 @media (max-width: 470px) {
-    .thead_info_icon_container  {
-        padding: 0 0.5rem;
-    }
-    .input_busca {
-        font-size: 0.7rem;
+    .text_novo, .bt_header_select, .input_busca {
+        font-size: 0.6rem;
     }
     .quantidade_exibida {
-        margin-top: 0.1rem;
-        font-size: 0.7rem;
+        font-size: 0.5rem;
     }
     .header_icon {
         font-size: 1.1rem;
     }
     .bt_header_select  {
-        padding: 0.2rem 0.8rem;
-        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+    }
+    .header_icon_container {
+        padding: 0 0.5rem;
+        padding-top: 0.1rem;
     }
 }
