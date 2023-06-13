@@ -106,7 +106,7 @@ export class VisualizacaoComponent {
         maxLength: 14
       },
       {
-        campo: 'telefone',
+        campo: 'telefones',
         hidden: null,
         maxLength: 15
       },
