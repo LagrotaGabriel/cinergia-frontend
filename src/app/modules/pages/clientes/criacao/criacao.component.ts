@@ -137,6 +137,9 @@ export class CriacaoComponent {
       statusCliente: this.getValueAtributoDadosCliente('statusCliente'),
       dataNascimento: Util.isNotEmptyString(this.getValueAtributoDadosCliente('dataNascimento')) ? this.getValueAtributoDadosCliente('dataNascimento') : null,
       tipoPessoa: this.getValueAtributoDadosCliente('tipoPessoa'),
+      acessoSistema: Util.isNotEmptyString(this.getValueAtributoDadosCliente('senha'))
+        ? { senha: this.getValueAtributoDadosCliente('senha') }
+        : null,
       telefones: this.telefones,
       endereco: Util.isNotEmptyString(this.getValueAtributoDadosEndereco('logradouro'))
         ? {

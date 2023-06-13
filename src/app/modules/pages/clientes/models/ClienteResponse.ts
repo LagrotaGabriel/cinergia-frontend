@@ -1,5 +1,6 @@
 import { Endereco } from "src/app/shared/models/Endereco";
 import { Telefone } from "src/app/shared/models/Telefone";
+import { Acesso } from "./Acesso";
 
 export class ClienteResponse {
     id: number;
@@ -11,6 +12,7 @@ export class ClienteResponse {
     statusCliente: string;
     dataNascimento: string;
     tipoPessoa: string;
+    acessoSistema: Acesso;
     telefones: Telefone[];
     endereco: Endereco;
     checked: boolean;
@@ -25,6 +27,7 @@ export class ClienteResponse {
         this.statusCliente = item?.statusCliente;
         this.dataNascimento = item?.dataNascimento;
         this.tipoPessoa = item?.tipoPessoa;
+        this.acessoSistema = item?.acessoSistema;
         this.telefones = item?.telefones;
         this.endereco = item?.endereco;
         this.checked = false;

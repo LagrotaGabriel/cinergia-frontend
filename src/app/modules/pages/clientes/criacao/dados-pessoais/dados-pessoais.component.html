@@ -33,16 +33,25 @@
         [maxDate]="'2023-04-17'" [disabledGroup]="dadosCliente.controls['dataNascimento'].disabled"
         [id]="'dataNascimento'" [titulo]="'Data de nascimento'" formControlName="dataNascimento"
         [vazio]="getValueAtributoDadosCliente('dataNascimento') == '' || getValueAtributoDadosCliente('dataNascimento') == null"
-        (focusout)="validaDataNascimento()" [tabIndex]="7" #inputDataNascimento></app-custom-date-input>
+        (focusout)="validaDataNascimento()" [tabIndex]="5" #inputDataNascimento></app-custom-date-input>
 
     <!-- INPUT GROUP E-MAIL -->
-    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'email'" [titulo]="'E-mail'"
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'email'" [titulo]="'E-mail'"
         [tabIndex]="6" [maxLength]="50" [touched]="dadosCliente.controls['email'].touched"
         [todosCaracteresMaiusculos]="false" [customIcon]="'alternate_email'"
         [disabledGroup]="dadosCliente.controls['email'].disabled"
         [valido]="!(dadosCliente.controls['email'].touched && dadosCliente.controls['email'].invalid)"
         [mensagemErro]="'O e-mail digitado é inválido'" formControlName="email"
         #inputInscricaoEstadual></app-custom-input>
+
+    <!-- INPUT GROUP SENHA -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'senha'" [titulo]="'Senha'"
+        [tabIndex]="7" [maxLength]="200" [touched]="dadosCliente.controls['senha'].touched"
+        [todosCaracteresMaiusculos]="false" [customIcon]="'lock'"
+        [disabledGroup]="dadosCliente.controls['senha'].disabled"
+        [valido]="!(dadosCliente.controls['senha'].touched && dadosCliente.controls['senha'].invalid)"
+        [mensagemErro]="'A senha digitada é inválida'" formControlName="senha"
+        #inputSenha></app-custom-input>
 
     <!-- PRIMEIRO CONTAINER DE BOTÃO -->
     <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

@@ -90,6 +90,7 @@ export class DadosPessoaisComponent {
       tipoPessoa: ['FISICA', Validators.required],
       cpfCnpj: ['', [Validators.pattern(this.inputPatternCpfCnpj), Validators.maxLength(this.inputLengthCpfCnpj), Validators.minLength(this.inputLengthCpfCnpj)]],
       email: ['', [Validators.email, Validators.maxLength(50)]],
+      senha: [''],
       dataNascimento: [''],
       statusCliente: ['COMUM', Validators.required]
     });
@@ -287,6 +288,7 @@ export class DadosPessoaisComponent {
       tipoPessoa: cliente.tipoPessoa,
       cpfCnpj: cliente.cpfCnpj,
       email: cliente.email,
+      senha: cliente.acessoSistema != null ? cliente.acessoSistema.senha : null,
       dataNascimento: cliente.dataNascimento,
       statusCliente: cliente.statusCliente
     })
