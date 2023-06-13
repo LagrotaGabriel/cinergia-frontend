@@ -3,15 +3,16 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Telefone } from 'src/app/shared/models/Telefone';
-import { SelectOption } from 'src/app/modules/shared/custom-inputs/models/select-option';
 import { CustomSelectComponent } from 'src/app/modules/shared/custom-inputs/custom-select/custom-select.component';
-import { ClienteResponse } from '../../models/ClienteResponse';
 import { Util } from 'src/app/modules/utils/Util';
+import { CustomInputComponent } from 'src/app/modules/shared/custom-inputs/custom-input/custom-input.component';
+import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
   selector: 'app-dados-telefone',
   templateUrl: './dados-telefone.component.html',
-  styleUrls: ['../criacao.component.scss']
+  styleUrls: ['../criacao.component.scss', './dados-telefone.scss'],
+  animations: [fadeInOutAnimation]
 })
 export class DadosTelefoneComponent {
 
@@ -22,50 +23,50 @@ export class DadosTelefoneComponent {
   // Validations
   inputLengthPrefixo: number = 2;
   inputPrefixoPattern: any = /^\d{2}/;
-  inputLengthTelefone: number;
-  inputTelefonePattern: any;
 
   // Tags html
-  @ViewChild('SelectTipoTelefone') selectTipoTelefone: CustomSelectComponent;
+  @ViewChild('inputPrefixo') inputPrefixo: CustomInputComponent;
 
   @Input() stepAtual: number;
-  @Input() telefoneEncontradoNoCnpj: Telefone;
-  @Input() setupTelefoneAtualizacao: Telefone = null;
+  @Input() telefoneEncontradoNoCnpj: Telefone[] = [];
+  @Input() setupTelefonesAtualizacao: Telefone[] = [];
 
   protected dadosTelefone: FormGroup = this.createFormDadosTelefone();
-  @Output() emissorDeDadosDeTelefoneDoCliente = new EventEmitter<FormGroup>();
+
+  telefones: Telefone[] = [];
+  @Output() emissorDeDadosDeTelefoneDoCliente = new EventEmitter<Telefone[]>();
 
   dadosTelefoneSubscribe$: Subscription = this.dadosTelefone.valueChanges.pipe(
     debounceTime(500)
   ).subscribe({
     next: () => {
-      this.emissorDeDadosDeTelefoneDoCliente.emit(this.dadosTelefone);
+      this.emissorDeDadosDeTelefoneDoCliente.emit(this.telefones);
     }
   })
 
   ngAfterViewInit(): void {
     this.ref.detectChanges();
-    this.emissorDeDadosDeTelefoneDoCliente.emit(this.dadosTelefone);
+    this.emissorDeDadosDeTelefoneDoCliente.emit(this.telefones);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let setupTelefoneAtualizacao = changes['setupTelefoneAtualizacao'];
-    if (Util.isNotObjectEmpty(setupTelefoneAtualizacao)) {
-      if (Util.isNotObjectEmpty(setupTelefoneAtualizacao.currentValue)) {
-        this.realizaSetupTelefone(setupTelefoneAtualizacao.currentValue);
+    let setupTelefonesAtualizacao = changes['setupTelefonesAtualizacao'];
+    if (Util.isNotObjectEmpty(setupTelefonesAtualizacao)) {
+      if (Util.isNotObjectEmpty(setupTelefonesAtualizacao.currentValue)) {
+        this.realizaSetupTelefone(setupTelefonesAtualizacao.currentValue);
       }
     }
 
     if (this.stepAtual == 1) {
       setTimeout(() => {
-        this.selectTipoTelefone.acionaFoco();
+        this.inputPrefixo.acionaFoco();
       }, 300);
     }
 
     if (changes['telefoneEncontradoNoCnpj'] != undefined) {
-      let telefone: Telefone = changes['telefoneEncontradoNoCnpj'].currentValue;
-      if (telefone != undefined) {
-        this.atualizaTelefoneComTelefoneEncontradoPeloCnpj(telefone);
+      let telefones: Telefone[] = changes['telefoneEncontradoNoCnpj'].currentValue;
+      if (telefones != undefined) {
+        this.atualizaTelefoneComTelefoneEncontradoPeloCnpj(telefones);
       }
     }
   }
@@ -76,11 +77,10 @@ export class DadosTelefoneComponent {
 
   createFormDadosTelefone(): FormGroup {
     return this.formBuilder.group({
-      tipoTelefone: [''],
       prefixo: new FormControl(
         {
           value: '',
-          disabled: true
+          disabled: false
         },
         [
           Validators.pattern(this.inputPrefixoPattern)]
@@ -88,10 +88,12 @@ export class DadosTelefoneComponent {
       numero: new FormControl(
         {
           value: '',
-          disabled: true
+          disabled: false
         },
         [
-          Validators.pattern(this.inputTelefonePattern)]
+          Validators.minLength(8),
+          Validators.maxLength(9)
+        ]
       ),
     });
   }
@@ -104,81 +106,35 @@ export class DadosTelefoneComponent {
     this.dadosTelefone.controls[atributo].setValue(valor);
   }
 
-  // Geradores de Select Options
-  protected geraOptionsTipoTelefone(): SelectOption[] {
-    let options: SelectOption[] = [
-      {
-        text: 'Sem telefone',
-        value: ''
-      },
-      {
-        text: 'Fixo',
-        value: 'FIXO'
-      },
-      {
-        text: 'Móvel',
-        value: 'MOVEL'
-      },
-      {
-        text: 'Móvel com whatsapp',
-        value: 'MOVEL_WHATSAPP'
-      }
-    ]
-    return options;
+  protected addTelefoneIsValid(): boolean {
+    if (this.dadosTelefone.invalid
+      || Util.isEmptyString(this.getValueAtributoDadosTelefone('prefixo'))
+      || Util.isEmptyString(this.getValueAtributoDadosTelefone('numero'))
+      || this.telefones.length == 3) return false;
+    else return true;
   }
 
-  atualizaValidatorsTelefone() {
+  protected addTelefone() {
+    if (!this.addTelefoneIsValid()) return;
 
-    this.dadosTelefone.setValue({
-      tipoTelefone: this.getValueAtributoDadosTelefone('tipoTelefone'),
-      prefixo: '',
-      numero: ''
-    })
-
-    this.dadosTelefone.clearValidators();
-
-    if (this.getValueAtributoDadosTelefone('tipoTelefone') != '') {
-
-      this.dadosTelefone.enable()
-
-      if (this.getValueAtributoDadosTelefone('tipoTelefone') == 'FIXO') {
-        this.inputLengthTelefone = 8;
-        this.inputTelefonePattern = /^\d{8}/;
-      }
-
-      else if (this.getValueAtributoDadosTelefone('tipoTelefone') == 'MOVEL' || this.getValueAtributoDadosTelefone('tipoTelefone') == 'MOVEL_WHATSAPP') {
-        this.inputLengthTelefone = 9;
-        this.inputTelefonePattern = /^\d{9}/;
-      }
-
-      this.dadosTelefone.controls['prefixo'].setValidators([
-        Validators.required, Validators.pattern(this.inputPrefixoPattern)
-      ])
-
-      this.dadosTelefone.controls['numero'].setValidators([
-        Validators.required, Validators.pattern(this.inputTelefonePattern)
-      ])
-
+    let telefone: Telefone = {
+      prefixo: this.getValueAtributoDadosTelefone('prefixo'),
+      numero: this.getValueAtributoDadosTelefone('numero')
     }
 
-    else {
-      this.dadosTelefone.controls['prefixo'].disable();
-      this.dadosTelefone.controls['numero'].disable();
-    }
-
-    this.dadosTelefone.controls['prefixo'].updateValueAndValidity();
-    this.dadosTelefone.controls['numero'].updateValueAndValidity();
+    this.telefones.push(telefone);
+    this.dadosTelefone.reset();
+    this.inputPrefixo.acionaFoco();
   }
 
-  private atualizaTelefoneComTelefoneEncontradoPeloCnpj(telefone: Telefone) {
-    this.setValueParaAtributoDadosTelefone('tipoTelefone', telefone.tipoTelefone);
-    this.atualizaValidatorsTelefone();
-    this.dadosTelefone.setValue({
-      tipoTelefone: telefone.tipoTelefone,
-      prefixo: telefone.prefixo,
-      numero: telefone.numero,
-    })
-    this.dadosTelefone.markAllAsTouched();
+  protected recebeEmissaoDeRemocaoDeTelefone(telefone: Telefone) {
+    let indexOf:number = this.telefones.indexOf(telefone);
+    this.telefones.splice(indexOf, 1);
+  }
+
+  private atualizaTelefoneComTelefoneEncontradoPeloCnpj(telefones: Telefone[]) {
+    this.telefones = telefones;
+    this.emissorDeDadosDeTelefoneDoCliente.emit(this.telefones);
   }
 
   verificaSePrefixoTelefoneNuloOuVazio(): boolean {
@@ -214,49 +170,9 @@ export class DadosTelefoneComponent {
     }
   }
 
-  protected realizaSetupTelefone(telefone: Telefone) {
-    this.dadosTelefone.setValue({
-      tipoTelefone: telefone.tipoTelefone,
-      prefixo: telefone.prefixo,
-      numero: telefone.numero
-    })
-    this.atualizaValidatorsTelefoneAtualizacao();
-  }
-
-  protected atualizaValidatorsTelefoneAtualizacao() {
-    this.dadosTelefone.clearValidators();
-
-    if (this.getValueAtributoDadosTelefone('tipoTelefone') != '') {
-
-      this.dadosTelefone.enable()
-
-      if (this.getValueAtributoDadosTelefone('tipoTelefone') == 'FIXO') {
-        this.inputLengthTelefone = 8;
-        this.inputTelefonePattern = /^\d{8}/;
-      }
-
-      else if (this.getValueAtributoDadosTelefone('tipoTelefone') == 'MOVEL' || this.getValueAtributoDadosTelefone('tipoTelefone') == 'MOVEL_WHATSAPP') {
-        this.inputLengthTelefone = 9;
-        this.inputTelefonePattern = /^\d{9}/;
-      }
-
-      this.dadosTelefone.controls['prefixo'].setValidators([
-        Validators.required, Validators.pattern(this.inputPrefixoPattern)
-      ])
-
-      this.dadosTelefone.controls['numero'].setValidators([
-        Validators.required, Validators.pattern(this.inputTelefonePattern)
-      ])
-
-    }
-
-    else {
-      this.dadosTelefone.controls['prefixo'].disable();
-      this.dadosTelefone.controls['numero'].disable();
-    }
-
-    this.dadosTelefone.controls['prefixo'].updateValueAndValidity();
-    this.dadosTelefone.controls['numero'].updateValueAndValidity();
+  protected realizaSetupTelefone(telefone: Telefone[]) {
+    this.telefones = telefone;
+    this.emissorDeDadosDeTelefoneDoCliente.emit(this.telefones);
   }
 
 }

@@ -9,7 +9,7 @@ export class ClienteRequest {
     statusCliente: string;
     dataNascimento: string;
     tipoPessoa: string;
-    telefone: Telefone;
+    telefones: Telefone[];
     endereco: Endereco;
 
     constructor(item) {
@@ -20,7 +20,7 @@ export class ClienteRequest {
         this.statusCliente = item?.statusCliente;
         this.dataNascimento = item?.dataNascimento;
         this.tipoPessoa = item?.tipoPessoa;
-        this.telefone = item?.telefone;
+        this.telefones = item?.telefones;
         this.endereco = item?.endereco;
     }
     

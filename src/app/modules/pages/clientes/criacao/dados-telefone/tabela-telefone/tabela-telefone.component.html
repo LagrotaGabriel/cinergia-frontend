@@ -1,0 +1,50 @@
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 table_container table-responsive">
+
+    <table class="table table-borderless table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th scope="col" class="th_content align-middle">
+                    Prefixo
+                </th>
+
+                <th scope="col" class="th_content align-middle">
+                    Número
+                </th>
+
+                <th scope="col" class="header_acoes align-middle">
+
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr [@fadeInOut] *ngFor="let telefone of telefones">
+
+                <td class="td_content align-middle">
+                    {{ telefone.prefixo }}
+                </td>
+
+                <td class="td_content align-middle">
+                    {{ telefone.numero }}
+                </td>
+
+                <th scope="row" class="content_acoes align-middle" (click)="removeTelefone(telefone)">
+                    <div class="icon_container">
+                        <mat-icon fontIcon="close"
+                            class="icone icone_tabela icone_tabela_remove float-right"></mat-icon>
+                    </div>
+                </th>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

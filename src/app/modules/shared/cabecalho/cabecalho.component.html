@@ -33,7 +33,7 @@
 
         <div class="row bt_header_upper_container_right">
             <div *ngIf="pageableObject != null" class="bt_header_container page_size_container">
-                <select [(ngModel)]="pageableObject.pageSize" *ngIf="verificaSeConteudoMaiorQueZero()"
+                <select [(ngModel)]="pageableObject.pageSize"
                     class="bt_header bt_header_select col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
                     (change)="alteraQuantidadeItensExibidosPorPagina(select)" #select>
                     <option value="5" class="bt_header_option">5</option>
@@ -53,9 +53,7 @@
             </div>
 
             <div class="bt_header_container">
-                <div class="row bt_header bt_header_novo"
-                    [ngClass]="{ 'btHeaderComPaddingAjustado': (pageableObject == null || pageableObject.content.length == 0) }"
-                    [routerLink]="'/' + modulo + '/update'">
+                <div class="row bt_header bt_header_novo" [routerLink]="'/' + modulo + '/update'">
                     <h5 class="text_novo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         Criar
                     </h5>

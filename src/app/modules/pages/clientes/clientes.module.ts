@@ -8,9 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+
 import { DadosPessoaisComponent } from './criacao/dados-pessoais/dados-pessoais.component';
 import { DadosTelefoneComponent } from './criacao/dados-telefone/dados-telefone.component';
 import { DadosEnderecoComponent } from './criacao/dados-endereco/dados-endereco.component';
+import { TabelaTelefoneComponent } from './criacao/dados-telefone/tabela-telefone/tabela-telefone.component';
 
 
 
@@ -21,7 +24,8 @@ import { DadosEnderecoComponent } from './criacao/dados-endereco/dados-endereco.
     CriacaoComponent,
     DadosPessoaisComponent,
     DadosTelefoneComponent,
-    DadosEnderecoComponent
+    DadosEnderecoComponent,
+    TabelaTelefoneComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,8 @@ import { DadosEnderecoComponent } from './criacao/dados-endereco/dados-endereco.
     MatSnackBarModule,
     MatStepperModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class ClientesModule { }

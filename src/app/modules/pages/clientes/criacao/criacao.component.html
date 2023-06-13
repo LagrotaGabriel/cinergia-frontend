@@ -33,7 +33,7 @@
                 <span>Telefone</span>
             </ng-template>
             <app-dados-telefone [stepAtual]="stepAtual"
-                [setupTelefoneAtualizacao]="clientePreAtualizacao ? clientePreAtualizacao.telefone : null"
+                [setupTelefonesAtualizacao]="clientePreAtualizacao ? clientePreAtualizacao.telefones : null"
                 [telefoneEncontradoNoCnpj]="telefoneBuscadoCnpj"
                 (emissorDeDadosDeTelefoneDoCliente)="recebeFormGroupDadosTelefone($event)"></app-dados-telefone>
         </mat-step>

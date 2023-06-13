@@ -1,0 +1,31 @@
+@import '../../../../../../dist/variables.scss';
+@import "../../../../../../../node_modules/rfs/scss";
+
+.button_container_telefone  {
+    margin: 0;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.button_add_telefone:hover {
+    border: 1px solid $primary-color;
+    color: $light-black;
+    background-color: $primary-color;
+    transition: 0.5s;
+}
+
+.button_add_telefone {
+    margin: 0;
+}
+
+.button_disabled {
+    border-color: $light-grey;
+    color: $light-grey;
+    cursor: default;
+}
+
+.button_disabled:hover {
+    background-color: transparent;
+    border-color: $light-grey;
+    color: $light-grey;
+}

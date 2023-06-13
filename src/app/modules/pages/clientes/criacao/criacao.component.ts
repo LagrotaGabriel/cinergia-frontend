@@ -34,13 +34,14 @@ export class CriacaoComponent {
   // Form groups
   protected dadosCliente: FormGroup;
   protected dadosTelefone: FormGroup;
+  protected telefones: Telefone[] = [];
   protected dadosEndereco: FormGroup;
 
   cliente: ClienteRequest;
   clientePreAtualizacao: ClienteResponse;
 
   stepAtual: number = 0;
-  telefoneBuscadoCnpj: Telefone;
+  telefoneBuscadoCnpj: Telefone[];
   enderecoBuscadoCnpj: Endereco;
 
   titulo: string = 'Cadastrar novo cliente';
@@ -84,10 +85,6 @@ export class CriacaoComponent {
     return this.dadosCliente.controls[atributo].value;
   }
 
-  protected getValueAtributoDadosTelefone(atributo: string): any {
-    return this.dadosTelefone.controls[atributo].value;
-  }
-
   protected getValueAtributoDadosEndereco(atributo: string): any {
     return this.dadosEndereco.controls[atributo].value;
   }
@@ -113,7 +110,7 @@ export class CriacaoComponent {
 
   protected recebeFormGroupDadosTelefone(event) {
     console.log('Recebendo dados de telefone')
-    this.dadosTelefone = event;
+    this.telefones = event;
   }
 
   protected recebeFormGroupDadosEndereco(event) {
@@ -121,7 +118,7 @@ export class CriacaoComponent {
     this.dadosEndereco = event;
   }
 
-  protected recebeTelefoneEncontradoNoCnpj(telefone: Telefone) {
+  protected recebeTelefoneEncontradoNoCnpj(telefone: Telefone[]) {
     console.log('Recebendo telefone encontrado pelo CNPJ');
     this.telefoneBuscadoCnpj = telefone;
   }
@@ -140,13 +137,7 @@ export class CriacaoComponent {
       statusCliente: this.getValueAtributoDadosCliente('statusCliente'),
       dataNascimento: Util.isNotEmptyString(this.getValueAtributoDadosCliente('dataNascimento')) ? this.getValueAtributoDadosCliente('dataNascimento') : null,
       tipoPessoa: this.getValueAtributoDadosCliente('tipoPessoa'),
-      telefone: Util.isNotEmptyString(this.getValueAtributoDadosTelefone('tipoTelefone'))
-        ? {
-          tipoTelefone: this.getValueAtributoDadosTelefone('tipoTelefone'),
-          prefixo: this.getValueAtributoDadosTelefone('prefixo'),
-          numero: this.getValueAtributoDadosTelefone('numero')
-        }
-        : null,
+      telefones: this.telefones,
       endereco: Util.isNotEmptyString(this.getValueAtributoDadosEndereco('logradouro'))
         ? {
           codigoPostal: Util.isNotEmptyString(this.getValueAtributoDadosEndereco('codigoPostal')) ? this.getValueAtributoDadosEndereco('codigoPostal') : null,
@@ -167,7 +158,7 @@ export class CriacaoComponent {
     if (Util.isNotEmptyString(this.getValueAtributoDadosCliente('dataNascimento')))
       this.cliente.dataNascimento = this.datePipe.transform(this.getValueAtributoDadosCliente('dataNascimento'), "yyyy-MM-dd");
 
-    if (this.dadosCliente.valid && this.dadosTelefone.valid && this.dadosEndereco.valid) {
+    if (this.dadosCliente.valid && this.dadosEndereco.valid) {
       if (Util.isEmptyNumber(this.idCliente)) this.enviaFormularioNovoCliente();
       else this.enviaFormularioAtualizaCliente();
     }

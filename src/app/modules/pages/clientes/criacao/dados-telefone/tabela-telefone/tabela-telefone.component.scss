@@ -1,18 +1,21 @@
-@import '../../../../dist/variables.scss';
-@import "../../../../../node_modules/rfs/scss";
+@import '../../../../../../../dist/variables.scss';
+@import "../../../../../../../../node_modules/rfs/scss";
 
 .table_container {
     margin: 0;
     padding: 0;
+    margin-bottom: 0.5rem;
 }
 
 table {
     padding: 0 1rem !important;
     background-color: $light-black;
+    border: 1px solid $dark-grey;
 }
 
 thead {
     border-bottom: 1px solid $dark-grey;
+    background-color: $primary-color;
 }
 
 thead tr th {
@@ -35,24 +38,8 @@ thead tr th {
     color: $dark-white;
 }
 
-tr:hover {
-    cursor: pointer;
-}
-
-tr td:first-of-type {
-    color: $light-white;
-}
-
-.header_checkbox {
-    padding-left: 0 !important;
-}
-
 tr th:first-of-type {
     padding-left: 0;
-}
-
-tr th:last-of-type {
-    padding-right: 0;
 }
 
 .icone_tabela {
@@ -119,8 +106,9 @@ input[type=checkbox] {
 }
 
 @media (max-width: 768px) {
-    tr td, tr th{
+    tr td, tr th, thead tr td, thead tr th{
         font-size: 0.7rem !important;
+        padding: 0.2rem 0.5rem;
     }
     .md {
         display: none;

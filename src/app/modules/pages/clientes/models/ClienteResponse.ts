@@ -11,7 +11,7 @@ export class ClienteResponse {
     statusCliente: string;
     dataNascimento: string;
     tipoPessoa: string;
-    telefone: Telefone;
+    telefones: Telefone[];
     endereco: Endereco;
     checked: boolean;
 
@@ -25,7 +25,7 @@ export class ClienteResponse {
         this.statusCliente = item?.statusCliente;
         this.dataNascimento = item?.dataNascimento;
         this.tipoPessoa = item?.tipoPessoa;
-        this.telefone = item?.telefone;
+        this.telefones = item?.telefones;
         this.endereco = item?.endereco;
         this.checked = false;
     }

@@ -40,7 +40,7 @@ export class DadosPessoaisComponent {
   @Input() stepAtual: number;
   @Input() setupDadosAtualizacao: ClienteResponse;
 
-  @Output() emissorDeTelefoneEncontradoNoCnpj = new EventEmitter<Telefone>();
+  @Output() emissorDeTelefoneEncontradoNoCnpj = new EventEmitter<Telefone[]>();
   @Output() emissorDeEnderecoEncontradoNoCnpj = new EventEmitter<Endereco>();
 
   protected dadosCliente: FormGroup = this.createFormDadosCliente();
@@ -238,28 +238,15 @@ export class DadosPessoaisComponent {
   }
 
   private setaClienteComInformacoesDeTelefoneObtidasPeloCnpj(cnpjResponse: CnpjResponse) {
+    console.log(cnpjResponse)
     if (Util.isNotEmptyString(cnpjResponse.telefonePrincipal)) {
-      let telefone: Telefone;
-      if (cnpjResponse.telefonePrincipal.length == 10) {
-        telefone = {
-          tipoTelefone: 'FIXO',
-          prefixo: cnpjResponse.telefonePrincipal.slice(0, 2),
-          numero: cnpjResponse.telefonePrincipal.slice(2)
-        }
-      }
-      else if (cnpjResponse.telefonePrincipal.length == 11) {
-        telefone = {
-          tipoTelefone: 'MOVEL',
-          prefixo: cnpjResponse.telefonePrincipal.slice(0, 2),
-          numero: cnpjResponse.telefonePrincipal.slice(2)
-        }
-      }
-      else {
-        telefone.tipoTelefone = '';
-        telefone.prefixo = '';
-        telefone.numero = '';
-      }
-      this.emissorDeTelefoneEncontradoNoCnpj.emit(telefone);
+      let telefones: Telefone[] = [];
+      telefones.push({
+        prefixo: cnpjResponse.telefonePrincipal.slice(0, 2),
+        numero: cnpjResponse.telefonePrincipal.slice(2)
+      });
+
+      this.emissorDeTelefoneEncontradoNoCnpj.emit(telefones);
     }
   }
 

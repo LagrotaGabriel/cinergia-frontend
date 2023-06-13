@@ -29,7 +29,7 @@ export class CabecalhoComponent {
   .pipe(
     debounceTime(400),
     distinctUntilChanged(),
-    map((valorDigitado) => valorDigitado != undefined ? valorDigitado.trim() : undefined),
+    map((valorDigitado) => valorDigitado != undefined ? valorDigitado.trim().toUpperCase() : undefined),
     tap(() => {
       this.pageableObject.pageNumber = 0;
     }),
