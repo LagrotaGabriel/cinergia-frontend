@@ -54,4 +54,15 @@
         </div>
     </div>
 
+    <div class="dados_pessoais_info_block row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="dados_pessoais_info_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Observações
+        </div>
+        <div class="dados_pessoais_info_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ cliente?.observacoes != null
+            ? cliente?.observacoes
+            : 'Não definido' }}
+        </div>
+    </div>
+
 </div>

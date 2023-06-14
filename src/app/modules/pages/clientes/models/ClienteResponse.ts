@@ -10,6 +10,7 @@ export class ClienteResponse {
     nome: string;
     email: string;
     cpfCnpj: string;
+    observacoes: string;
     statusCliente: string;
     dataNascimento: string;
     tipoPessoa: string;
@@ -26,6 +27,7 @@ export class ClienteResponse {
         this.nome = item?.nome;
         this.email = item?.email;
         this.cpfCnpj = item?.cpfCnpj;
+        this.observacoes = item?.observacoes;
         this.statusCliente = item?.statusCliente;
         this.dataNascimento = item?.dataNascimento;
         this.tipoPessoa = item?.tipoPessoa;

@@ -94,7 +94,6 @@ export class CriacaoComponent {
   inicializaCliente(id: number) {
     this.obtemClientePorIdSubscription$ = this.clienteService.obtemClientePorId(id).subscribe({
       next: (cliente: ClienteResponse) => {
-        console.log(cliente);
         this.clientePreAtualizacao = cliente;
         this.cliente = this.clientePreAtualizacao;
       }
@@ -134,6 +133,7 @@ export class CriacaoComponent {
       nome: this.getValueAtributoDadosCliente('nome'),
       email: Util.isNotEmptyString(this.getValueAtributoDadosCliente('email')) ? this.getValueAtributoDadosCliente('email') : null,
       cpfCnpj: Util.isNotEmptyString(this.getValueAtributoDadosCliente('cpfCnpj')) ? this.getValueAtributoDadosCliente('cpfCnpj') : null,
+      observacoes: Util.isNotEmptyString(this.getValueAtributoDadosCliente('observacao')) ? this.getValueAtributoDadosCliente('observacao') : null,
       statusCliente: this.getValueAtributoDadosCliente('statusCliente'),
       dataNascimento: Util.isNotEmptyString(this.getValueAtributoDadosCliente('dataNascimento')) ? this.getValueAtributoDadosCliente('dataNascimento') : null,
       tipoPessoa: this.getValueAtributoDadosCliente('tipoPessoa'),
@@ -168,6 +168,7 @@ export class CriacaoComponent {
   }
 
   private enviaFormularioNovoCliente() {
+    console.log(this.cliente);
     this.novoClienteSubscription$ =
       this.clienteService.novoCliente(this.cliente).subscribe({
         error: error => {

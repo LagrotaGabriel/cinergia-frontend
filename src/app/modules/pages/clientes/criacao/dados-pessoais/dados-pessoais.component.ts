@@ -92,7 +92,8 @@ export class DadosPessoaisComponent {
       email: ['', [Validators.email, Validators.maxLength(50)]],
       senha: [''],
       dataNascimento: [''],
-      statusCliente: ['COMUM', Validators.required]
+      statusCliente: ['COMUM', Validators.required],
+      observacao: ['']
     });
   }
 
@@ -287,6 +288,7 @@ export class DadosPessoaisComponent {
       nome: cliente.nome,
       tipoPessoa: cliente.tipoPessoa,
       cpfCnpj: cliente.cpfCnpj,
+      observacao: cliente.observacoes,
       email: cliente.email,
       senha: cliente.acessoSistema != null ? cliente.acessoSistema.senha : null,
       dataNascimento: cliente.dataNascimento,

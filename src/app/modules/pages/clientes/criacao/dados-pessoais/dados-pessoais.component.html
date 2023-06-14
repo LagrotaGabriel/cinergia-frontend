@@ -1,5 +1,5 @@
 <form #dadosClienteForm="ngForm" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
-    [formGroup]="dadosCliente" (keyup.enter)="botaoProximo.click()" (keyup.escape)="botaoRetorno.click()">
+    [formGroup]="dadosCliente" (keyup.escape)="botaoRetorno.click()">
 
     <!-- INPUT GROUP NOME -->
     <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputNome'" [titulo]="'Nome'"
@@ -50,16 +50,23 @@
         [todosCaracteresMaiusculos]="false" [customIcon]="'lock'"
         [disabledGroup]="dadosCliente.controls['senha'].disabled"
         [valido]="!(dadosCliente.controls['senha'].touched && dadosCliente.controls['senha'].invalid)"
-        [mensagemErro]="'A senha digitada é inválida'" formControlName="senha"
-        #inputSenha></app-custom-input>
+        [mensagemErro]="'A senha digitada é inválida'" formControlName="senha" #inputSenha></app-custom-input>
+
+
+    <app-custom-textarea class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'observacao'"
+        [titulo]="'Observações'" [tabIndex]="8" [maxLength]="250"
+        [touched]="dadosCliente.controls['observacao'].touched" [todosCaracteresMaiusculos]="false"
+        [disabledGroup]="dadosCliente.controls['observacao'].disabled"
+        [valido]="dadosCliente.controls['observacao'].valid" formControlName="observacao"
+        #inputObservacao></app-custom-textarea>
 
     <!-- PRIMEIRO CONTAINER DE BOTÃO -->
     <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="8"
+        <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="9"
             (click)="retornaParaVisualizacaoDeClientes()">
             Voltar
         </button>
-        <button tabindex="9" class="button" type="button" mat-button matStepperNext #botaoProximo
+        <button tabindex="10" class="button" type="button" mat-button matStepperNext #botaoProximo
             [ngClass]="{'botaoHabilitado': dadosClienteForm.valid, 'botaoDesabilitado': !dadosClienteForm.valid}"
             (click)="avancaProximaEtapa()">Próximo</button>
     </div>
