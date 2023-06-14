@@ -168,6 +168,13 @@ export class DadosTelefoneComponent {
         duration: 3500
       })
     }
+    else {
+      if (Util.isNotEmptyString(this.getValueAtributoDadosTelefone('prefixo')) 
+      && Util.isNotEmptyString(this.getValueAtributoDadosTelefone('numero'))
+      && this.dadosTelefone.valid) {
+        this.addTelefone();
+      }
+    }
   }
 
   protected realizaSetupTelefone(telefone: Telefone[]) {
