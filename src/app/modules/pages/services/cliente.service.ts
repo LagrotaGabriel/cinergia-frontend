@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_CONFIG } from 'src/app/config/api-config';
+
+import { Observable, catchError, map, retry, tap, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientePageObject } from '../clientes/models/ClientePageObject';
-import { Observable, catchError, map, retry, throwError } from 'rxjs';
-import { API_CONFIG } from 'src/app/config/api-config';
 import { ClienteRequest } from '../clientes/models/ClienteRequest';
 import { ClienteResponse } from '../clientes/models/ClienteResponse';
 
@@ -18,7 +19,6 @@ export class ClienteService {
     params: new HttpParams({
     }),
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': API_CONFIG.devToken
     }),
     body: null
@@ -43,7 +43,6 @@ export class ClienteService {
       map((response) => new ClienteResponse(response)),
       catchError((error: HttpErrorResponse) => {
         this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
-        console.log(error);
         return throwError(() => new HttpErrorResponse(error));
       }),
     )

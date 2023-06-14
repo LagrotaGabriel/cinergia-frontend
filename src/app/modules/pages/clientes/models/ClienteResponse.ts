@@ -32,6 +32,7 @@ export class ClienteResponse {
         this.acessoSistema = item?.acessoSistema;
         this.telefones = item?.telefones;
         this.endereco = item?.endereco;
+        this.fotoPerfil = item?.fotoPerfil;
         this.checked = false;
     }
 

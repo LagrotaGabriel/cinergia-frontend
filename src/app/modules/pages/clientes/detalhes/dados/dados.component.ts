@@ -96,6 +96,7 @@ export class DadosComponent {
   }
 
   obtemSrcImagem(cliente: ClienteResponse) {
+    console.log(cliente?.fotoPerfil);
     if (Util.isObjectEmpty(cliente?.fotoPerfil)) this.urlImagemPerfil = '/assets/imgs/profile_photo.png';
     else {
       this.obtemImagemPerfilClienteSubscription$ = this.clienteService.obtemImagemPerfilCliente(cliente.id).subscribe({
@@ -153,6 +154,7 @@ export class DadosComponent {
         fotoPerfil = event.target.files[0];
         this.atualizaImagemPerfilClienteSubscription$ = this.clienteService.atualizaImagemPerfilCliente(this.cliente.id, fotoPerfil).subscribe({
           next: (response: ClienteResponse) => {
+            console.log(response);
             this.cliente = response;
             this.obtemSrcImagem(response);
           },
