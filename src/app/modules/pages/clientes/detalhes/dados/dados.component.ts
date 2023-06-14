@@ -135,11 +135,11 @@ export class DadosComponent {
     if (event.target.files[0] == undefined) return;
 
     else {
-      const max_size = 1048576;
+      const max_size = 10048576;
       const allowed_types = ['image/png', 'image/jpeg'];
 
       if (event.target.files[0].size > max_size) {
-        this._snackBar.open("O tamanho da imagem não pode ser maior do que 1MB", "Fechar", {
+        this._snackBar.open("O tamanho da imagem não pode ser maior do que 10MB", "Fechar", {
           duration: 5000
         })
         return;
