@@ -36,7 +36,7 @@
             Voltar
         </button>
         <button class="button" mat-button #botaoProximo type="button" tabindex="14" (click)="avancaProximaEtapa()"
-            matStepperNext>
+            matStepperNext [disabled]="!dadosTelefone.valid">
             Próximo
         </button>
     </div>

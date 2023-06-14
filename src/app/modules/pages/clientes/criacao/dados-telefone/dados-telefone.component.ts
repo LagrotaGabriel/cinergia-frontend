@@ -128,7 +128,7 @@ export class DadosTelefoneComponent {
   }
 
   protected recebeEmissaoDeRemocaoDeTelefone(telefone: Telefone) {
-    let indexOf:number = this.telefones.indexOf(telefone);
+    let indexOf: number = this.telefones.indexOf(telefone);
     this.telefones.splice(indexOf, 1);
   }
 
@@ -169,10 +169,15 @@ export class DadosTelefoneComponent {
       })
     }
     else {
-      if (Util.isNotEmptyString(this.getValueAtributoDadosTelefone('prefixo')) 
-      && Util.isNotEmptyString(this.getValueAtributoDadosTelefone('numero'))
-      && this.dadosTelefone.valid) {
-        this.addTelefone();
+      if (Util.isNotEmptyString(this.getValueAtributoDadosTelefone('prefixo'))
+        && Util.isNotEmptyString(this.getValueAtributoDadosTelefone('numero'))
+        && this.dadosTelefone.valid) {
+        if (window.confirm('O telefone inserido não foi adicionado à lista de telefones do cliente. Deseja adicionar?')) {
+          this.addTelefone();
+        }
+        else {
+          this.dadosTelefone.reset();
+        }
       }
     }
   }
