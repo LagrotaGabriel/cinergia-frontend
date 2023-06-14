@@ -25,7 +25,7 @@
         <tbody *ngIf="objetos != null; else: loadBarTabela">
 
             <ng-container *ngIf="objetos?.length > 0, else tabelaVazia">
-                <tr *ngFor="let objeto of objetos; let i = index">
+                <tr *ngFor="let objeto of objetos; let i = index" (dblclick)="navegarParaDetalhes(objeto.id)">
 
                     <th scope="row" class="content_checkbox align-middle">
                         <input (click)="alteraEstadoCheckTabela(i)" [checked]="objeto.checked" type="checkbox"

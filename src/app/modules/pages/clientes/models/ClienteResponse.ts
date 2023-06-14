@@ -1,6 +1,7 @@
 import { Endereco } from "src/app/shared/models/Endereco";
 import { Telefone } from "src/app/shared/models/Telefone";
 import { Acesso } from "./Acesso";
+import { Arquivo } from "src/app/shared/models/Arquivo";
 
 export class ClienteResponse {
     id: number;
@@ -15,6 +16,7 @@ export class ClienteResponse {
     acessoSistema: Acesso;
     telefones: Telefone[];
     endereco: Endereco;
+    fotoPerfil: Arquivo;
     checked: boolean;
 
     constructor(item) {

@@ -23,10 +23,6 @@ export class TabelaComponent {
   @Output() emiteAlteracaoDoEstadoDeCheckDaTabela = new EventEmitter<any>();
   @Output() emiteSolicitacaoDeExclusaoDoItem = new EventEmitter<number>();
 
-  ngAfterViewInit(): void {
-    console.log(this.objetos);
-  }
-
   ngDoCheck(): void {
     localStorage.setItem('itensSelecionadosNaTabela', JSON.stringify(this.itensSelecionadosNaTabela));
     this.ajustaCheckDeObjetosNaTabelaComBaseNoCheckAll();
@@ -36,7 +32,6 @@ export class TabelaComponent {
     let valorCampo = objeto[tbody.campo] || '-';
 
     if (tbody.campo == 'telefones' && objeto['telefones'].length > 0) {
-      console.log(objeto['telefones'])
       valorCampo = '(' + (objeto['telefones'][0].prefixo) + ')' + ' ' + (objeto['telefones'][0].numero);
     }
 
@@ -119,5 +114,10 @@ export class TabelaComponent {
       [this.modulo + '/update'],
       { queryParams: { id: id } }
     );
+  }
+
+  navegarParaDetalhes(id: number) {
+      let pathUrl: string = this.modulo + '/' + (id.toString());
+      this.router.navigate([pathUrl]);
   }
 }

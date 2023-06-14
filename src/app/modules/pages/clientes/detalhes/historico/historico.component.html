@@ -1,0 +1,8 @@
+<mat-tab-group class="block_menu" [selectedIndex]="abaSelecionada.value"
+    (selectedIndexChange)="abaSelecionada.setValue($event)" dynamicHeight>
+
+    <mat-tab label="Pagamentos">
+        <app-pagamentos [abaSelecionada]="emiteMudancaDeAba"></app-pagamentos>
+    </mat-tab>
+
+</mat-tab-group>

@@ -1,3 +1,4 @@
+import { Arquivo } from 'src/app/shared/models/Arquivo';
 import { Acesso } from './Acesso';
 import { Endereco } from "src/app/shared/models/Endereco";
 import { Telefone } from "src/app/shared/models/Telefone";

@@ -1,0 +1,20 @@
+<div class="dados_titulo_container row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+    [ngClass]="{'dados_titulo_container_disabled': isTelefoneDisabled()}" (click)="expandeTelefone()">
+    <div class="dados_pessoais_titulo">Telefones</div>
+    <mat-icon [fontIcon]="dadosTelefone ? 'expand_more' : 'chevron_left'" class="icone icone_titulo"></mat-icon>
+</div>
+
+<div *ngIf="dadosTelefone" [@slideUpDown]
+    class="container_dados container_dados_pessoais row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <div *ngFor="let telefone of cliente?.telefones; let i = index"
+        class="dados_pessoais_info_block row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="dados_pessoais_info_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ (i+1) + '° Telefone'}}
+        </div>
+        <div class="dados_pessoais_info_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ '(' + telefone.prefixo + ')' + ' ' + telefone.numero }}
+        </div>
+    </div>
+
+</div>

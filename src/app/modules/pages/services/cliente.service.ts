@@ -24,6 +24,44 @@ export class ClienteService {
     body: null
   }
 
+  public obtemImagemPerfilCliente(idCliente: number): Observable<any> {
+    return this.http.get(`${API_CONFIG.baseUrl}/cliente/imagem-perfil/${idCliente}`,
+      { headers: this.httpOptions.headers, responseType: "blob" }).pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+          console.log(error);
+          return throwError(() => new HttpErrorResponse(error));
+        }),
+      )
+  }
+
+  public atualizaImagemPerfilCliente(idCliente: number, imagemPerfil: Blob): Observable<ClienteResponse> {
+    this.httpOptions.body = null;
+    let formData = new FormData();
+    formData.append("imagemPerfil", imagemPerfil);
+    return this.http.put<ClienteResponse>(`${API_CONFIG.baseUrl}/cliente/imagem-perfil/${idCliente}`, formData, this.httpOptions).pipe(
+      map((response) => new ClienteResponse(response)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+    )
+  }
+
+  public obtemDetalhesDoClientePorId(id: number): Observable<ClienteResponse> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    return this.http.get<ClienteResponse>(`${API_CONFIG.baseUrl}/cliente/${id}`, this.httpOptions).pipe(
+      map((resposta) => new ClienteResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+    )
+  }
+
   public getClientes(valorBusca: string, clientePageObject: ClientePageObject): Observable<ClientePageObject> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
