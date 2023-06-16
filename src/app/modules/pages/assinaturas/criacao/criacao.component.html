@@ -9,23 +9,45 @@
     <form class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [formGroup]="dadosPlano"
         (keyup.escape)="botaoRetorno.click()">
 
-        <!-- INPUT GROUP NOME -->
-        <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputNome'" [titulo]="'Nome'"
-            [tabIndex]="1" [maxLength]="50" [touched]="dadosPlano.controls['nome'].touched"
-            [todosCaracteresMaiusculos]="true" [customIcon]="null"
-            [disabledGroup]="dadosPlano.controls['nome'].disabled"
-            [valido]="!(dadosPlano.controls['nome'].touched && dadosPlano.controls['nome'].invalid)"
-            [mensagemErro]="'Campo obrigatório'" formControlName="nome" #inputNome></app-custom-input>
+        <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [titulo]="'Cliente'"
+            [disabledGroup]="true" [valido]="true" formControlName="cliente"></app-custom-input>
 
-        <app-custom-select-box [selectBoxList]="geraSelectBoxList()"></app-custom-select-box>
+        <!-- INPUT GROUP NOME -->
+        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputDescricao'"
+            [titulo]="'Descrição do plano'" [tabIndex]="1" [maxLength]="50"
+            [touched]="dadosPlano.controls['descricao'].touched" [todosCaracteresMaiusculos]="true" [customIcon]="null"
+            [disabledGroup]="dadosPlano.controls['descricao'].disabled"
+            [valido]="!(dadosPlano.controls['descricao'].touched && dadosPlano.controls['descricao'].invalid)"
+            [mensagemErro]="'Campo obrigatório'" formControlName="descricao" #inputNome></app-custom-input>
+
+        <!-- INPUT GROUP VALOR -->
+        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputValor'"
+            [titulo]="'Valor'" [tabIndex]="2" [maxLength]="10"
+            [touched]="dadosPlano.controls['valor'].touched" [customIcon]="'attach_money'"
+            [disabledGroup]="dadosPlano.controls['valor'].disabled"
+            [valido]="!(dadosPlano.controls['valor'].touched && dadosPlano.controls['valor'].invalid)"
+            [mensagemErro]="'Campo obrigatório'" formControlName="valor" #inputValor></app-custom-input>
+
+        <app-custom-date-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputDataInicio'"
+            [titulo]="'Data de início'" [tabIndex]="3" formControlName="dataInicio" [minDate]="getHojeUs()"
+            #inputDataInicio></app-custom-date-input>
+
+        <app-custom-select class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="periodicidade"
+            [tabIndex]="4" [titulo]="'Periodicidade de cobrança'"
+            [disabledGroup]="dadosPlano.get('periodicidade').disabled" #selectAcessoSistemaAtivo
+            [options]="geraOptionsPeriodicidadeCobranca()"></app-custom-select>
+
+        <app-custom-select-box class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+            [selectBoxList]="geraSelectBoxList()" [titulo]="'Forma de pagamento'"
+            (emissorDeBoxSelecionado)="recebeAlteracaoDeFormaPagamento($event)"></app-custom-select-box>
 
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->
         <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="9"
+            <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="5"
                 (click)="retornaParaVisualizacaoDePlanos()">
                 Voltar
             </button>
-            <button tabindex="10" class="button" type="button" mat-button matStepperNext #botaoProximo>Enviar</button>
+            <button tabindex="6" class="button" type="button" mat-button matStepperNext #botaoProximo>Enviar</button>
         </div>
 
     </form>

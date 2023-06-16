@@ -1,9 +1,11 @@
+import { SelectBox } from './../../../shared/custom-inputs/models/SelectBox';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanoService } from '../../services/plano.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { SelectBox } from 'src/app/modules/shared/custom-inputs/models/SelectBox';
+import { SelectOption } from 'src/app/modules/shared/custom-inputs/models/select-option';
+import { Util } from 'src/app/modules/utils/Util';
 
 @Component({
   selector: 'app-criacao',
@@ -20,9 +22,15 @@ export class CriacaoComponent {
   titulo: string = 'Cadastrar nova assinatura';
   protected dadosPlano: FormGroup = this.createFormDadosCliente();
 
+  protected formaPagamentoAtual: string = 'BOLETO';
+
   createFormDadosCliente(): FormGroup {
     return this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.maxLength(50)]],
+      cliente: ['João da Silva'],
+      descricao: ['', [Validators.required, Validators.maxLength(50)]],
+      valor: ['0,00', [Validators.required]],
+      dataInicio: [Util.getHojeUs()],
+      periodicidade: ['DIARIO', [Validators.required]]
     });
   }
 
@@ -59,4 +67,47 @@ export class CriacaoComponent {
 
     return selectBoxList;
   }
+
+  geraOptionsPeriodicidadeCobranca(): SelectOption[] {
+
+    let options: SelectOption[];
+
+    options = [
+      {
+        text: 'Diária',
+        value: 'DIARIO'
+      },
+      {
+        text: 'Semanal',
+        value: 'SEMANAL'
+      },
+      {
+        text: 'Mensal',
+        value: 'MENSAL'
+      },
+      {
+        text: 'Trimestral',
+        value: 'TRIMESTRAL'
+      },
+      {
+        text: 'Semestral',
+        value: 'SEMESTRAL'
+      },
+      {
+        text: 'Anual',
+        value: 'ANUAL'
+      }
+    ]
+
+    return options;
+  }
+
+  getHojeUs(): string {
+    return Util.getHojeUs();
+  }
+
+  recebeAlteracaoDeFormaPagamento(selectBox: SelectBox) {
+    this.formaPagamentoAtual = selectBox.value;
+  }
+
 }

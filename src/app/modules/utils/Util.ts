@@ -7,7 +7,7 @@ export class Util {
     }
 
     public static isListEmpty(list: any[]): boolean {
-        if(list == null || list == undefined) return true;
+        if (list == null || list == undefined) return true;
         else {
             if (list.length == 0) return true;
             else return false;
@@ -47,5 +47,13 @@ export class Util {
     public static isSomeAttributeFilled(object: any): boolean {
         if (Object.keys(object).some(k => !!object[k])) return true;
         return false;
+    }
+
+    public static getHojeUs(): string {
+        let hoje = new Date();
+        let year = hoje.getFullYear().toString();
+        let month = hoje.getMonth() < 10 ? '0' + hoje.getMonth().toString() : hoje.getMonth().toString();
+        let day = hoje.getDay() < 10 ? '0' + hoje.getDay().toString() : hoje.getDay().toString();
+        return (year + '-' + month + '-' + day).toString();
     }
 }

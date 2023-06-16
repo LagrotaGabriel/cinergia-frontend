@@ -15,6 +15,7 @@ export class CustomSelectBoxComponent {
   @Output() emissorDeBoxSelecionado = new EventEmitter<SelectBox>;
 
   @Input() selectBoxList: SelectBox[];
+  @Input() titulo: string;
 
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
