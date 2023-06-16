@@ -18,6 +18,7 @@ import { CustomSelectComponent } from './custom-inputs/custom-select/custom-sele
 import { CustomErrorComponent } from './custom-inputs/custom-error/custom-error.component';
 import { CustomDateInputComponent } from './custom-inputs/custom-date-input/custom-date-input.component';
 import { CustomTextareaComponent } from './custom-inputs/custom-textarea/custom-textarea.component';
+import { CustomSelectBoxComponent } from './custom-inputs/custom-select-box/custom-select-box.component';
 
 
 
@@ -32,6 +33,7 @@ import { CustomTextareaComponent } from './custom-inputs/custom-textarea/custom-
     CustomErrorComponent,
     CustomDateInputComponent,
     CustomTextareaComponent,
+    CustomSelectBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { CustomTextareaComponent } from './custom-inputs/custom-textarea/custom-
     CustomInputComponent,
     CustomSelectComponent,
     CustomDateInputComponent,
-    CustomTextareaComponent
+    CustomTextareaComponent,
+    CustomSelectBoxComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,19 @@
+<div class="row container_formas_pagamento col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <div *ngFor="let box of selectBoxList" class="block_forma_pagamento mat-elevation-z4" (click)="selecionaBox(box)">
+        <div class="row content_forma_pagamento"
+            [ngClass]="{'content_forma_pagamento_ativo': selectedBox?.value == box?.value}">
+            <div class="forma_pagamento_icon_container">
+                <mat-icon [fontIcon]="box.icon" class="forma_pagamento_icon"
+                    [ngClass]="{'icone_forma_pagamento_ativo':selectedBox?.value == box?.value}"></mat-icon>
+            </div>
+            <div class="forma_pagamento_text_container">
+                <div class="forma_pagamento_text col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                    [ngClass]="{'text_forma_pagamento_ativo': selectedBox?.value == box?.value}">
+                    {{ box.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

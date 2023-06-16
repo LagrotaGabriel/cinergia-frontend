@@ -1,0 +1,61 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+.container_formas_pagamento {
+    padding: 0 1rem;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.block_forma_pagamento {
+    margin-right: 1rem;
+}
+
+.content_forma_pagamento {
+    cursor: pointer;
+    border: 1px solid $medium-grey;
+    height: 4rem;
+    padding: 0 1.5rem;
+}
+
+.forma_pagamento_icon_container,
+.forma_pagamento_text_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5rem;
+}
+
+.forma_pagamento_icon {
+    color: $medium-grey;
+}
+
+.forma_pagamento_text {
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: $medium-grey;
+    font-family: $font-poppins;
+    font-size: 1.2rem;
+    font-weight: 500;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.content_forma_pagamento_ativo {
+    transition: 0.3s;
+    border: 1px solid $primary-color;
+}
+
+.icone_forma_pagamento_ativo,
+.text_forma_pagamento_ativo {
+    transition: 0.3s;
+    color: $primary-color;
+}

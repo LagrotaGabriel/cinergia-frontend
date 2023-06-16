@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanoService } from '../../services/plano.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SelectBox } from 'src/app/modules/shared/custom-inputs/models/SelectBox';
 
 @Component({
   selector: 'app-criacao',
@@ -27,5 +28,35 @@ export class CriacaoComponent {
 
   retornaParaVisualizacaoDePlanos() {
     this.router.navigate(['/assinaturas'])
+  }
+
+  geraSelectBoxList(): SelectBox[] {
+
+    let selectBoxList: SelectBox[];
+
+    selectBoxList = [
+      {
+        text: 'Boleto',
+        value: 'BOLETO',
+        icon: 'receipt'
+      },
+      {
+        text: 'Pix',
+        value: 'PIX',
+        icon: 'qr_code_2'
+      },
+      {
+        text: 'Crédito',
+        value: 'CREDIT_CARD',
+        icon: 'credit_card'
+      },
+      {
+        text: 'Débito',
+        value: 'DEBIT_CARD',
+        icon: 'account_balance'
+      }
+    ]
+
+    return selectBoxList;
   }
 }

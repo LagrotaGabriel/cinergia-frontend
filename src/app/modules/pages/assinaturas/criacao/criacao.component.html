@@ -17,6 +17,8 @@
             [valido]="!(dadosPlano.controls['nome'].touched && dadosPlano.controls['nome'].invalid)"
             [mensagemErro]="'Campo obrigatório'" formControlName="nome" #inputNome></app-custom-input>
 
+        <app-custom-select-box [selectBoxList]="geraSelectBoxList()"></app-custom-select-box>
+
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->
         <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="9"
