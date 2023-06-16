@@ -16,6 +16,7 @@ export class CabecalhoComponent {
   @Input() pageableObject: any;
   @Input() modulo: string;
   @Input() itensSelecionadosNaTabela: any[];
+  @Input() inputPlaceholder: string;
 
   @Output() emissorDeSolicitacaoDeExclusaoEmMassaDeItens = new EventEmitter<number[]>();
   @Output() emissorDeSolicitacaoDeRelatorio = new EventEmitter<number[]>();

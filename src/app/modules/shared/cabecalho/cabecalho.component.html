@@ -69,7 +69,7 @@
                 <div class="input_icon">
                     <mat-icon fontIcon="search" class="icone icone_filtro"></mat-icon>
                 </div>
-                <input class="input_busca" type="search" placeholder="Busca por nome, e-mail, cpf, etc..."
+                <input class="input_busca" type="search" [placeholder]="inputPlaceholder"
                     autocomplete="off" spellcheck="false" (input)="emiteFormControl()" [formControl]="busca" />
             </div>
         </div>

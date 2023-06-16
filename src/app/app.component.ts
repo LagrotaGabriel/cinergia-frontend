@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  mercadoPagoVersion: any;
+
+  // SDK do Mercado Pago
+
 }

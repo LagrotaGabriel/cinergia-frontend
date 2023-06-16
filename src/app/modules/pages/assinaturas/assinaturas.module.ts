@@ -4,6 +4,8 @@ import { VisualizacaoComponent } from './visualizacao/visualizacao.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { CriacaoComponent } from './criacao/criacao.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -11,11 +13,14 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     CriacaoComponent,
     DetalhesComponent,
-    VisualizacaoComponent
+    VisualizacaoComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ]
 })
 export class AssinaturasModule { }

@@ -7,11 +7,13 @@
         (emissorDeSolicitacaoDeAtualizacaoDeTabela)="recebeSolicitacaoDeAtualizacaoDaTabela()"
         (emissorDeSolicitacaoDeExclusaoEmMassaDeItens)="recebeSolicitacaoDeExclusaoDeClientesEmMassa($event)"
         (emissorDeSolicitacaoDeRelatorio)="recebeSolicitacaoDeRelatorio($event)" [pageableObject]="clientePageObject"
-        [itensSelecionadosNaTabela]="clientesSelecionadosNaTabela" [modulo]="'clientes'"></app-cabecalho>
+        [itensSelecionadosNaTabela]="clientesSelecionadosNaTabela" [modulo]="'clientes'"
+        [inputPlaceholder]="'Busca por nome, cpf, e-mail...'"></app-cabecalho>
 
     <app-tabela (emiteSolicitacaoDeExclusaoDoItem)="recebeSolicitacaoDeExclusao($event)"
         (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
-        [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="clientePageObject?.content" [modulo]="'clientes'"></app-tabela>
+        [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="clientePageObject?.content"
+        [modulo]="'clientes'"></app-tabela>
 
     <app-paginacao [pageObject]="clientePageObject" (emissorDePageNumberAtualizado)="recebePageNumberAtualizado($event)"
         [@fadeInOut]></app-paginacao>

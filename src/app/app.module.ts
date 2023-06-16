@@ -59,7 +59,7 @@ import { FaturamentosModule } from './modules/pages/faturamentos/faturamentos.mo
     HttpClientModule,
   ],
 
-  providers: [DatePipe],
+  providers: [DatePipe, { provide: Window, useValue: window }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

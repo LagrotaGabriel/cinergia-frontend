@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SideNavDetails } from '../models/SideNavDetails';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,6 +8,13 @@ import { SideNavDetails } from '../models/SideNavDetails';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent {
+
+  constructor(private router: Router) {
+    router.events.subscribe((val) => {
+      if (!this.sideNavDetails.sidebarDesktop) this.sideNavDetails.estadoSidebar = false;
+    });
+  }
+
   public screenWidth: any;
 
   public sideNavDetails: SideNavDetails = {

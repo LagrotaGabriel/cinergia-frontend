@@ -3,6 +3,14 @@
 
 .container {
     width: 100%;
-    padding: 0;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    background-color: $light-black;
     font-family: $font-poppins;
+}
+
+app-paginacao {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
 }

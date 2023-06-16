@@ -88,7 +88,11 @@ export class DadosPessoaisComponent {
     return this.formBuilder.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       tipoPessoa: ['FISICA', Validators.required],
-      cpfCnpj: ['', [Validators.pattern(this.inputPatternCpfCnpj), Validators.maxLength(this.inputLengthCpfCnpj), Validators.minLength(this.inputLengthCpfCnpj)]],
+      cpfCnpj: ['', [
+        Validators.pattern(this.inputPatternCpfCnpj),
+        Validators.maxLength(this.inputLengthCpfCnpj),
+        Validators.minLength(this.inputLengthCpfCnpj),
+        Validators.required]],
       email: ['', [Validators.email, Validators.maxLength(50)]],
       senha: [''],
       dataNascimento: [''],

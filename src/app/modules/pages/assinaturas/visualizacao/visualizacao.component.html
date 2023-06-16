@@ -1,5 +1,18 @@
-<app-titulo [texto]="'Assinaturas cadastradas'"></app-titulo>
+<app-titulo [texto]="'Assinaturas'" [@fadeInOut]></app-titulo>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 container">
-    Container
+    <app-cabecalho (emissorDeBuscaFormControl)="recebeBuscaFormControl($event)" [@fadeInOut]
+        (emissorDeObjetoPageableAposTypeAhead)="recebeObjetoPageableInfoAtualizadoPosTypeAhead($event)"
+        (emissorDePageSizeComQuantidadeDeItensPorPaginaAlterada)="recebeQtdItensPorPaginaAlterada($event)"
+        (emissorDeSolicitacaoDeAtualizacaoDeTabela)="recebeSolicitacaoDeAtualizacaoDaTabela()"
+        (emissorDeSolicitacaoDeRelatorio)="recebeSolicitacaoDeRelatorio($event)" [pageableObject]="planoPageObject"
+        [itensSelecionadosNaTabela]="planosSelecionadosNaTabela" [modulo]="'assinaturas'"
+        [inputPlaceholder]="'Busca por descrição...'"></app-cabecalho>
+
+    <app-tabela (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
+        [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="planoPageObject?.content"
+        [modulo]="'assinaturas'"></app-tabela>
+
+    <app-paginacao [pageObject]="planoPageObject" (emissorDePageNumberAtualizado)="recebePageNumberAtualizado($event)"
+        [@fadeInOut]></app-paginacao>
 </div>
