@@ -38,7 +38,7 @@ export class CriacaoComponent {
     this.router.navigate(['/assinaturas'])
   }
 
-  geraSelectBoxList(): SelectBox[] {
+  geraSelectBoxListFormasDePagamento(): SelectBox[] {
 
     let selectBoxList: SelectBox[];
 
@@ -63,6 +63,30 @@ export class CriacaoComponent {
         value: 'DEBIT_CARD',
         icon: 'account_balance'
       }
+    ]
+
+    return selectBoxList;
+  }
+
+  geraSelectBoxListNotificacoesCobranca(): SelectBox[] {
+    let selectBoxList: SelectBox[];
+
+    selectBoxList = [
+      {
+        text: 'Whatsapp',
+        value: 'WHATSAPP',
+        icon: 'call'
+      },
+      {
+        text: 'E-mail',
+        value: 'EMAIL',
+        icon: 'mail'
+      },
+      {
+        text: 'Sistema',
+        value: 'SISTEMA',
+        icon: 'computer'
+      },
     ]
 
     return selectBoxList;

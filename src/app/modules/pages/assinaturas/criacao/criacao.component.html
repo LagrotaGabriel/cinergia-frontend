@@ -9,10 +9,11 @@
     <form class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [formGroup]="dadosPlano"
         (keyup.escape)="botaoRetorno.click()">
 
+        <!-- INPUT GROUP CLIENTE -->
         <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [titulo]="'Cliente'"
             [disabledGroup]="true" [valido]="true" formControlName="cliente"></app-custom-input>
 
-        <!-- INPUT GROUP NOME -->
+        <!-- INPUT GROUP DESCRIÇÃO -->
         <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputDescricao'"
             [titulo]="'Descrição do plano'" [tabIndex]="1" [maxLength]="50"
             [touched]="dadosPlano.controls['descricao'].touched" [todosCaracteresMaiusculos]="true" [customIcon]="null"
@@ -21,24 +22,31 @@
             [mensagemErro]="'Campo obrigatório'" formControlName="descricao" #inputNome></app-custom-input>
 
         <!-- INPUT GROUP VALOR -->
-        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputValor'"
-            [titulo]="'Valor'" [tabIndex]="2" [maxLength]="10"
-            [touched]="dadosPlano.controls['valor'].touched" [customIcon]="'attach_money'"
-            [disabledGroup]="dadosPlano.controls['valor'].disabled"
+        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputValor'" [titulo]="'Valor'"
+            [tabIndex]="2" [maxLength]="10" [touched]="dadosPlano.controls['valor'].touched"
+            [customIcon]="'attach_money'" [disabledGroup]="dadosPlano.controls['valor'].disabled"
             [valido]="!(dadosPlano.controls['valor'].touched && dadosPlano.controls['valor'].invalid)"
             [mensagemErro]="'Campo obrigatório'" formControlName="valor" #inputValor></app-custom-input>
 
+        <!-- INPUT GROUP DATA DE INÍCIO -->
         <app-custom-date-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'inputDataInicio'"
             [titulo]="'Data de início'" [tabIndex]="3" formControlName="dataInicio" [minDate]="getHojeUs()"
             #inputDataInicio></app-custom-date-input>
 
+        <!-- INPUT GROUP PERIODICIDADE DE COBRANÇA -->
         <app-custom-select class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="periodicidade"
             [tabIndex]="4" [titulo]="'Periodicidade de cobrança'"
             [disabledGroup]="dadosPlano.get('periodicidade').disabled" #selectAcessoSistemaAtivo
             [options]="geraOptionsPeriodicidadeCobranca()"></app-custom-select>
 
+        <!-- INPUT FORMA DE PAGAMENTO -->
         <app-custom-select-box class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
-            [selectBoxList]="geraSelectBoxList()" [titulo]="'Forma de pagamento'"
+            [selectBoxList]="geraSelectBoxListFormasDePagamento()" [titulo]="'Forma de pagamento'" [multiSelection]="false"
+            (emissorDeBoxSelecionado)="recebeAlteracaoDeFormaPagamento($event)"></app-custom-select-box>
+
+        <!-- INPUT NOTIFICAÇÕES -->
+        <app-custom-select-box class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+            [selectBoxList]="geraSelectBoxListNotificacoesCobranca()" [titulo]="'Notificações de cobrança'" [multiSelection]="true"
             (emissorDeBoxSelecionado)="recebeAlteracaoDeFormaPagamento($event)"></app-custom-select-box>
 
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->

@@ -5,6 +5,7 @@ import { TabelaComponent } from './tabela/tabela.component';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,6 +45,7 @@ import { CustomSelectBoxComponent } from './custom-inputs/custom-select-box/cust
     MatBadgeModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    BrowserModule
   ],
   exports: [
     TituloComponent,
