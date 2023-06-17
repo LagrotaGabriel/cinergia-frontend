@@ -27,7 +27,7 @@ export class PlanoService {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
     this.buildPageableParams(planoPageObject);
-    return this.http.get<PlanoPageObject>(`${API_CONFIG.baseUrl}/planos/${idCliente}`, this.httpOptions).pipe(
+    return this.http.get<PlanoPageObject>(`${API_CONFIG.baseUrl}/plano/cliente/${idCliente}`, this.httpOptions).pipe(
       map(resposta => new PlanoPageObject(resposta)),
       catchError((error: HttpErrorResponse) => {
         this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
