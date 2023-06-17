@@ -23,6 +23,22 @@ export class PlanoService {
     body: null
   }
 
+  public getPlanosCliente(planoPageObject: PlanoPageObject, idCliente: number): Observable<PlanoPageObject> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    this.buildPageableParams(planoPageObject);
+    return this.http.get<PlanoPageObject>(`${API_CONFIG.baseUrl}/planos/${idCliente}`, this.httpOptions).pipe(
+      map(resposta => new PlanoPageObject(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+      retry({ count: 20, delay: 10000 })
+    )
+  }
+
+
   public getPlanos(valorBusca: string, planoPageObject: PlanoPageObject): Observable<PlanoPageObject> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;

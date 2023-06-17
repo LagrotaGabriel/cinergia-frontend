@@ -1,0 +1,84 @@
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 hr_container">
+    <hr class="hr">
+</div>
+
+<div *ngIf="planos?.content?.length > 0, else conteudoVazio" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="block block_titulo_itens row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
+        <div class="block_titulo_itens_titulo">
+            {{ planos?.totalElements == 1
+            ? planos?.totalElements + ' advertência encontrada'
+            : planos?.totalElements + ' advertências encontradas' }}
+        </div>
+    </div>
+
+    <div class="block block_itens row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+        <div *ngFor="let plano of planos?.content"
+            matTooltip="Advertência emitida dia {{ plano.dataCadastro | date: 'dd/MM/yyyy' }} às {{ plano.horaCadastro | slice:0:5 }}"
+            matTooltipPosition="left" class="item_container row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
+            [ngClass]="{'item_container_expandido': plano.expandido}">
+
+            <div class="item_container_titulo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
+                <div class="row item_text item_text_titulo" (click)="plano.expandido = !plano.expandido">
+                    {{ plano.descricao }}
+                </div>
+
+                <div class="row item_details">
+
+                    <div class="item_details_status" [class]="plano.statusPlano">
+                        {{ plano.statusPlano | titlecase }}
+                    </div>
+
+                    <mat-icon [fontIcon]="'settings'" class="icone_details icone_opcoes" #opcoesPlano
+                        [matMenuTriggerFor]="menu"></mat-icon>
+                    <mat-menu class="menu dropdown-menu mat-elevation-z3" #menu="matMenu">
+                        <a class="row dropdown-item">
+                            <mat-icon [fontIcon]="'picture_as_pdf'"></mat-icon>
+                            <div class="texto_opcao">Gerar PDF padrão</div>
+                        </a>
+                    </mat-menu>
+
+                    <mat-icon [fontIcon]="plano.expandido ? 'expand_more' : 'chevron_left'"
+                        (click)="plano.expandido = !plano.expandido" class="icone_details icone_drop"></mat-icon>
+                </div>
+            </div>
+
+            <div [@slideUpDown] class="item_container_conteudo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
+                *ngIf="plano.expandido">
+                <div class="row item_text">
+                    {{ plano.descricao }}
+                </div>
+            </div>
+
+        </div>
+
+        <ul *ngIf="planos?.totalPages > 1" class="pagination">
+            <li (click)="voltarPagina()" [ngClass]="{'disabled': planos.pageNumber == 0}" class="page-item">
+                <a class="page-link">{{ geraBotaoVoltarPaginacao() }}</a>
+            </li>
+            <ng-container *ngFor="let numero of GeraNumerosParaNavegarNaPaginacao(planos.totalPages); let i = index">
+                <li *ngIf="(planos.pageNumber - i) <= 3 && (planos.pageNumber - i) >= 0
+                    || (i - planos.pageNumber) <= 3 && (i - planos.pageNumber) >= 0
+                    || planos.pageNumber == 0 && (i - planos.pageNumber) <= 6 && (i - planos.pageNumber) >= 0
+                    || planos.pageNumber == 1 && (i - planos.pageNumber) <= 5 && (i - planos.pageNumber) >= 0
+                    || planos.pageNumber == 2 && (i - planos.pageNumber) <= 4 && (i - planos.pageNumber) >= 0
+                    || (planos.pageNumber == (planos.totalPages-1)) && (planos.pageNumber - i) <= 6
+                    || (planos.pageNumber == (planos.totalPages-2)) && (planos.pageNumber - i) <= 5
+                    || (planos.pageNumber == (planos.totalPages-3)) && (planos.pageNumber - i) <= 4"
+                    (click)="selecionarPagina(i)" [ngClass]="{'active': planos.pageNumber == i}" class="page-item">
+                    <a class="page-link">{{ i+1 }}</a>
+                </li>
+            </ng-container>
+            <li (click)="avancarPagina()" [ngClass]="{'disabled': planos.pageNumber == planos.totalPages-1}"
+                class="page-item"><a class="page-link">{{ geraBotaoAvancarPaginacao() }}</a></li>
+        </ul>
+
+    </div>
+</div>
+
+<ng-template #conteudoVazio class="container_vazio col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <div class="block_vazio col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        Não há nenhum item por aqui
+    </div>
+</ng-template>

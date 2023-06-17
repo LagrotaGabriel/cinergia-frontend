@@ -9,6 +9,7 @@ export class PlanoResponse {
     statusPlano: string;
     periodicidade: string;
     checked: boolean;
+    expandido: boolean;
 
     constructor(item) {
         this.id = item?.id;
@@ -21,6 +22,7 @@ export class PlanoResponse {
         this.statusPlano = item?.statusPlano;
         this.periodicidade = item?.periodicidade;
         this.checked = false;
+        this.expandido = false;
     }
     
 }

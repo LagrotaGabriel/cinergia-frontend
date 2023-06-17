@@ -1,3 +1,5 @@
+import { CartaoRequest } from "./CartaoRequest";
+
 export class PlanoRequest {
     id: number;
     idClienteResponsavel: number;
@@ -6,6 +8,7 @@ export class PlanoRequest {
     valor: number;
     formaPagamento: string;
     periodicidade: string;
+    cartao: CartaoRequest;
 
     constructor(item) {
         this.id = item?.id;
@@ -15,6 +18,7 @@ export class PlanoRequest {
         this.valor = item?.valor;
         this.formaPagamento = item?.formaPagamento;
         this.periodicidade = item?.periodicidade;
+        this.cartao = item?.cartao;
     }
     
 }

@@ -24,6 +24,7 @@ import { PagamentosComponent } from './detalhes/historico/pagamentos/pagamentos.
 import { DetalhesDadosPessoaisComponent } from './detalhes/dados/detalhes-dados-pessoais/detalhes-dados-pessoais.component';
 import { DetalhesDadosTelefoneComponent } from './detalhes/dados/detalhes-dados-telefone/detalhes-dados-telefone.component';
 import { DetalhesDadosEnderecoComponent } from './detalhes/dados/detalhes-dados-endereco/detalhes-dados-endereco.component';
+import { AssinaturasComponent } from './detalhes/historico/assinaturas/assinaturas.component';
 
 
 
@@ -42,6 +43,7 @@ import { DetalhesDadosEnderecoComponent } from './detalhes/dados/detalhes-dados-
     DetalhesDadosPessoaisComponent,
     DetalhesDadosTelefoneComponent,
     DetalhesDadosEnderecoComponent,
+    AssinaturasComponent,
   ],
   imports: [
     CommonModule,

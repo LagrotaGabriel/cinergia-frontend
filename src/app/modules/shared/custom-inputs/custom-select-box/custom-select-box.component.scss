@@ -6,6 +6,11 @@ div {
     margin: 0;
 }
 
+.label_container {
+    display: flex;
+    justify-content: center;
+}
+
 .label {
     color: $dark-white;
     font-size: 1.2rem;
@@ -17,13 +22,13 @@ div {
     -ms-user-select: none;
     user-select: none;
     padding: 0 1rem;
-    margin-top: 1rem;
 }
 
 .container {
     padding: 0 1rem;
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
 }
 
 .block {
