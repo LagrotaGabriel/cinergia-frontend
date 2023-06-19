@@ -10,7 +10,7 @@ const routes: Routes = [
     component: VisualizacaoComponent,
   },
   {
-    path: 'update',
+    path: 'update/:id',
     component: CriacaoComponent
   },
   {

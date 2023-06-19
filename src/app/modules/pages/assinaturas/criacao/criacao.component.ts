@@ -3,10 +3,14 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanoService } from '../../services/plano.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SelectOption } from 'src/app/modules/shared/custom-inputs/models/select-option';
 import { Util } from 'src/app/modules/utils/Util';
 import { slideUpDownAnimation } from 'src/app/shared/animations';
+import { PlanoRequest } from '../models/PlanoRequest';
+import { ClienteService } from '../../services/cliente.service';
+import { ClienteResponse } from '../../clientes/models/ClienteResponse';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-criacao',
@@ -17,7 +21,9 @@ import { slideUpDownAnimation } from 'src/app/shared/animations';
 export class CriacaoComponent {
   constructor(private formBuilder: FormBuilder,
     private planoService: PlanoService,
+    private clienteService: ClienteService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private ref: ChangeDetectorRef) { }
 
@@ -25,19 +31,34 @@ export class CriacaoComponent {
   protected dadosPlano: FormGroup = this.createFormDadosCliente();
 
   protected formaPagamentoAtual: string = 'BOLETO';
+  protected notificacoes: string[] = [];
+
+  private cliente: ClienteResponse;
+  private obtemClienteSubscription$: Subscription;
+
+  ngAfterViewInit(): void {
+
+    console.log(Util.getHojeUs());
+
+    this.obtemClienteSubscription$ = this.clienteService.obtemClientePorId(parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe({
+      next: (response: ClienteResponse) => {
+        this.cliente = response;
+        this.setValueParaAtributoDadosPlano('cliente', this.cliente.nome);
+      }
+    })
+  }
+  
+  ngOnDestroy(): void {
+    if (Util.isNotObjectEmpty(this.obtemClienteSubscription$)) this.obtemClienteSubscription$.unsubscribe();
+  }
 
   createFormDadosCliente(): FormGroup {
     return this.formBuilder.group({
-      cliente: ['João da Silva'],
+      cliente: [''],
       descricao: ['', [Validators.required, Validators.maxLength(50)]],
       valor: ['0,00', [Validators.required]],
       dataInicio: [Util.getHojeUs()],
-      periodicidade: ['DIARIO', [Validators.required]],
-      nomePortador: ['João da Silva', Validators.required],
-      cpfCnpjPortador: ['122.233.455-66', Validators.required],
-      numero: ['', Validators.required],
-      ccv: ['', Validators.required],
-      vencimento: ['', Validators.required]
+      periodicidade: ['MENSAL', [Validators.required]],
     });
   }
 
@@ -61,23 +82,26 @@ export class CriacaoComponent {
       {
         text: 'Boleto',
         value: 'BOLETO',
-        icon: 'receipt'
+        icon: 'receipt',
+        placeholder: 'Taxa de R$ 3,99 por transação paga'
       },
       {
         text: 'Pix',
         value: 'PIX',
-        icon: 'qr_code_2'
+        icon: 'qr_code_2',
+        placeholder: 'Taxa de R$ 3,99 por transação paga'
       },
       {
         text: 'Crédito',
         value: 'CREDIT_CARD',
-        icon: 'credit_card'
+        icon: 'credit_card',
+        placeholder: 'Taxa de R$ 2,49 + 2,99% por transação paga'
       },
-      {
-        text: 'Débito',
-        value: 'DEBIT_CARD',
-        icon: 'account_balance'
-      }
+      // {
+      //   text: 'Débito',
+      //   value: 'DEBIT_CARD',
+      //   icon: 'account_balance'
+      // }
     ]
 
     return selectBoxList;
@@ -90,17 +114,20 @@ export class CriacaoComponent {
       {
         text: 'Whatsapp',
         value: 'WHATSAPP',
-        icon: 'call'
+        icon: 'call',
+        placeholder: 'Permite que o cliente seja notificado através do número de whatsapp cadastrado'
       },
       {
         text: 'E-mail',
         value: 'EMAIL',
-        icon: 'mail'
+        icon: 'mail',
+        placeholder: 'Permite que o cliente seja notificado através do e-mail cadastrado'
       },
       {
         text: 'Sistema',
         value: 'SISTEMA',
-        icon: 'computer'
+        icon: 'computer',
+        placeholder: 'Permite que o cliente seja notificado através do seu login no sistema'
       },
     ]
 
@@ -113,20 +140,12 @@ export class CriacaoComponent {
 
     options = [
       {
-        text: 'Diária',
-        value: 'DIARIO'
-      },
-      {
         text: 'Semanal',
         value: 'SEMANAL'
       },
       {
         text: 'Mensal',
         value: 'MENSAL'
-      },
-      {
-        text: 'Trimestral',
-        value: 'TRIMESTRAL'
       },
       {
         text: 'Semestral',
@@ -161,6 +180,42 @@ export class CriacaoComponent {
 
   recebeAlteracaoDeFormaPagamento(selectBox: SelectBox) {
     this.formaPagamentoAtual = selectBox.value;
+  }
+
+  recebeAlteracaoDeNotificacoes(selectBoxes: SelectBox[]) {
+    let notificacoes: string[] = [];
+    selectBoxes.forEach(box => {
+      notificacoes.push(box.value);
+    })
+    this.notificacoes = notificacoes;
+  }
+
+  realizaCriacaoDeObjetoPlano(): PlanoRequest {
+    let planoRequest: PlanoRequest = {
+      id: null,
+      dataInicio: this.getValueAtributoDadosPlano('dataInicio'),
+      descricao: this.getValueAtributoDadosPlano('descricao'),
+      valor: this.getValueAtributoDadosPlano('valor'),
+      formaPagamento: this.formaPagamentoAtual,
+      periodicidade: this.getValueAtributoDadosPlano('periodicidade'),
+      notificacoes: this.notificacoes,
+      cartao: null
+    }
+    return planoRequest;
+  }
+
+  realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano() {
+    this.planoService.novoPlano(this.realizaCriacaoDeObjetoPlano(), parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: () => {
+
+      },
+      complete: () => {
+
+      }
+    })
   }
 
 }

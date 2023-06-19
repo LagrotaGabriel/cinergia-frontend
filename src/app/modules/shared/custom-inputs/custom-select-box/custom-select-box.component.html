@@ -1,13 +1,16 @@
 <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 label_container">
-    <label class="label">
+    <label class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 label" [ngClass]="{'labelComPlaceholder': selectedBox?.placeholder != null }">
         {{ titulo }}
     </label>
+    <div *ngIf="!multiSelection" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 placeholder" [@fadeInOut]>
+        {{ selectedBox.placeholder }}
+    </div>
 </div>
 
 <div class="row container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
     <div *ngFor="let box of selectBoxList" class="block mat-elevation-z4"
-        (click)="multiSelection ? selecionaBoxes(box) : selecionaBox(box)">
+        (click)="multiSelection ? selecionaBoxes(box) : selecionaBox(box)" [title]="multiSelection ? box?.placeholder : ''">
         <div class="row content"
             [ngClass]="{'content_ativo': (multiSelection) ? (verificaSeBoxEstaAtivo(box)) : (selectedBox?.value == box?.value)}">
             <div class="icon_container">

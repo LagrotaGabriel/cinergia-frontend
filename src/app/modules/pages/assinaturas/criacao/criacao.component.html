@@ -45,61 +45,11 @@
             [multiSelection]="false"
             (emissorDeBoxSelecionado)="recebeAlteracaoDeFormaPagamento($event)"></app-custom-select-box>
 
-        <div *ngIf="formaPagamentoAtual == 'CREDIT_CARD'"
-            class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 credit_card_container" [@slideUpDown]>
-
-            <!-- INPUT GROUP NOME PORTADOR -->
-            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputNomePortador'"
-                [titulo]="'Nome impresso no cartão'" [tabIndex]="5" [maxLength]="50"
-                [touched]="dadosPlano.controls['nomePortador'].touched" [todosCaracteresMaiusculos]="true"
-                [customIcon]="null" [disabledGroup]="dadosPlano.controls['nomePortador'].disabled"
-                [valido]="!(dadosPlano.controls['nomePortador'].touched && dadosPlano.controls['nomePortador'].invalid)"
-                [mensagemErro]="'Campo obrigatório'" formControlName="nomePortador"
-                #inputNomePortador></app-custom-input>
-
-            <!-- INPUT GROUP CPF/CNPJ -->
-            <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'cpfCnpjPortador'"
-                [titulo]="'Cpf ou Cnpj impresso no cartão'" [tabIndex]="6" [maxLength]="20"
-                [touched]="dadosPlano.controls['cpfCnpjPortador'].touched" [todosCaracteresMaiusculos]="false"
-                [customIcon]="'badge'" (input)="realizaTratamentoCpfCnpj()"
-                [disabledGroup]="dadosPlano.controls['cpfCnpjPortador'].disabled"
-                [valido]="!(dadosPlano.controls['cpfCnpjPortador'].touched && dadosPlano.controls['cpfCnpjPortador'].invalid)"
-                [mensagemErro]="'CPF/CNPJ Inválido!'" formControlName="cpfCnpjPortador"
-                #inputCpfCnpjPortador></app-custom-input>
-
-            <!-- INPUT GROUP NUMERO DO CARTÃO -->
-            <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" [id]="'numero'"
-                [titulo]="'Número do cartão'" [tabIndex]="7" [maxLength]="20"
-                [touched]="dadosPlano.controls['numero'].touched" [todosCaracteresMaiusculos]="false"
-                [customIcon]="'credit_card'" (input)="realizaTratamentoNumeroCartao()"
-                [disabledGroup]="dadosPlano.controls['numero'].disabled"
-                [valido]="!(dadosPlano.controls['numero'].touched && dadosPlano.controls['numero'].invalid)"
-                [mensagemErro]="'Campo obrigatório'" formControlName="numero" #inputNumeroCartao></app-custom-input>
-
-            <!-- INPUT GROUP CCV -->
-            <app-custom-input class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6" [id]="'ccv'" [titulo]="'Ccv'"
-                [tabIndex]="8" [maxLength]="3" [touched]="dadosPlano.controls['ccv'].touched"
-                [todosCaracteresMaiusculos]="false" [customIcon]="null" (input)="realizaTratamentoNumeroCartao()"
-                [disabledGroup]="dadosPlano.controls['ccv'].disabled"
-                [valido]="!(dadosPlano.controls['ccv'].touched && dadosPlano.controls['ccv'].invalid)"
-                [mensagemErro]="'Campo obrigatório'" formControlName="ccv" #inputCcvCartao></app-custom-input>
-
-            <!-- INPUT GROUP CPF/CNPJ -->
-            <app-custom-input class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6" [id]="'numero'"
-                [titulo]="'Número do cartão'" [tabIndex]="7" [maxLength]="20"
-                [touched]="dadosPlano.controls['numero'].touched" [todosCaracteresMaiusculos]="false"
-                [customIcon]="'credit_card'" (input)="realizaTratamentoNumeroCartao()"
-                [disabledGroup]="dadosPlano.controls['numero'].disabled"
-                [valido]="!(dadosPlano.controls['numero'].touched && dadosPlano.controls['numero'].invalid)"
-                [mensagemErro]="'Campo obrigatório'" formControlName="numero" #inputNumeroCartao></app-custom-input>
-
-        </div>
-
         <!-- INPUT NOTIFICAÇÕES -->
         <app-custom-select-box class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
             [selectBoxList]="geraSelectBoxListNotificacoesCobranca()" [titulo]="'Notificações de cobrança'"
             [multiSelection]="true"
-            (emissorDeBoxSelecionado)="recebeAlteracaoDeFormaPagamento($event)"></app-custom-select-box>
+            (emissorDeBoxesSelecionado)="recebeAlteracaoDeNotificacoes($event)"></app-custom-select-box>
 
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->
         <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -111,7 +61,7 @@
             </div>
             <div class="button_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <button tabindex="7" class="button col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" type="button"
-                    mat-button matStepperNext #botaoProximo>Enviar</button>
+                    mat-button (click)="realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano()">Enviar</button>
             </div>
         </div>
 

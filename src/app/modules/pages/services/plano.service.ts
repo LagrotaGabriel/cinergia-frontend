@@ -55,9 +55,9 @@ export class PlanoService {
     )
   }
 
-  public novoPlano(planoRequest: PlanoRequest): Observable<PlanoResponse> {
+  public novoPlano(planoRequest: PlanoRequest, idCliente: number): Observable<PlanoResponse> {
     this.httpOptions.body = null;
-    return this.http.post<PlanoResponse>(`${API_CONFIG.baseUrl}/plano`, planoRequest, this.httpOptions).pipe(
+    return this.http.post<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idCliente}`, planoRequest, this.httpOptions).pipe(
       map(resposta => new PlanoResponse(resposta)),
     )
   }

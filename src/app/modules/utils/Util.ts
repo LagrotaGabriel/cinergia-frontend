@@ -52,8 +52,9 @@ export class Util {
     public static getHojeUs(): string {
         let hoje = new Date();
         let year = hoje.getFullYear().toString();
-        let month = hoje.getMonth() < 10 ? '0' + hoje.getMonth().toString() : hoje.getMonth().toString();
-        let day = hoje.getDay() < 10 ? '0' + hoje.getDay().toString() : hoje.getDay().toString();
+        let monthPreOp = hoje.getMonth() + 1;
+        let month = monthPreOp < 10 ? '0' + monthPreOp.toString() : monthPreOp.toString();
+        let day = hoje.getDate() < 10 ? '0' + hoje.getDate().toString() : hoje.getDate().toString();
         return (year + '-' + month + '-' + day).toString();
     }
 }

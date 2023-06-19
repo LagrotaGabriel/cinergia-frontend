@@ -2,25 +2,29 @@
     <hr class="hr">
 </div>
 
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 button_container">
+    <button class="button_novo" (click)="encaminhaParaCriacaoDeNovaAssinatura()">Criar</button>
+</div>
+
 <div *ngIf="planos?.content?.length > 0, else conteudoVazio" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="block block_titulo_itens row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
         <div class="block_titulo_itens_titulo">
             {{ planos?.totalElements == 1
-            ? planos?.totalElements + ' advertência encontrada'
-            : planos?.totalElements + ' advertências encontradas' }}
+            ? planos?.totalElements + ' assinatura encontrada'
+            : planos?.totalElements + ' assinaturas encontradas' }}
         </div>
     </div>
 
     <div class="block block_itens row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
         <div *ngFor="let plano of planos?.content"
-            matTooltip="Advertência emitida dia {{ plano.dataCadastro | date: 'dd/MM/yyyy' }} às {{ plano.horaCadastro | slice:0:5 }}"
+            matTooltip="Assinatura criada dia {{ plano.dataCadastro | date: 'dd/MM/yyyy' }} às {{ plano.horaCadastro | slice:0:5 }}"
             matTooltipPosition="left" class="item_container row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
             [ngClass]="{'item_container_expandido': plano.expandido}">
 
             <div class="item_container_titulo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
                 <div class="row item_text item_text_titulo" (click)="plano.expandido = !plano.expandido">
-                    {{ plano.descricao }}
+                    {{ plano.descricao }} - R$ {{ plano.valor }} ({{plano.periodicidade | titlecase}})
                 </div>
 
                 <div class="row item_details">
@@ -46,7 +50,8 @@
             <div [@slideUpDown] class="item_container_conteudo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
                 *ngIf="plano.expandido">
                 <div class="row item_text">
-                    {{ plano.descricao }}
+                    Assinatura de R$ {{ plano.valor }}, periodicidade {{ plano.periodicidade | titlecase}} com pagamento
+                    no {{ realizaTratamentoFormaPagamento(plano.formaPagamento) }}
                 </div>
             </div>
 
