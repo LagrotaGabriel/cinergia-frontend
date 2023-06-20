@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { TituloComponent } from './titulo/titulo.component';
 import { TabelaComponent } from './tabela/tabela.component';
 
@@ -22,7 +22,9 @@ import { CustomDateInputComponent } from './custom-inputs/custom-date-input/cust
 import { CustomTextareaComponent } from './custom-inputs/custom-textarea/custom-textarea.component';
 import { CustomSelectBoxComponent } from './custom-inputs/custom-select-box/custom-select-box.component';
 
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -58,6 +60,9 @@ import { CustomSelectBoxComponent } from './custom-inputs/custom-select-box/cust
     CustomDateInputComponent,
     CustomTextareaComponent,
     CustomSelectBoxComponent
-  ]
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
 })
 export class SharedModule { }

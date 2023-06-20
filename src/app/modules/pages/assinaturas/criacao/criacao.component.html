@@ -35,7 +35,7 @@
 
         <!-- INPUT GROUP PERIODICIDADE DE COBRANÇA -->
         <app-custom-select class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" formControlName="periodicidade"
-            [tabIndex]="4" [titulo]="'Periodicidade de cobrança'"
+            [tabIndex]="4" [titulo]="'Periodicidade'"
             [disabledGroup]="dadosPlano.get('periodicidade').disabled" #selectAcessoSistemaAtivo
             [options]="geraOptionsPeriodicidadeCobranca()"></app-custom-select>
 
@@ -53,16 +53,15 @@
 
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->
         <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="button_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                <button class="button botaoHabilitado col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" type="button"
+
+                <button class="button botaoHabilitado" type="button"
                     #botaoRetorno mat-button tabindex="6" (click)="retornaParaVisualizacaoDePlanos()">
                     Voltar
                 </button>
-            </div>
-            <div class="button_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                <button tabindex="7" class="button col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" type="button"
+
+                <button tabindex="7" class="button" type="button"
                     mat-button (click)="realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano()">Enviar</button>
-            </div>
+
         </div>
 
     </form>

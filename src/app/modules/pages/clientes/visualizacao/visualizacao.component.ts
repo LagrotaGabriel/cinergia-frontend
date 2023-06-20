@@ -98,22 +98,30 @@ export class VisualizacaoComponent {
       {
         campo: 'nome',
         hidden: null,
-        maxLength: 18
+        maxLength: 18,
+        type: 'string',
+        tableTdCustomClasses: []
       },
       {
         campo: 'cpfCnpj',
         hidden: null,
-        maxLength: 14
+        maxLength: 14,
+        type: 'string',
+        tableTdCustomClasses: []
       },
       {
         campo: 'telefones',
         hidden: null,
-        maxLength: 15
+        maxLength: 15,
+        type: 'string',
+        tableTdCustomClasses: []
       },
       {
         campo: 'email',
         hidden: null,
-        maxLength: 18
+        maxLength: 18,
+        type: 'string',
+        tableTdCustomClasses: []
       });
 
     return tdsTabela;

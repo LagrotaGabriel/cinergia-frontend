@@ -18,13 +18,12 @@
     <div class="block block_itens row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
         <div *ngFor="let plano of planos?.content"
-            matTooltip="Assinatura criada dia {{ plano.dataCadastro | date: 'dd/MM/yyyy' }} às {{ plano.horaCadastro | slice:0:5 }}"
-            matTooltipPosition="left" class="item_container row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
+            class="item_container row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
             [ngClass]="{'item_container_expandido': plano.expandido}">
 
             <div class="item_container_titulo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
                 <div class="row item_text item_text_titulo" (click)="plano.expandido = !plano.expandido">
-                    {{ plano.descricao }} - R$ {{ plano.valor }} ({{plano.periodicidade | titlecase}})
+                    {{ plano.descricao }}
                 </div>
 
                 <div class="row item_details">
@@ -32,15 +31,6 @@
                     <div class="item_details_status" [class]="plano.statusPlano">
                         {{ plano.statusPlano | titlecase }}
                     </div>
-
-                    <mat-icon [fontIcon]="'settings'" class="icone_details icone_opcoes" #opcoesPlano
-                        [matMenuTriggerFor]="menu"></mat-icon>
-                    <mat-menu class="menu dropdown-menu mat-elevation-z3" #menu="matMenu">
-                        <a class="row dropdown-item">
-                            <mat-icon [fontIcon]="'picture_as_pdf'"></mat-icon>
-                            <div class="texto_opcao">Gerar PDF padrão</div>
-                        </a>
-                    </mat-menu>
 
                     <mat-icon [fontIcon]="plano.expandido ? 'expand_more' : 'chevron_left'"
                         (click)="plano.expandido = !plano.expandido" class="icone_details icone_drop"></mat-icon>
@@ -50,8 +40,11 @@
             <div [@slideUpDown] class="item_container_conteudo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
                 *ngIf="plano.expandido">
                 <div class="row item_text">
-                    Assinatura de R$ {{ plano.valor }}, periodicidade {{ plano.periodicidade | titlecase}} com pagamento
-                    no {{ realizaTratamentoFormaPagamento(plano.formaPagamento) }}
+                    Valor: {{ plano.valor | currency : 'BRL' }}
+                    <br> Periodicidade: {{ plano.periodicidade | titlecase}}
+                    <br>Forma de pagamento: {{ plano.formaPagamento }}
+                    <br><br>Criado dia {{ plano.dataCadastro | date: 'dd/MM/yyyy' }} às {{ plano.horaCadastro |
+                    slice:0:5 }}
                 </div>
             </div>
 

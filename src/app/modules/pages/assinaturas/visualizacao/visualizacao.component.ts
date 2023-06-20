@@ -72,21 +72,26 @@ export class VisualizacaoComponent {
     let thsTabela: TableTh[] = []
     thsTabela.push(
       {
-        campo: 'Nome',
+        campo: 'Descrição',
         hidden: null
       },
       {
-        campo: 'CPF/CNPJ',
+        campo: 'Valor',
         hidden: null
       },
       {
-        campo: 'Telefone',
+        campo: 'Forma de pgto.',
         hidden: null
       },
       {
-        campo: 'E-mail',
+        campo: 'Periodicidade',
         hidden: null
-      });
+      },
+      {
+        campo: 'Status',
+        hidden: null
+      },
+      );
 
     return thsTabela;
   }
@@ -95,25 +100,49 @@ export class VisualizacaoComponent {
     let tdsTabela: TableTd[] = []
     tdsTabela.push(
       {
-        campo: 'nome',
+        campo: 'descricao',
         hidden: null,
-        maxLength: 18
+        maxLength: 18,
+        type: 'string',
+        tableTdCustomClasses: []
       },
       {
-        campo: 'cpfCnpj',
+        campo: 'valor',
         hidden: null,
-        maxLength: 14
+        maxLength: 14,
+        type: 'money',
+        tableTdCustomClasses: []
       },
       {
-        campo: 'telefones',
+        campo: 'formaPagamento',
         hidden: null,
-        maxLength: 15
+        maxLength: 15,
+        type: 'string',
+        tableTdCustomClasses: []
       },
       {
-        campo: 'email',
+        campo: 'periodicidade',
         hidden: null,
-        maxLength: 18
-      });
+        maxLength: 18,
+        type: 'string',
+        tableTdCustomClasses: []
+      },
+      {
+        campo: 'statusPlano',
+        hidden: null,
+        maxLength: 15,
+        type: 'string',
+        tableTdCustomClasses: [
+          {
+            value: 'Ativo',
+            className: 'green_span'
+          },
+          {
+            value: 'Inativo',
+            className: 'red_span'
+          },
+        ]
+      },);
 
     return tdsTabela;
   }

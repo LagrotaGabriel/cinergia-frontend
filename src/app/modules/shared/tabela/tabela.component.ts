@@ -38,10 +38,25 @@ export class TabelaComponent {
     let td: TableTd = {
       campo: valorCampo,
       hidden: tbody.hidden,
-      maxLength: tbody.maxLength
+      maxLength: tbody.maxLength,
+      type: tbody.type,
+      tableTdCustomClasses: tbody.tableTdCustomClasses
     };
 
     return td;
+  }
+
+  obtemClassePersonalizada(tableTd: TableTd): string {
+
+    let customClassName: string = null;
+
+    if (tableTd.tableTdCustomClasses.length == 0) return customClassName;
+    else {
+      tableTd.tableTdCustomClasses.forEach(customClass => {
+        if (tableTd.campo == customClass.value) customClassName = customClass.className;
+      })
+    }
+    return customClassName;
   }
 
   checkAll() {
@@ -117,7 +132,7 @@ export class TabelaComponent {
   }
 
   navegarParaDetalhes(id: number) {
-      let pathUrl: string = this.modulo + '/' + (id.toString());
-      this.router.navigate([pathUrl]);
+    let pathUrl: string = this.modulo + '/' + (id.toString());
+    this.router.navigate([pathUrl]);
   }
 }

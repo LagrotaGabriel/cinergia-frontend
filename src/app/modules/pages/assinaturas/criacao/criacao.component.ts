@@ -83,19 +83,19 @@ export class CriacaoComponent {
         text: 'Boleto',
         value: 'BOLETO',
         icon: 'receipt',
-        placeholder: 'Taxa de R$ 3,99 por transação paga'
+        placeholder: 'Taxa de R$ 3,49 por transação paga'
       },
       {
         text: 'Pix',
         value: 'PIX',
         icon: 'qr_code_2',
-        placeholder: 'Taxa de R$ 3,99 por transação paga'
+        placeholder: 'Taxa de R$ 3,49 por transação paga'
       },
       {
         text: 'Crédito',
         value: 'CREDIT_CARD',
         icon: 'credit_card',
-        placeholder: 'Taxa de R$ 2,49 + 2,99% por transação paga'
+        placeholder: 'Taxa de R$ 1,99 + 2,99% por transação paga'
       },
       // {
       //   text: 'Débito',

@@ -31,10 +31,10 @@ div {
 
 .placeholder {
     text-align: center;
-    color: $primary-color;
+    color: $common;
     margin-bottom: 0.8rem;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 400;
     font-family: $font-poppins;
 }
 
@@ -91,4 +91,36 @@ div {
 .text_ativo {
     transition: 0.5s;
     color: $primary-color;
+}
+
+@media (max-width: 768px) {
+    .label {
+        font-size: 1.2rem;
+    }
+    .placeholder {
+        font-size: 0.7rem;
+    }
+    .text {
+        font-size: 1rem;
+    }
+    .block {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .label {
+        font-size: 0.95rem;
+    }
+    .text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 470px) {
+    .label {
+        font-size: 0.9rem;
+    }
 }

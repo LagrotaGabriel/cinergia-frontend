@@ -34,8 +34,10 @@
 
                     <td *ngFor="let tbody of tbodies" class="td_content align-middle" [class]="tbody.hidden">
                         <ng-container *ngIf="obtemTd(objeto, tbody) as tdContent">
-                            <span>
-                                {{ tdContent.campo }}
+                            <span [class]="obtemClassePersonalizada(tdContent)">
+                                {{ tdContent.type == 'money'
+                                ? (tdContent.campo | currency : 'BRL')
+                                : (tdContent.campo) }}
                             </span>
                         </ng-container>
                     </td>

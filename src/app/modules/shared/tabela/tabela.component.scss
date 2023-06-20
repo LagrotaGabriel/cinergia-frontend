@@ -105,6 +105,20 @@ input[type=checkbox] {
     margin-bottom: 1.5rem;
 }
 
+.red_span {
+    border: 1px solid $red;
+    color: $red;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px; 
+}
+
+.green_span {
+    border: 1px solid $success;
+    color: $success;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px; 
+}
+
 @media (max-width: 1200px) {
 
 }

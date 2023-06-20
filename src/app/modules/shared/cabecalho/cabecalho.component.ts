@@ -1,3 +1,4 @@
+import { PlanoService } from 'src/app/modules/pages/services/plano.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
@@ -11,12 +12,14 @@ import { ClienteService } from '../../pages/services/cliente.service';
 export class CabecalhoComponent {
 
   constructor(
-    private clienteService: ClienteService) { }
+    private clienteService: ClienteService,
+    private planoService: PlanoService) { }
 
   @Input() pageableObject: any;
   @Input() modulo: string;
   @Input() itensSelecionadosNaTabela: any[];
   @Input() inputPlaceholder: string;
+  @Input() botaoCriarHabilitado: boolean = true;
 
   @Output() emissorDeSolicitacaoDeExclusaoEmMassaDeItens = new EventEmitter<number[]>();
   @Output() emissorDeSolicitacaoDeRelatorio = new EventEmitter<number[]>();
@@ -56,6 +59,9 @@ export class CabecalhoComponent {
     switch(this.modulo) {
       case 'clientes': {
         return this.clienteService.getClientes(valorDigitado, this.pageableObject)
+      }
+      case 'assinaturas': {
+        return this.planoService.getPlanos(valorDigitado, this.pageableObject)
       }
       default: {
         return null;

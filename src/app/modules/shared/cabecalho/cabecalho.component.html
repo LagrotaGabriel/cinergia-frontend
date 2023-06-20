@@ -52,7 +52,7 @@
                 </select>
             </div>
 
-            <div class="bt_header_container">
+            <div *ngIf="botaoCriarHabilitado" class="bt_header_container">
                 <div class="row bt_header bt_header_novo" [routerLink]="'/' + modulo + '/update'">
                     <h5 class="text_novo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         Criar
@@ -69,8 +69,8 @@
                 <div class="input_icon">
                     <mat-icon fontIcon="search" class="icone icone_filtro"></mat-icon>
                 </div>
-                <input class="input_busca" type="search" [placeholder]="inputPlaceholder"
-                    autocomplete="off" spellcheck="false" (input)="emiteFormControl()" [formControl]="busca" />
+                <input class="input_busca" type="search" [placeholder]="inputPlaceholder" autocomplete="off"
+                    spellcheck="false" (input)="emiteFormControl()" [formControl]="busca" />
             </div>
         </div>
     </div>
@@ -78,6 +78,6 @@
     <h5 *ngIf="verificaSeConteudoMaiorQueZero()"
         class="quantidade_exibida col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         Página {{ pageableObject.pageNumber+1 }} de {{ pageableObject.totalPages }} | {{ pageableObject.totalElements }}
-        Clientes encontrados
+        {{ 'itens exibido' + (pageableObject?.totalElements > 1 ? 's' : '') }}
     </h5>
 </div>

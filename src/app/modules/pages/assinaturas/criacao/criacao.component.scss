@@ -36,22 +36,10 @@ app-custom-select {
 .button_container {
     border-top: 1px solid $dark-grey;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     padding: 0 1rem;
+    padding-top: 1rem;
     margin-top: 0.5rem;
-}
-
-.button_block {
-    padding: 0 0.5rem;
-    padding-top: 1.5rem;
-}
-
-.button_block:first-of-type {
-    padding-left: 0;
-}
-
-.button_block:last-of-type {
-    padding-right: 0;
 }
 
 .button {
@@ -63,6 +51,7 @@ app-custom-select {
     border: 1px solid $primary-color;
     color: $primary-color;
     cursor: pointer;
+    margin-left: 1rem;
 }
 
 //CREDIT CARD 
@@ -137,7 +126,8 @@ app-custom-select {
     }
 
     .button_container {
-        padding: 0;
+        padding: 0 1rem;
+        border: none;
     }
 
     .button {
@@ -174,8 +164,9 @@ app-custom-select {
     }
 
     .button_container {
-        padding: 0;
+        padding: 0 1rem;
         margin-bottom: 0.5rem;
+        border: none;
     }
 
     .button {
@@ -225,8 +216,10 @@ app-custom-select {
     }
 
     .button_container {
-        padding: 0;
+        border: none;
+        padding-top: 0;
         margin-bottom: 0.5rem;
+        margin-top: 0;
         padding: 0 1rem;
     }
 

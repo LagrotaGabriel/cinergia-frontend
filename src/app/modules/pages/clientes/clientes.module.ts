@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { VisualizacaoComponent } from './visualizacao/visualizacao.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { CriacaoComponent } from './criacao/criacao.component';
@@ -26,7 +26,9 @@ import { DetalhesDadosTelefoneComponent } from './detalhes/dados/detalhes-dados-
 import { DetalhesDadosEnderecoComponent } from './detalhes/dados/detalhes-dados-endereco/detalhes-dados-endereco.component';
 import { AssinaturasComponent } from './detalhes/historico/assinaturas/assinaturas.component';
 
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -57,6 +59,9 @@ import { AssinaturasComponent } from './detalhes/historico/assinaturas/assinatur
     MatTooltipModule,
     MatMenuModule,
     BrowserAnimationsModule
-  ]
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
 })
 export class ClientesModule { }
