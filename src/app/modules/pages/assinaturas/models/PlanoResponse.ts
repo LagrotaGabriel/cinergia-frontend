@@ -2,6 +2,7 @@ export class PlanoResponse {
     id: number;
     dataCadastro: string;
     horaCadastro: string;
+    dataVencimento: string;
     dataInicio: string;
     descricao: string;
     valor: number;
@@ -15,6 +16,7 @@ export class PlanoResponse {
         this.id = item?.id;
         this.dataCadastro = item?.dataCadastro;
         this.horaCadastro = item?.horaCadastro;
+        this.dataVencimento = item?.dataVencimento;
         this.dataInicio = item?.dataInicio;
         this.descricao = item?.descricao;
         this.valor = item?.valor;

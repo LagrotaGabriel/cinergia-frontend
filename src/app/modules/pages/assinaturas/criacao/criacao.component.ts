@@ -198,8 +198,7 @@ export class CriacaoComponent {
       valor: this.getValueAtributoDadosPlano('valor'),
       formaPagamento: this.formaPagamentoAtual,
       periodicidade: this.getValueAtributoDadosPlano('periodicidade'),
-      notificacoes: this.notificacoes,
-      cartao: null
+      notificacoes: this.notificacoes
     }
     return planoRequest;
   }

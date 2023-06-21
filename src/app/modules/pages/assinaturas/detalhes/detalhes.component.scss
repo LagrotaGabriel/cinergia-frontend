@@ -1,0 +1,125 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+div,
+h1,
+hr,
+button {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: $light-black;
+    padding: 2rem 2rem;
+    margin: 1rem 0;
+    height: 95%;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.block_content_container {
+    border: 1px solid $dark-grey;
+    padding: 1rem 0.5rem;
+}
+
+.block_content {
+    display: flex;
+    justify-content: center;
+}
+
+.icone_block {
+    font-size: 55px;
+    height: 55px;
+    width: 55px;
+    color: $primary-color;
+}
+
+.block_title_content {
+    font-size: 1rem;
+    font-family: $font-roboto;
+    color: $primary-color;
+    font-weight: 700;
+    margin-top: 0.3rem;
+    justify-content: left;
+}
+
+.block_text_content {
+    font-size: 1.2rem;
+    font-family: $font-poppins;
+    color: $light-grey;
+    font-weight: 500;
+    margin-top: 0.3rem;
+    justify-content: left;
+}
+
+.container_informativos {
+    padding: 0 0.5rem;
+    margin: 0;
+    height: calc(100% - (55px + 3rem));
+}
+
+.informativos_block {
+    height: 100%;
+}
+
+.informativos_block:first-of-type {
+    padding-right: 0.7rem;
+}
+
+.informativos_block:last-of-type {
+    padding-left: 0.3rem;
+}
+
+.informativos_content {
+    padding: 1rem 0;
+    border: 1px solid $dark-grey;
+    height: 100%;
+}
+
+.descricao_titulo {
+    font-size: 1rem;
+    font-family: $font-poppins;
+    color: $dark-white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+    line-break: anywhere;
+}
+
+.descricao_atributo {
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+}
+
+.descricao_atributo_titulo {
+    font-size: 0.8rem;
+    color: $dark-white;
+    font-family: $font-poppins;
+}
+
+.descricao_atributo_texto {
+    font-size: 0.8rem;
+    color: $light-white;
+    font-family: $font-poppins;
+}
+
+span {
+    padding: 0 0.5rem;
+    border-radius: 3px;
+}
+
+.Ativo {
+    border: 1px solid $success;
+    color: $success;
+}
+
+.Inativo {
+    border: 1px solid $red;
+    color: $red;
+}

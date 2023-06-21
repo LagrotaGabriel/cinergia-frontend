@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
 import { TituloComponent } from './titulo/titulo.component';
 import { TabelaComponent } from './tabela/tabela.component';
 
@@ -62,7 +62,9 @@ registerLocaleData(localePt);
     CustomSelectBoxComponent
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    CurrencyPipe,
+    DatePipe
   ],
 })
 export class SharedModule { }

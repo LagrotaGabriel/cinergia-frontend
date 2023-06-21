@@ -6,7 +6,7 @@
 
             <tr>
 
-                <th scope="col" class="header_checkbox align-middle">
+                <th scope="col" class="header_checkbox align-middle" *ngIf="check">
                     <input (click)="checkAll()" [checked]="botaoCheckAllHabilitado" type="checkbox">
                 </th>
 
@@ -14,7 +14,7 @@
                     {{ thead.campo }}
                 </th>
 
-                <th scope="col" class="header_acoes align-middle">
+                <th scope="col" class="header_acoes align-middle" *ngIf="options">
 
                 </th>
 
@@ -27,7 +27,7 @@
             <ng-container *ngIf="objetos?.length > 0, else tabelaVazia">
                 <tr *ngFor="let objeto of objetos; let i = index" (dblclick)="navegarParaDetalhes(objeto.id)">
 
-                    <th scope="row" class="content_checkbox align-middle">
+                    <th scope="row" class="content_checkbox align-middle" *ngIf="check">
                         <input (click)="alteraEstadoCheckTabela(i)" [checked]="objeto.checked" type="checkbox"
                             class="checkbox">
                     </th>
@@ -35,14 +35,12 @@
                     <td *ngFor="let tbody of tbodies" class="td_content align-middle" [class]="tbody.hidden">
                         <ng-container *ngIf="obtemTd(objeto, tbody) as tdContent">
                             <span [class]="obtemClassePersonalizada(tdContent)">
-                                {{ tdContent.type == 'money'
-                                ? (tdContent.campo | currency : 'BRL')
-                                : (tdContent.campo) }}
+                                {{ realizaTratamentoPipe(tdContent) }}
                             </span>
                         </ng-container>
                     </td>
 
-                    <th scope="row" class="content_acoes align-middle">
+                    <th scope="row" class="content_acoes align-middle" *ngIf="options">
                         <div class="icon_container">
                             <mat-icon fontIcon="more_vert"
                                 class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"

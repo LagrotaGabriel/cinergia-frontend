@@ -1,7 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableTd } from '../models/TableTd';
 import { TableTh } from '../models/TableTh';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Util } from '../../utils/Util';
 
 @Component({
   selector: 'app-tabela',
@@ -10,12 +12,14 @@ import { TableTh } from '../models/TableTh';
 })
 export class TabelaComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) { }
 
   @Input() theads: TableTh[];
   @Input() tbodies: TableTd[];
   @Input() objetos: any[];
   @Input() modulo: string;
+  @Input() check: boolean = true;
+  @Input() options: boolean = true;
 
   botaoCheckAllHabilitado: boolean = JSON.parse(localStorage.getItem("checkAll") || 'false');
   itensSelecionadosNaTabela: any[] = JSON.parse(localStorage.getItem("itensSelecionadosNaTabela") || '[]');
@@ -57,6 +61,24 @@ export class TabelaComponent {
       })
     }
     return customClassName;
+  }
+
+  realizaTratamentoPipe(tableTd: TableTd): string {
+    let valor: string = tableTd.campo;
+    switch (tableTd.type) {
+      case 'money': {
+        valor = Util.isNotEmptyString(tableTd.campo) && tableTd.campo != '-' ? (this.currencyPipe.transform(tableTd.campo, 'BRL')) : '-';
+        break;
+      }
+      case 'date': {
+        valor = Util.isNotEmptyString(tableTd.campo) && tableTd.campo != '-' ? (this.datePipe.transform(tableTd.campo, 'dd/MM/yyyy')) : '-';
+        break;
+      }
+      default: {
+        return valor;
+      }
+    }
+    return valor;
   }
 
   checkAll() {

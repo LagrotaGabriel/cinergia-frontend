@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { API_CONFIG } from 'src/app/config/api-config';
 import { PlanoPageObject } from '../assinaturas/models/PlanoPageObject';
 import { PlanoResponse } from '../assinaturas/models/PlanoResponse';
+import { DadosPlanoResponse } from '../assinaturas/models/DadosPlanoResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -92,6 +93,15 @@ export class PlanoService {
       map((resposta) => new PlanoResponse(resposta))
     )
   }
+
+  public obtemDadosPlanoPorId(id: number): Observable<DadosPlanoResponse> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    return this.http.get<DadosPlanoResponse>(`${API_CONFIG.baseUrl}/plano/dados/${id}`, this.httpOptions).pipe(
+      map((resposta) => new DadosPlanoResponse(resposta))
+    )
+  }
+
 
   private buildRequestParams(busca: string) {
     if (busca != null && busca != undefined && busca != '') {

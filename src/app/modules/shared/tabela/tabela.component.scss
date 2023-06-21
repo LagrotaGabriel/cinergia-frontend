@@ -112,6 +112,13 @@ input[type=checkbox] {
     border-radius: 3px; 
 }
 
+.yellow_span {
+    border: 1px solid $warn;
+    color: $warn;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px; 
+}
+
 .green_span {
     border: 1px solid $success;
     color: $success;
