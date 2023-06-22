@@ -131,14 +131,33 @@ input[type=checkbox] {
 .dropdown-menu,
 .dropdown-item {
     background-color: $light-black !important;
+}
+
+.dropdown-item {
+    margin: 0;
+    display: flex;
+    padding: 0.2rem 1rem;
+}
+
+.dropdown-item-text {
     color: $dark-white;
     font-family: $font-poppins;
     font-size: 0.9rem;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover > .option_icon, .dropdown-item:hover > .dropdown-item-text {
     color: $primary-color !important;
     transition: 0.2s;
+}
+
+.option_icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    color: $dark-white;
 }
 
 @media (max-width: 1200px) {}

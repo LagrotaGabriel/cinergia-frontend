@@ -7,8 +7,11 @@ export class PagamentoResponse {
     valorLiquido: number;
     descricao: string;
     dataVencimento: string;
+    linkCobranca: string;
+    linkBoletoAsaas: string;
     formaPagamento: string;
     statusPagamento: string;
+    expandido: boolean;
     options: TableOptions;
 
     constructor(item) {
@@ -18,8 +21,11 @@ export class PagamentoResponse {
         this.valorLiquido = item?.valorLiquido;
         this.descricao = item?.descricao;
         this.dataVencimento = item?.dataVencimento;
+        this.linkCobranca = item?.linkCobranca;
+        this.linkBoletoAsaas = item?.linkBoletoAsaas;
         this.formaPagamento = item?.formaPagamento;
         this.statusPagamento = item?.statusPagamento;
+        this.expandido = false;
         this.options = {
             detalhesHabilitado: true,
             editarHabilitado: true,

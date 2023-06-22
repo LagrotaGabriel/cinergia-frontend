@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -23,7 +23,8 @@ export class DetalhesComponent {
 
   constructor(private pagamentoService: PagamentoService,
     private planoService: PlanoService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   getPagamentos$: Subscription;
   obterPlanoAtual$: Subscription;
@@ -165,7 +166,7 @@ export class DetalhesComponent {
               editarHabilitado: false,
               removerHabilitado: false,
               geraBoletoPagamento: objeto.formaPagamento == 'Boleto' ? true : false,
-              geraChavePixPagamento: objeto.formaPagamento == 'Pix' ? true : false
+              geraLinkCobrancaPagamento: objeto.formaPagamento != 'Cartão de crédito' ? true : false
             }
           })
           this.pagamentoPageObject = response;
@@ -176,6 +177,10 @@ export class DetalhesComponent {
           this.pagamentoPageObject = null;
         }
       });
+  }
+
+  retornarParaTabela() {
+    this.router.navigate(['/assinaturas']);
   }
 
 }

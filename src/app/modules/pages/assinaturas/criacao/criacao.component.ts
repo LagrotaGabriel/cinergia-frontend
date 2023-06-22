@@ -97,11 +97,6 @@ export class CriacaoComponent {
         icon: 'credit_card',
         placeholder: 'Taxa de R$ 1,99 + 2,99% por transação paga'
       },
-      // {
-      //   text: 'Débito',
-      //   value: 'DEBIT_CARD',
-      //   icon: 'account_balance'
-      // }
     ]
 
     return selectBoxList;

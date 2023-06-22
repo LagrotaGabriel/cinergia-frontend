@@ -73,13 +73,25 @@
         <div class="informativos_block col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
             <div class="row informativos_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
+                <div class="block_opcoes row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="block_opcoes_interno">
+                        <div class="botao botao_retornar row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                            (click)="retornarParaTabela()">
+                            <mat-icon class="icone_retornar" fontIcon="arrow_back"></mat-icon>
+                            <h5 class="retornar_text">
+                                Retornar
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="descricao_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     {{ plano?.descricao | titlecase }}
                 </div>
 
                 <hr>
 
-                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="row descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Valor
                     </div>
@@ -88,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Forma de pgto.
                     </div>
@@ -97,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Periodicidade
                     </div>
@@ -106,7 +118,7 @@
                     </div>
                 </div>
 
-                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Comprometimento
                     </div>
@@ -115,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Status
                     </div>
@@ -135,7 +147,8 @@
                     PAGAMENTOS DO PLANO
                 </div>
                 <app-tabela [@fadeInOut] [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()"
-                    [objetos]="pagamentoPageObject?.content" [check]="false" [options]="true"></app-tabela>
+                    [objetos]="pagamentoPageObject?.content" [check]="false" [options]="true"
+                    [dblClickEnabled]="false"></app-tabela>
             </div>
         </div>
 

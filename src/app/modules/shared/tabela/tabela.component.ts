@@ -23,6 +23,7 @@ export class TabelaComponent {
   @Input() modulo: string;
   @Input() check: boolean = true;
   @Input() options: boolean = true;
+  @Input() dblClickEnabled: boolean = true;
 
   botaoCheckAllHabilitado: boolean = JSON.parse(localStorage.getItem("checkAll") || 'false');
   itensSelecionadosNaTabela: any[] = JSON.parse(localStorage.getItem("itensSelecionadosNaTabela") || '[]');

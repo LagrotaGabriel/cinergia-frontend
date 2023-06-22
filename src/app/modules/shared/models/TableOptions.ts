@@ -3,5 +3,5 @@ export class TableOptions {
     editarHabilitado: boolean;
     removerHabilitado: boolean;
     geraBoletoPagamento?: boolean;
-    geraChavePixPagamento?: boolean;
+    geraLinkCobrancaPagamento?: boolean;
 }

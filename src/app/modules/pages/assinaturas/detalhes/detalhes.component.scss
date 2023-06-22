@@ -64,6 +64,61 @@ button {
     height: calc(100% - (55px + 3rem));
 }
 
+.block_opcoes {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $dark-grey;
+}
+
+.block_opcoes_interno {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.botao {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: $light-grey;
+    cursor: pointer;
+}
+
+.icone_retornar {
+    color: $light-grey;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.icone_retornar {
+    margin-right: 0.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.retornar_text {
+    font-family: $font-poppins;
+    font-size: 0.90rem;
+    font-weight: 500;
+    margin: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.botao_retornar:hover,
+.botao_retornar:hover>.icone_retornar {
+    color: $dark-white;
+}
+
+.botao_retornar:focus {
+    outline: 0;
+}
+
 .informativos_block {
     height: 100%;
 }
@@ -78,6 +133,7 @@ button {
 
 .informativos_content {
     padding: 1rem;
+    padding-top: 0.5rem;
     border: 1px solid $dark-grey;
     height: 100%;
 }
@@ -120,7 +176,7 @@ button {
     justify-content: center;
     font-family: $font-poppins;
     font-weight: 600;
-    margin-bottom: 0.3rem;
+    margin: 0.3rem 0;
     color: $primary-color;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -213,6 +269,7 @@ span {
     .descricao_titulo {
         display: flex;
         justify-content: center;
+        margin-top: 1rem;
     }
     .pagamentos_titulo {
         font-size: 0.8rem;

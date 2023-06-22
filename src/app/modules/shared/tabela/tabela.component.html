@@ -25,7 +25,7 @@
         <tbody *ngIf="objetos != null; else: loadBarTabela">
 
             <ng-container *ngIf="objetos?.length > 0, else tabelaVazia">
-                <tr *ngFor="let objeto of objetos; let i = index" (dblclick)="navegarParaDetalhes(objeto.id)">
+                <tr *ngFor="let objeto of objetos; let i = index" (dblclick)="dblClickEnabled ? navegarParaDetalhes(objeto.id) : null">
 
                     <th scope="row" class="content_checkbox align-middle" *ngIf="check">
                         <input (click)="alteraEstadoCheckTabela(i)" [checked]="objeto.checked" type="checkbox"
@@ -43,23 +43,43 @@
                     <th scope="row" class="content_acoes align-middle" *ngIf="options">
                         <div class="icon_container">
                             <mat-icon fontIcon="more_vert"
-                                class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"
+                                class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right" 
                                 data-toggle="dropdown"></mat-icon>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" (click)="navegarParaDetalhes(objeto.id)" *ngIf="objeto.options.detalhesHabilitado">
-                                    Detalhes
+                                <a class="row dropdown-item" (click)="navegarParaDetalhes(objeto.id)"
+                                    *ngIf="objeto.options.detalhesHabilitado">
+                                    <mat-icon fontIcon="info" class="option_icon"></mat-icon>
+                                    <div class="dropdown-item-text">
+                                        Detalhes
+                                    </div>
                                 </a>
-                                <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)" *ngIf="objeto.options.editarHabilitado">
-                                    Editar
+                                <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)"
+                                    *ngIf="objeto.options.editarHabilitado">
+                                    <mat-icon fontIcon="settings" class="option_icon"></mat-icon>
+                                    <div class="dropdown-item-text">
+                                        Editar
+                                    </div>
                                 </a>
-                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.geraBoletoPagamento">
-                                    Gerar boleto
+                                <a class="dropdown-item" [href]="objeto.linkBoletoAsaas" target="_blank"
+                                    *ngIf="objeto.options.geraBoletoPagamento">
+                                    <mat-icon fontIcon="analytics" class="option_icon"></mat-icon>
+                                    <div class="dropdown-item-text">
+                                        Exibir boleto
+                                    </div>
                                 </a>
-                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.geraChavePixPagamento">
-                                    Gerar chave pix
+                                <a class="dropdown-item" [href]="objeto.linkCobranca" target="_blank"
+                                    *ngIf="objeto.options.geraLinkCobrancaPagamento">
+                                    <mat-icon fontIcon="link" class="option_icon"></mat-icon>
+                                    <div class="dropdown-item-text">
+                                        Exibir link de pagamento
+                                    </div>
                                 </a>
-                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.removerHabilitado">
-                                    Excluir
+                                <a class="dropdown-item" *ngIf="objeto.options.removerHabilitado"
+                                    (click)="excluiItem(objeto.id)">
+                                    <mat-icon fontIcon="delete" class="option_icon"></mat-icon>
+                                    <div class="dropdown-item-text">
+                                        Excluir
+                                    </div>
                                 </a>
                             </div>
                         </div>

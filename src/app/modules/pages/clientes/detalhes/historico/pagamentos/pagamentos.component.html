@@ -1,1 +1,77 @@
-<p>Pagamentos depende do módulo de assinaturas. Será construído posteriormente</p>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 hr_container">
+    <hr class="hr">
+</div>
+
+<div *ngIf="pagamentos?.content?.length > 0, else conteudoVazio" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="block block_titulo_itens row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
+        <div class="block_titulo_itens_titulo">
+            {{ pagamentos?.totalElements == 1
+            ? pagamentos?.totalElements + ' cobrança encontrada'
+            : pagamentos?.totalElements + ' cobranças encontradas' }}
+        </div>
+    </div>
+
+    <div class="block block_itens row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+        <div *ngFor="let pagamento of pagamentos?.content"
+            class="item_container row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
+            [ngClass]="{'item_container_expandido': pagamento.expandido}">
+
+            <div class="item_container_titulo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12">
+                <div class="row item_text item_text_titulo" (click)="pagamento.expandido = !pagamento.expandido">
+                    {{ pagamento.descricao }}
+                </div>
+
+                <div class="row item_details">
+
+                    <div class="item_details_status" [class]="pagamento.statusPagamento">
+                        {{ pagamento.statusPagamento | titlecase }}
+                    </div>
+
+                    <mat-icon [fontIcon]="pagamento.expandido ? 'expand_more' : 'chevron_left'"
+                        (click)="pagamento.expandido = !pagamento.expandido" class="icone_details icone_drop"></mat-icon>
+                </div>
+            </div>
+
+            <div [@slideUpDown] class="item_container_conteudo row col-xl-12 col-lg-12 col-md-l2 col-sm-12 col-12"
+                *ngIf="pagamento.expandido">
+                <div class="row item_text">
+                    Valor: {{ pagamento.valorBruto | currency : 'BRL' }}
+                    <br> Data de vencimento: {{ pagamento.dataVencimento | date: 'dd/MM/yyyy'}}
+                    <br>Forma de pagamento: {{ pagamento.formaPagamento }}
+                    <br><br>Criado dia {{ pagamento.dataCadastro | date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+
+        </div>
+
+        <ul *ngIf="pagamentos?.totalPages > 1" class="pagination">
+            <li (click)="voltarPagina()" [ngClass]="{'disabled': pagamentos.pageNumber == 0}" class="page-item">
+                <a class="page-link">{{ geraBotaoVoltarPaginacao() }}</a>
+            </li>
+            <ng-container *ngFor="let numero of GeraNumerosParaNavegarNaPaginacao(pagamentos.totalPages); let i = index">
+                <li *ngIf="(pagamentos.pageNumber - i) <= 3 && (pagamentos.pageNumber - i) >= 0
+                    || (i - pagamentos.pageNumber) <= 3 && (i - pagamentos.pageNumber) >= 0
+                    || pagamentos.pageNumber == 0 && (i - pagamentos.pageNumber) <= 6 && (i - pagamentos.pageNumber) >= 0
+                    || pagamentos.pageNumber == 1 && (i - pagamentos.pageNumber) <= 5 && (i - pagamentos.pageNumber) >= 0
+                    || pagamentos.pageNumber == 2 && (i - pagamentos.pageNumber) <= 4 && (i - pagamentos.pageNumber) >= 0
+                    || (pagamentos.pageNumber == (pagamentos.totalPages-1)) && (pagamentos.pageNumber - i) <= 6
+                    || (pagamentos.pageNumber == (pagamentos.totalPages-2)) && (pagamentos.pageNumber - i) <= 5
+                    || (pagamentos.pageNumber == (pagamentos.totalPages-3)) && (pagamentos.pageNumber - i) <= 4"
+                    (click)="selecionarPagina(i)" [ngClass]="{'active': pagamentos.pageNumber == i}" class="page-item">
+                    <a class="page-link">{{ i+1 }}</a>
+                </li>
+            </ng-container>
+            <li (click)="avancarPagina()" [ngClass]="{'disabled': pagamentos.pageNumber == pagamentos.totalPages-1}"
+                class="page-item"><a class="page-link">{{ geraBotaoAvancarPaginacao() }}</a></li>
+        </ul>
+
+    </div>
+</div>
+
+<ng-template #conteudoVazio class="container_vazio col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <div class="block_vazio col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        Não há nenhum item por aqui
+    </div>
+</ng-template>

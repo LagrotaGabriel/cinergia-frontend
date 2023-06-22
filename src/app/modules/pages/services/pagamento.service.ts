@@ -21,6 +21,21 @@ export class PagamentoService {
     body: null
   }
 
+  public getPagamentosCliente(pagamentoPageObject: PagamentoPageObject, idCliente: number): Observable<PagamentoPageObject> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    this.buildPageableParams(pagamentoPageObject);
+    return this.http.get<PagamentoPageObject>(`${API_CONFIG.baseUrl}/pagamento/cliente/${idCliente}`, this.httpOptions).pipe(
+      map(resposta => new PagamentoPageObject(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+      retry({ count: 20, delay: 10000 })
+    )
+  }
+
   public getPagamentos(pagamentoPageObject: PagamentoPageObject, idPlano: number): Observable<PagamentoPageObject> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
