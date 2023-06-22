@@ -4,6 +4,7 @@
 .table_container {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 table {
@@ -19,7 +20,8 @@ thead tr th {
     padding: 0.5rem 0.75rem;
 }
 
-.table td, .table th {
+.table td,
+.table th {
     font-family: $font-poppins;
     font-size: 0.8rem;
     white-space: nowrap;
@@ -109,40 +111,57 @@ input[type=checkbox] {
     border: 1px solid $red;
     color: $red;
     padding: 0.1rem 0.5rem;
-    border-radius: 3px; 
+    border-radius: 3px;
 }
 
 .yellow_span {
     border: 1px solid $warn;
     color: $warn;
     padding: 0.1rem 0.5rem;
-    border-radius: 3px; 
+    border-radius: 3px;
 }
 
 .green_span {
     border: 1px solid $success;
     color: $success;
     padding: 0.1rem 0.5rem;
-    border-radius: 3px; 
+    border-radius: 3px;
 }
 
-@media (max-width: 1200px) {
-
+.dropdown-menu,
+.dropdown-item {
+    background-color: $light-black !important;
+    color: $dark-white;
+    font-family: $font-poppins;
+    font-size: 0.9rem;
 }
+
+.dropdown-item:hover {
+    color: $primary-color !important;
+    transition: 0.2s;
+}
+
+@media (max-width: 1200px) {}
 
 @media (max-width: 992px) {
-    tr td, tr th{
+
+    tr td,
+    tr th {
         font-size: 0.8rem !important;
     }
+
     .lg {
         display: none;
     }
 }
 
 @media (max-width: 768px) {
-    tr td, tr th{
+
+    tr td,
+    tr th {
         font-size: 0.7rem !important;
     }
+
     .md {
         display: none;
     }
@@ -152,7 +171,9 @@ input[type=checkbox] {
     .tabela_vazia_container {
         font-size: 0.8rem;
     }
-    tr td, tr th{
+
+    tr td,
+    tr th {
         font-size: 0.6rem !important;
     }
 
@@ -161,6 +182,4 @@ input[type=checkbox] {
     }
 }
 
-@media (max-width: 470px) {
-
-}
+@media (max-width: 470px) {}

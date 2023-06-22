@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe, TitleCasePipe, registerLocaleData } from '@angular/common';
 import { TituloComponent } from './titulo/titulo.component';
 import { TabelaComponent } from './tabela/tabela.component';
 
@@ -64,7 +64,8 @@ registerLocaleData(localePt);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     CurrencyPipe,
-    DatePipe
+    DatePipe,
+    TitleCasePipe
   ],
 })
 export class SharedModule { }

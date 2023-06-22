@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, Pipe, PipeTransform } from '@an
 import { Router } from '@angular/router';
 import { TableTd } from '../models/TableTd';
 import { TableTh } from '../models/TableTh';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { Util } from '../../utils/Util';
 
 @Component({
@@ -12,7 +12,10 @@ import { Util } from '../../utils/Util';
 })
 export class TabelaComponent {
 
-  constructor(private router: Router, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) { }
+  constructor(private router: Router, 
+    private datePipe: DatePipe, 
+    private currencyPipe: CurrencyPipe, 
+    private titleCasePipe: TitleCasePipe) { }
 
   @Input() theads: TableTh[];
   @Input() tbodies: TableTd[];
@@ -44,6 +47,7 @@ export class TabelaComponent {
       hidden: tbody.hidden,
       maxLength: tbody.maxLength,
       type: tbody.type,
+      titleCase: tbody.titleCase,
       tableTdCustomClasses: tbody.tableTdCustomClasses
     };
 
@@ -75,7 +79,10 @@ export class TabelaComponent {
         break;
       }
       default: {
-        return valor;
+        if (Util.isNotEmptyString(tableTd.campo) && tableTd.campo != '') {
+          if (tableTd.titleCase) valor = this.titleCasePipe.transform(tableTd.campo);
+        }
+        else valor = '-';
       }
     }
     return valor;

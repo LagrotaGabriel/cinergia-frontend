@@ -1,3 +1,5 @@
+import { TableOptions } from "src/app/modules/shared/models/TableOptions";
+
 export class PlanoResponse {
     id: number;
     dataCadastro: string;
@@ -11,6 +13,7 @@ export class PlanoResponse {
     periodicidade: string;
     checked: boolean;
     expandido: boolean;
+    options: TableOptions;
 
     constructor(item) {
         this.id = item?.id;
@@ -25,6 +28,11 @@ export class PlanoResponse {
         this.periodicidade = item?.periodicidade;
         this.checked = false;
         this.expandido = false;
+        this.options = {
+            detalhesHabilitado: true,
+            editarHabilitado: true,
+            removerHabilitado: false
+        }
     }
     
 }

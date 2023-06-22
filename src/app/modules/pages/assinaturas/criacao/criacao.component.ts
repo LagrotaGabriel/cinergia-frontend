@@ -205,14 +205,8 @@ export class CriacaoComponent {
 
   realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano() {
     this.planoService.novoPlano(this.realizaCriacaoDeObjetoPlano(), parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: () => {
-
-      },
       complete: () => {
-
+        this.router.navigate(['/assinaturas']);
       }
     })
   }

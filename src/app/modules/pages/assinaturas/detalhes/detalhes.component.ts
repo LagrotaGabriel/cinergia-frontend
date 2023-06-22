@@ -11,6 +11,7 @@ import { PlanoService } from '../../services/plano.service';
 import { PlanoResponse } from '../models/PlanoResponse';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 import { DadosPlanoResponse } from '../models/DadosPlanoResponse';
+import { TableOptions } from 'src/app/modules/shared/models/TableOptions';
 
 @Component({
   selector: 'app-detalhes',
@@ -81,13 +82,15 @@ export class DetalhesComponent {
         hidden: null,
         maxLength: 18,
         type: 'date',
-        tableTdCustomClasses: []
+        titleCase: false,
+        tableTdCustomClasses: [],
       },
       {
         campo: 'dataPagamento',
         hidden: null,
         maxLength: 18,
         type: 'date',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -95,6 +98,7 @@ export class DetalhesComponent {
         hidden: null,
         maxLength: 14,
         type: 'money',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -102,6 +106,7 @@ export class DetalhesComponent {
         hidden: null,
         maxLength: 15,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -109,6 +114,7 @@ export class DetalhesComponent {
         hidden: null,
         maxLength: 18,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: [
           {
             value: 'Aprovado',
@@ -116,6 +122,10 @@ export class DetalhesComponent {
           },
           {
             value: 'Reprovado',
+            className: 'red_span'
+          },
+          {
+            value: 'Atrasado',
             className: 'red_span'
           },
           {
@@ -149,6 +159,15 @@ export class DetalhesComponent {
       {
         next: (response: PagamentoPageObject) => {
           let sortDirection = this.pagamentoPageObject == null ? this.pagamentoPageObject = undefined : this.pagamentoPageObject.sortDirection;
+          response.content.forEach(objeto => {
+            objeto.options = {
+              detalhesHabilitado: false,
+              editarHabilitado: false,
+              removerHabilitado: false,
+              geraBoletoPagamento: objeto.formaPagamento == 'Boleto' ? true : false,
+              geraChavePixPagamento: objeto.formaPagamento == 'Pix' ? true : false
+            }
+          })
           this.pagamentoPageObject = response;
           this.pagamentoPageObject.sortDirection = sortDirection;
           if (this.pagamentoPageObject.sortDirection == undefined) this.pagamentoPageObject.sortDirection = 'DESC';

@@ -46,13 +46,19 @@
                                 class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"
                                 data-toggle="dropdown"></mat-icon>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" (click)="navegarParaDetalhes(objeto.id)">
+                                <a class="dropdown-item" (click)="navegarParaDetalhes(objeto.id)" *ngIf="objeto.options.detalhesHabilitado">
                                     Detalhes
                                 </a>
-                                <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)">
+                                <a class="dropdown-item" (click)="encaminhaParaAlteracaoItem(objeto.id)" *ngIf="objeto.options.editarHabilitado">
                                     Editar
                                 </a>
-                                <a class="dropdown-item" (click)="excluiItem(objeto.id)">
+                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.geraBoletoPagamento">
+                                    Gerar boleto
+                                </a>
+                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.geraChavePixPagamento">
+                                    Gerar chave pix
+                                </a>
+                                <a class="dropdown-item" (click)="excluiItem(objeto.id)" *ngIf="objeto.options.removerHabilitado">
                                     Excluir
                                 </a>
                             </div>

@@ -1,3 +1,5 @@
+import { TableOptions } from "src/app/modules/shared/models/TableOptions";
+
 export class PagamentoResponse {
     dataCadastro: string;
     horaCadastro: string;
@@ -7,6 +9,7 @@ export class PagamentoResponse {
     dataVencimento: string;
     formaPagamento: string;
     statusPagamento: string;
+    options: TableOptions;
 
     constructor(item) {
         this.dataCadastro = item?.dataCadastro;
@@ -17,5 +20,10 @@ export class PagamentoResponse {
         this.dataVencimento = item?.dataVencimento;
         this.formaPagamento = item?.formaPagamento;
         this.statusPagamento = item?.statusPagamento;
+        this.options = {
+            detalhesHabilitado: true,
+            editarHabilitado: true,
+            removerHabilitado: false
+        }
     }
 }

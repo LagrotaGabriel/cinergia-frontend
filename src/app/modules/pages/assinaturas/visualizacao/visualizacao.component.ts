@@ -48,6 +48,13 @@ export class VisualizacaoComponent {
       {
         next: (response: PlanoPageObject) => {
           let sortDirection = this.planoPageObject == null ? this.planoPageObject = undefined : this.planoPageObject.sortDirection;
+          response.content.forEach(objeto => {
+            objeto.options = {
+              detalhesHabilitado: true,
+              editarHabilitado: true,
+              removerHabilitado: false
+            }
+          })
           this.planoPageObject = response;
           this.planoPageObject.sortDirection = sortDirection;
           if (this.planoPageObject.sortDirection == undefined) this.planoPageObject.sortDirection = 'DESC';
@@ -104,6 +111,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 18,
         type: 'string',
+        titleCase: true,
         tableTdCustomClasses: []
       },
       {
@@ -111,6 +119,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 14,
         type: 'money',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -118,6 +127,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 15,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -125,6 +135,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 18,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -132,6 +143,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 15,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: [
           {
             value: 'Ativo',

@@ -2,6 +2,7 @@ import { Endereco } from "src/app/shared/models/Endereco";
 import { Telefone } from "src/app/shared/models/Telefone";
 import { Acesso } from "./Acesso";
 import { Arquivo } from "src/app/shared/models/Arquivo";
+import { TableOptions } from "src/app/modules/shared/models/TableOptions";
 
 export class ClienteResponse {
     id: number;
@@ -19,6 +20,7 @@ export class ClienteResponse {
     endereco: Endereco;
     fotoPerfil: Arquivo;
     checked: boolean;
+    options: TableOptions;
 
     constructor(item) {
         this.id = item?.id;
@@ -36,6 +38,11 @@ export class ClienteResponse {
         this.endereco = item?.endereco;
         this.fotoPerfil = item?.fotoPerfil;
         this.checked = false;
+        this.options = {
+            detalhesHabilitado: true,
+            editarHabilitado: true,
+            removerHabilitado: false
+        }
     }
 
     isChecked(): boolean {

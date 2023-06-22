@@ -30,6 +30,7 @@ button {
 .block_content {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .icone_block {
@@ -76,7 +77,7 @@ button {
 }
 
 .informativos_content {
-    padding: 1rem 0;
+    padding: 1rem;
     border: 1px solid $dark-grey;
     height: 100%;
 }
@@ -85,28 +86,45 @@ button {
     font-size: 1rem;
     font-family: $font-poppins;
     color: $dark-white;
-    display: flex;
-    justify-content: center;
     margin-bottom: 0.5rem;
-    padding: 0 0.5rem;
-    line-break: anywhere;
+    padding: 0;
+    overflow: hidden;
 }
 
 .descricao_atributo {
     margin-top: 0.5rem;
-    padding: 0 1rem;
+    padding: 0rem;
 }
 
 .descricao_atributo_titulo {
     font-size: 0.8rem;
     color: $dark-white;
     font-family: $font-poppins;
+    width: 100%;
+    overflow: hidden;
 }
 
 .descricao_atributo_texto {
     font-size: 0.8rem;
     color: $light-white;
     font-family: $font-poppins;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pagamentos_titulo {
+    font-size: 1.2rem;
+    color: $dark-white;
+    padding: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    font-family: $font-poppins;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: $primary-color;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 span {
@@ -122,4 +140,88 @@ span {
 .Inativo {
     border: 1px solid $red;
     color: $red;
+}
+
+@media (max-width: 1200px) {
+
+    .block_content_container {
+        padding: 1rem 0.5rem;
+    }
+
+    .icone_block {
+        font-size: 45px;
+        height: 45px;
+        width: 45px;
+    }
+
+    .block_title_content {
+        font-size: 0.9rem;
+        margin-top: 0;
+        justify-content: center;
+    }
+
+    .block_text_content {
+        font-size: 1rem;
+        margin-top: 0;
+        justify-content: center;
+    }
+
+    .container_informativos {
+        height: calc(100% - (55px + 5rem));
+    }
+
+    .pagamentos_titulo {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+}
+
+@media (max-width: 960px) {
+    .icone_block {
+        font-size: 40px;
+        height: 40px;
+        width: 40px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .icone_block {
+        font-size: 35px;
+        height: 35px;
+        width: 35px;
+    }
+
+    .block_title_content {
+        font-size: 0.8rem;
+    }
+
+    .block_text_content {
+        font-size: 0.9rem;
+    }
+
+    .container {
+        height: auto;
+        padding: 2rem 1.5rem;
+    }
+
+    .informativos_block {
+        padding: 0 !important;
+        margin-top: 0.5rem;
+    }
+    .descricao_titulo {
+        display: flex;
+        justify-content: center;
+    }
+    .pagamentos_titulo {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 576px) {
+    .descricao_atributo {
+        width: 100%;
+    }
 }

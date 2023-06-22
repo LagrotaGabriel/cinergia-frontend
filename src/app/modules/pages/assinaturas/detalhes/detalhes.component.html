@@ -2,12 +2,12 @@
 
     <div class="row block_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="row block_content_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="block_content block_icon_content col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                <div class="block_content block_icon_content col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
                     <mat-icon fontIcon="attach_money" class="icone icone_block"></mat-icon>
                 </div>
-                <div class="block_right_content col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <div class="block_right_content col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="block_content block_title_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         TOTAL
                     </div>
@@ -18,12 +18,12 @@
             </div>
         </div>
 
-        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="row block_content_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="block_content block_icon_content col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                <div class="block_content block_icon_content col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
                     <mat-icon fontIcon="pending_actions" class="icone icone_block"></mat-icon>
                 </div>
-                <div class="block_right_content col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <div class="block_right_content col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="block_content block_title_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         PENDENTE
                     </div>
@@ -34,12 +34,12 @@
             </div>
         </div>
 
-        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="row block_content_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="block_content block_icon_content col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                <div class="block_content block_icon_content col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
                     <mat-icon fontIcon="price_check" class="icone icone_block"></mat-icon>
                 </div>
-                <div class="block_right_content col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <div class="block_right_content col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="block_content block_title_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         PAGO
                     </div>
@@ -50,12 +50,12 @@
             </div>
         </div>
 
-        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="block col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="row block_content_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="block_content block_icon_content col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                <div class="block_content block_icon_content col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12">
                     <mat-icon fontIcon="money_off" class="icone icone_block"></mat-icon>
                 </div>
-                <div class="block_right_content col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <div class="block_right_content col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="block_content block_title_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         EM ATRASO
                     </div>
@@ -70,17 +70,17 @@
 
     <div class="container_informativos row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-        <div class="informativos_block col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-            <div class="informativos_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="informativos_block col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+            <div class="row informativos_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
                 <div class="descricao_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    {{ plano?.descricao }}
+                    {{ plano?.descricao | titlecase }}
                 </div>
 
                 <hr>
 
-                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
+                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                    <div class="row descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Valor
                     </div>
                     <div class="descricao_atributo_texto col-xl-12 col-lg-12 col-md-12 col-12">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Forma de pgto.
                     </div>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Periodicidade
                     </div>
@@ -106,18 +106,7 @@
                     </div>
                 </div>
 
-                <div class="row descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
-                        Status
-                    </div>
-                    <div class="descricao_atributo_texto col-xl-12 col-lg-12 col-md-12 col-12">
-                        <span [class]="plano?.statusPlano">
-                            {{ plano?.statusPlano }}
-                        </span>
-                    </div>
-                </div>
-
-                <div class="row descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Comprometimento
                     </div>
@@ -126,13 +115,27 @@
                     </div>
                 </div>
 
+                <div class=" descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                    <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
+                        Status
+                    </div>
+                    <div class="descricao_atributo_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <span [class]="plano?.statusPlano">
+                            {{ plano?.statusPlano }}
+                        </span>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="informativos_block col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+        <div class="informativos_block col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
             <div class="informativos_content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pagamentos_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    PAGAMENTOS DO PLANO
+                </div>
                 <app-tabela [@fadeInOut] [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()"
-                    [objetos]="pagamentoPageObject?.content" [check]="false" [options]="false"></app-tabela>
+                    [objetos]="pagamentoPageObject?.content" [check]="false" [options]="true"></app-tabela>
             </div>
         </div>
 

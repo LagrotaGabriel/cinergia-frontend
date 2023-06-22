@@ -1,3 +1,4 @@
+import { TableOptions } from "./TableOptions";
 import { TableTdCustomClass } from "./TableTdCustomClass";
 
 export class TableTd {
@@ -5,5 +6,6 @@ export class TableTd {
     hidden: string;
     maxLength: number;
     type: string;
+    titleCase: boolean;
     tableTdCustomClasses: TableTdCustomClass[];
 }

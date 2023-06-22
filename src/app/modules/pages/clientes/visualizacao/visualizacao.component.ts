@@ -49,6 +49,13 @@ export class VisualizacaoComponent {
       {
         next: (response: ClientePageObject) => {
           let sortDirection = this.clientePageObject == null ? this.clientePageObject = undefined : this.clientePageObject.sortDirection;
+          response.content.forEach(objeto => {
+            objeto.options = {
+              detalhesHabilitado: true,
+              editarHabilitado: true,
+              removerHabilitado: true
+            }
+          })
           this.clientePageObject = response;
           this.clientePageObject.sortDirection = sortDirection;
           if (this.clientePageObject.sortDirection == undefined) this.clientePageObject.sortDirection = 'DESC';
@@ -100,6 +107,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 18,
         type: 'string',
+        titleCase: true,
         tableTdCustomClasses: []
       },
       {
@@ -107,6 +115,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 14,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -114,6 +123,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 15,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       },
       {
@@ -121,6 +131,7 @@ export class VisualizacaoComponent {
         hidden: null,
         maxLength: 18,
         type: 'string',
+        titleCase: false,
         tableTdCustomClasses: []
       });
 
