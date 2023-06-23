@@ -1,0 +1,18 @@
+<app-titulo [texto]="'Cobranças'"></app-titulo>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 container">
+    <app-cabecalho (emissorDeBuscaFormControl)="recebeBuscaFormControl($event)" [@fadeInOut]
+        (emissorDeObjetoPageableAposTypeAhead)="recebeObjetoPageableInfoAtualizadoPosTypeAhead($event)"
+        (emissorDePageSizeComQuantidadeDeItensPorPaginaAlterada)="recebeQtdItensPorPaginaAlterada($event)"
+        (emissorDeSolicitacaoDeAtualizacaoDeTabela)="recebeSolicitacaoDeAtualizacaoDaTabela()"
+        (emissorDeSolicitacaoDeRelatorio)="recebeSolicitacaoDeRelatorio($event)" [pageableObject]="pagamentoPageObject"
+        [itensSelecionadosNaTabela]="pagamentosSelecionadosNaTabela" [modulo]="'assinaturas'"
+        [inputPlaceholder]="'Busca por descrição...'" [botaoCriarHabilitado]="false"></app-cabecalho>
+
+    <app-tabela (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
+        [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="pagamentoPageObject?.content"
+        [modulo]="'pagamentos'"></app-tabela>
+
+    <app-paginacao [pageObject]="pagamentoPageObject" (emissorDePageNumberAtualizado)="recebePageNumberAtualizado($event)"
+        [@fadeInOut]></app-paginacao>
+</div>

@@ -1,4 +1,4 @@
-import { Observable, map, retry, throwError, catchError } from 'rxjs';
+import { Observable, map, retry, throwError, catchError, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -36,7 +36,7 @@ export class PagamentoService {
     )
   }
 
-  public getPagamentos(pagamentoPageObject: PagamentoPageObject, idPlano: number): Observable<PagamentoPageObject> {
+  public getPagamentosPlano(pagamentoPageObject: PagamentoPageObject, idPlano: number): Observable<PagamentoPageObject> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
     this.buildPageableParams(pagamentoPageObject);
@@ -49,6 +49,38 @@ export class PagamentoService {
       }),
       retry({ count: 20, delay: 10000 })
     )
+  }
+
+  public getPagamentos(valorBusca: string, pagamentoPageObject: PagamentoPageObject): Observable<PagamentoPageObject> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    this.buildRequestParams(valorBusca);
+    this.buildPageableParams(pagamentoPageObject);
+    return this.http.get<PagamentoPageObject>(`${API_CONFIG.baseUrl}/pagamento`, this.httpOptions).pipe(
+      map(resposta => new PagamentoPageObject(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+      retry({ count: 20, delay: 10000 })
+    )
+  }
+
+  public obtemRelatorioPagamentos(listaDeIds: number[]): any {
+    this.http.post(`${API_CONFIG.baseUrl}/pagamento/relatorio`, listaDeIds, { headers: this.httpOptions.headers, responseType: "blob" })
+      .subscribe(
+        ((response) => {
+          let blob = new Blob([response], { type: 'application/pdf' });
+          let fileURL = URL.createObjectURL(blob);
+          let tagUrlRelatorio = document.createElement('a');
+          tagUrlRelatorio.href = fileURL;
+          tagUrlRelatorio.target = '_blank';
+          tagUrlRelatorio.download = 'relatorio-pagamentos-' + new Date().getTime().toString() + '.pdf';
+          document.body.appendChild(tagUrlRelatorio);
+          tagUrlRelatorio.click();
+        })
+      );
   }
 
   private buildRequestParams(busca: string) {

@@ -156,7 +156,7 @@ export class DetalhesComponent {
   }
 
   invocaRequisicaoHttpGetParaAtualizarObjetos() {
-    this.getPagamentos$ = this.pagamentoService.getPagamentos(this.pagamentoPageObject, parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(
+    this.getPagamentos$ = this.pagamentoService.getPagamentosPlano(this.pagamentoPageObject, parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(
       {
         next: (response: PagamentoPageObject) => {
           let sortDirection = this.pagamentoPageObject == null ? this.pagamentoPageObject = undefined : this.pagamentoPageObject.sortDirection;
@@ -166,7 +166,8 @@ export class DetalhesComponent {
               editarHabilitado: false,
               removerHabilitado: false,
               geraBoletoPagamento: objeto.formaPagamento == 'Boleto' ? true : false,
-              geraLinkCobrancaPagamento: objeto.formaPagamento != 'Cartão de crédito' ? true : false
+              geraLinkCobrancaPagamento: objeto.formaPagamento != 'Cartão de crédito' ? true : false,
+              geraComprovantePagamento: objeto.statusPagamento == 'Aprovado' ? true : false
             }
           })
           this.pagamentoPageObject = response;

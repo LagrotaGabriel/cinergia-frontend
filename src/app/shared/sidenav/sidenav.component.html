@@ -17,15 +17,15 @@
       <mat-icon fontIcon="person" class="sidenav_icon" [ngClass]="{'icone_ativo': cliente.isActive }"></mat-icon>
     </div>
 
-    <div #faturamento="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()"
-      [routerLink]="['/faturamento']" routerLinkActive tabindex="-1" matRipple>
-      <mat-icon fontIcon="auto_graph" class="sidenav_icon"
-        [ngClass]="{'icone_ativo': faturamento.isActive }"></mat-icon>
+    <div #pagamentos="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()"
+      [routerLink]="['/cobrancas']" routerLinkActive tabindex="-1" matRipple>
+      <mat-icon fontIcon="attach_money" class="sidenav_icon"
+        [ngClass]="{'icone_ativo': pagamentos.isActive }"></mat-icon>
     </div>
 
     <div #assinaturas="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/assinaturas']"
       routerLinkActive tabindex="-1" matRipple>
-      <mat-icon fontIcon="paid" class="sidenav_icon" [ngClass]="{'icone_ativo': assinaturas.isActive }"></mat-icon>
+      <mat-icon fontIcon="autorenew" class="sidenav_icon" [ngClass]="{'icone_ativo': assinaturas.isActive }"></mat-icon>
     </div>
   </mat-drawer>
 

@@ -51,8 +51,8 @@ export class VisualizacaoComponent {
           response.content.forEach(objeto => {
             objeto.options = {
               detalhesHabilitado: true,
-              editarHabilitado: true,
-              removerHabilitado: false
+              editarHabilitado: false,
+              removerHabilitado: true
             }
           })
           this.planoPageObject = response;

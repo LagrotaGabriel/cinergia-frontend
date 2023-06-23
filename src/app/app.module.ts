@@ -27,7 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ClientesModule } from './modules/pages/clientes/clientes.module';
 import { DatePipe } from '@angular/common';
 import { AssinaturasModule } from './modules/pages/assinaturas/assinaturas.module';
-import { FaturamentosModule } from './modules/pages/faturamentos/faturamentos.module';
+import { PagamentosModule } from './modules/pages/pagamentos/pagamentos.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { FaturamentosModule } from './modules/pages/faturamentos/faturamentos.mo
     MatExpansionModule,
     ClientesModule,
     AssinaturasModule,
-    FaturamentosModule,
+    PagamentosModule,
     HttpClientModule,
   ],
 

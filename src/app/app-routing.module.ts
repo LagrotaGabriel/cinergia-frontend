@@ -1,4 +1,3 @@
-import { FaturamentosRoutingModule } from './modules/pages/faturamentos/faturamentos-routing.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
@@ -17,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/pages/assinaturas/assinaturas-routing.module').then(m => m.AssinaturasRoutingModule)
       },
       {
-        path: 'faturamento',
-        loadChildren: () => import('./modules/pages/faturamentos/faturamentos-routing.module').then(m => m.FaturamentosRoutingModule)
+        path: 'cobrancas',
+        loadChildren: () => import('./modules/pages/pagamentos/pagamentos-routing.module').then(m => m.PagamentosRoutingModule)
       },
     ]
   },

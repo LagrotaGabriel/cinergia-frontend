@@ -14,4 +14,4 @@ import { SharedModule } from '../../shared/shared.module';
     SharedModule
   ]
 })
-export class FaturamentosModule { }
+export class PagamentosModule { }
