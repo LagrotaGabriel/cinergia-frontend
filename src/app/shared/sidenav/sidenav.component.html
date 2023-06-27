@@ -7,14 +7,14 @@
   <mat-drawer #sidenav id="sidenav" [mode]="sideNavDetails.tipoSidebar" class="sidenav mat-elevation-z8"
     [opened]="sideNavDetails.estadoSidebar">
 
-    <div #inicio="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/']"
+    <div #dashboard="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/dashboard']"
       [routerLinkActiveOptions]="{ exact: true }" routerLinkActive tabindex="-1" matRipple>
-      <mat-icon fontIcon="home" class="sidenav_icon" [ngClass]="{'icone_ativo': inicio.isActive }"></mat-icon>
+      <mat-icon fontIcon="insights" class="sidenav_icon" [ngClass]="{'icone_ativo': dashboard.isActive }"></mat-icon>
     </div>
 
     <div #cliente="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()" [routerLink]="['/clientes']"
       routerLinkActive tabindex="-1" matRipple>
-      <mat-icon fontIcon="person" class="sidenav_icon" [ngClass]="{'icone_ativo': cliente.isActive }"></mat-icon>
+      <mat-icon fontIcon="face" class="sidenav_icon" [ngClass]="{'icone_ativo': cliente.isActive }"></mat-icon>
     </div>
 
     <div #pagamentos="routerLinkActive" class="sidenav_item" (click)="limpaLocalStorage()"

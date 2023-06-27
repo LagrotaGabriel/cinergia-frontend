@@ -1,0 +1,136 @@
+<app-titulo [texto]="'Meu painel'"></app-titulo>
+
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 container">
+
+    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_container">
+        <div class="col-xl-3 col-lg-3-col-md-3 col-sm-3 col-3 informativos_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_content  mat-elevation-z8">
+                <mat-icon fontIcon="wallet"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_icone"></mat-icon>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_titulo">
+                    Saldo
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_text">
+                    R$ 0,00
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3-col-md-3 col-sm-3 col-3 informativos_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_content  mat-elevation-z8">
+                <mat-icon fontIcon="sync_disabled"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_icone"></mat-icon>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_titulo">
+                    Atrasado
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_text">
+                    R$ 0,00
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3-col-md-3 col-sm-3 col-3 informativos_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_content  mat-elevation-z8">
+                <mat-icon fontIcon="browse_gallery"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_icone"></mat-icon>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_titulo">
+                    Previsto
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_text">
+                    R$ 0,00
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3-col-md-3 col-sm-3 col-3 informativos_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_content  mat-elevation-z8">
+                <mat-icon fontIcon="done_outline"
+                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_icone"></mat-icon>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_titulo">
+                    Confirmado
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 informativos_text">
+                    R$ 0,00
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 grafico_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 grafico_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 grafico_content  mat-elevation-z8">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 grafico_titulo">
+                    Faturamento
+                </div>
+                <canvas class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 grafico line-chart grafico-linha"
+                    #grafico></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 assinaturas_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_block">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_content  mat-elevation-z8">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_titulo">
+                    Assinaturas
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_container">
+                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_content assinaturas_status_content_ativas">
+                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_title_content">
+                            <mat-icon fontIcon="trending_up" class="assinatura_status_icon assinatura_status_icon_ativas"></mat-icon>
+                            <div class="assinatura_status_title">Ativas</div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_text">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_container">
+                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_content  assinaturas_status_content_inativas">
+                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_title_content">
+                            <mat-icon fontIcon="trending_down" class="assinatura_status_icon assinatura_status_icon_inativas"></mat-icon>
+                            <div class="assinatura_status_title">Inativas</div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_text">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_container">
+                    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinaturas_status_content  assinaturas_status_content_total">
+                        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_title_content">
+                            <mat-icon fontIcon="multiline_chart" class="assinatura_status_icon assinatura_status_icon_total"></mat-icon>
+                            <div class="assinatura_status_title">Total</div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 assinatura_status_text">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 transferencias_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transferencias_block">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transferencias_content  mat-elevation-z8">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transferencias_titulo">
+                    Transferências
+                </div>
+                <app-tabela></app-tabela>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 transacoes_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transacoes_block">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transacoes_content mat-elevation-z8">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 transacoes_titulo">
+                    Últimas transações
+                </div>
+                <app-tabela></app-tabela>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -8,6 +8,10 @@ const routes: Routes = [
     component: SidenavComponent,
     children: [
       {
+        path: 'dashboard',
+        loadChildren: () => import('./modules/pages/dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
+      },
+      {
         path: 'clientes',
         loadChildren: () => import('./modules/pages/clientes/clientes-routing.module').then(m => m.ClientesRoutingModule)
       },
@@ -23,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/'
+    redirectTo: '/dashboard'
   }
 ];
 

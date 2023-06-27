@@ -28,6 +28,7 @@ import { ClientesModule } from './modules/pages/clientes/clientes.module';
 import { DatePipe } from '@angular/common';
 import { AssinaturasModule } from './modules/pages/assinaturas/assinaturas.module';
 import { PagamentosModule } from './modules/pages/pagamentos/pagamentos.module';
+import { DashboardModule } from './modules/pages/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { PagamentosModule } from './modules/pages/pagamentos/pagamentos.module';
     ClientesModule,
     AssinaturasModule,
     PagamentosModule,
+    DashboardModule,
     HttpClientModule,
   ],
 

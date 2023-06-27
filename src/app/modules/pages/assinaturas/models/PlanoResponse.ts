@@ -11,6 +11,7 @@ export class PlanoResponse {
     formaPagamento: string;
     statusPlano: string;
     periodicidade: string;
+    notificacoes: string[];
     checked: boolean;
     expandido: boolean;
     options: TableOptions;
@@ -26,6 +27,7 @@ export class PlanoResponse {
         this.formaPagamento = item?.formaPagamento;
         this.statusPlano = item?.statusPlano;
         this.periodicidade = item?.periodicidade;
+        this.notificacoes = item?.notificacoes;
         this.checked = false;
         this.expandido = false;
         this.options = {

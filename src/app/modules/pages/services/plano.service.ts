@@ -113,8 +113,8 @@ export class PlanoService {
     if (planoPageObject != null) {
       this.httpOptions.params = this.httpOptions.params.set('page', planoPageObject.pageNumber);
       this.httpOptions.params = this.httpOptions.params.set('size', planoPageObject.pageSize);
-      this.httpOptions.params = this.httpOptions.params.set('sort', 'dataCadastro,' + planoPageObject.sortDirection);
-      this.httpOptions.params = this.httpOptions.params.append('sort', 'horaCadastro,' + planoPageObject.sortDirection);
+      this.httpOptions.params = this.httpOptions.params.set('sort', 'dataCadastro,DESC');
+      this.httpOptions.params = this.httpOptions.params.append('sort', 'horaCadastro,DESC');
     }
     else {
       this.httpOptions.params = this.httpOptions.params.set('page', 0);

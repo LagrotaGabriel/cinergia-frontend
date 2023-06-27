@@ -90,11 +90,12 @@ export class PagamentoService {
   }
 
   private buildPageableParams(pagamentoPageObject: PagamentoPageObject) {
+    console.log(pagamentoPageObject);
     if (pagamentoPageObject != null) {
       this.httpOptions.params = this.httpOptions.params.set('page', pagamentoPageObject.pageNumber);
       this.httpOptions.params = this.httpOptions.params.set('size', pagamentoPageObject.pageSize);
-      this.httpOptions.params = this.httpOptions.params.set('sort', 'dataCadastro,' + pagamentoPageObject.sortDirection);
-      this.httpOptions.params = this.httpOptions.params.append('sort', 'horaCadastro,' + pagamentoPageObject.sortDirection);
+      this.httpOptions.params = this.httpOptions.params.set('sort', 'dataCadastro,DESC');
+      this.httpOptions.params = this.httpOptions.params.append('sort', 'horaCadastro,DESC');
     }
     else {
       this.httpOptions.params = this.httpOptions.params.set('page', 0);

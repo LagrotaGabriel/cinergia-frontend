@@ -127,6 +127,15 @@
                     </div>
                 </div>
 
+                <div *ngIf="plano?.notificacoes.length > 0" class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
+                    <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
+                        Notificações
+                    </div>
+                    <div *ngFor="let notificacao of plano?.notificacoes" class="descricao_atributo_texto col-xl-12 col-lg-12 col-md-12 col-12">
+                        {{ '- ' + notificacao }}
+                    </div>
+                </div>
+
                 <div class="descricao_atributo col-xl-12 col-lg-12 col-md-12 col-sm-6">
                     <div class="descricao_atributo_titulo col-xl-12 col-lg-12 col-md-12 col-12">
                         Status

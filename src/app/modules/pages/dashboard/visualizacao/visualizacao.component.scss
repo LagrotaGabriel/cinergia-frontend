@@ -1,0 +1,137 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+div {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    padding: 1rem 0rem;
+    margin-top: 1rem;
+    background-color: transparent;
+    font-family: $font-poppins;
+}
+
+app-paginacao {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.informativos_block, .grafico_block, .transferencias_block, .transacoes_block, .assinaturas_block {
+    padding: 0.5rem 1rem;
+}
+
+.informativos_content, .grafico_content, .transferencias_content, .transacoes_content, .assinaturas_content {
+    background-color: $light-black;
+}
+
+.informativos_icone, .informativos_titulo, .informativos_text {
+    display: flex;
+    justify-content: center;
+}
+
+.informativos_titulo, .informativos_text {
+    margin-top: 0.2rem;
+}
+
+.informativos_content {
+    padding: 1.5rem 0.5rem;
+}
+
+.assinaturas_content {
+    height: 100%;
+}
+
+.assinaturas_status_container {
+    padding: 0.1rem 1rem;
+}
+
+.assinaturas_status_content {
+    border-radius: 5px;
+    padding: 0.3rem 1rem;
+}
+
+.assinaturas_status_content_ativas {
+    border: 1px solid $primary-color;
+}
+
+.assinaturas_status_content_inativas {
+    border: 1px solid $primary-color;
+}
+
+.assinaturas_status_content_total {
+    border: 1px solid $primary-color;
+}
+
+.assinatura_status_title_content {
+    display: flex;
+    justify-content: center;
+}
+
+.assinatura_status_icon_ativas {
+    color: $primary-color;
+}
+
+.assinatura_status_icon_inativas {
+    color: $primary-color;
+}
+
+.assinatura_status_icon_total {
+    color: $primary-color;
+}
+
+.assinatura_status_title {
+    color: $dark-white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    margin-left: 0.2rem;
+}
+
+.assinatura_status_text {
+    display: flex;
+    justify-content: center;
+    color: $light-white;
+    font-size: 1.2rem;
+    margin-left: 0.2rem;
+}
+
+.informativos_icone {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    color: $primary-color;
+}
+
+.informativos_titulo {
+    font-size: 1rem;
+    color: $dark-white;
+}
+
+.informativos_text {
+    font-size: 1.2rem;
+    color: $light-white;
+}
+
+canvas {
+    height: 10rem;
+}
+
+.grafico_titulo, .transferencias_titulo, .transacoes_titulo, .assinaturas_titulo {
+    color: $dark-white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0 1rem;
+    padding-top: 1rem;
+}
+
+.transferencias_container, .transacoes_container {
+    height: 20rem;
+}
+
+.transferencias_block, .transferencias_content, .transacoes_block, .transacoes_content {
+    height: 100%;
+}
