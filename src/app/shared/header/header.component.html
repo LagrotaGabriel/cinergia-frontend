@@ -1,47 +1,41 @@
 <div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <mat-toolbar class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 header">
+  <mat-toolbar class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 header">
 
-      <div class="container_botao_menu">
-        <button class="botao_menu" (click)="alteraExibicaoSideBar()" mat-icon-button>
-          <mat-icon class="icone_menu">menu</mat-icon>
-        </button>
-      </div>
+    <div class="container_botao_menu">
+      <button class="botao_menu" (click)="alteraExibicaoSideBar()" mat-icon-button>
+        <mat-icon class="icone_menu">menu</mat-icon>
+      </button>
+    </div>
 
-      <div class="container_icones_direita">
-        <button tabindex="-1"
-          mat-icon-button
-          class="icon"
-          matTooltip="Avisos"
-          matTooltipPosition="below"
-        >
-          <mat-icon>error</mat-icon>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="icon" tabindex="-1">
-          <mat-icon>settings</mat-icon>
-        </button>
-        <mat-menu class="menu" #menu="matMenu">
-          <button class="menu_button" mat-menu-item tabindex="-1">
-            <mat-icon>face_6</mat-icon>
-            <span class="menu_text">Alterar perfil</span>
-          </button>
-          <button class="menu_button" mat-menu-item tabindex="-1">
-            <mat-icon>dark_mode</mat-icon>
-            <span class="menu_text">Modo escuro</span>
-          </button>
-          <button class="menu_button" mat-menu-item tabindex="-1">
-            <mat-icon>support_agent</mat-icon>
-            <span class="menu_text">Acionar suporte</span>
-          </button>
-          <button
-            class="menu_button"
-            mat-menu-item
-            (click)="confirmaLogout('400ms', '400ms')"
-          >
-            <mat-icon>exit_to_app</mat-icon>
-            <span class="menu_text">Sair</span>
-          </button>
-        </mat-menu>
+    <div class="row coluna_direita">
+      <button tabindex="-1" mat-icon-button class="icon" matTooltip="Avisos" matTooltipPosition="below">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button tabindex="-1" mat-icon-button class="icon" matTooltip="Acionar o suporte" matTooltipPosition="below">
+        <mat-icon>support_agent</mat-icon>
+      </button>
+
+      <div tabindex="-1" class="row user_details_container" [matMenuTriggerFor]="menu">
+        <div class="user_details_text">Gabriel Lagrota - <b class="valor_saldo">R$ 0,00</b></div>
+        <mat-icon class="user_details_icon">expand_more</mat-icon>
       </div>
-    </mat-toolbar>
-  </div>
-  
+      <mat-menu class="menu" #menu="matMenu">
+        <button class="menu_button" mat-menu-item tabindex="-1">
+          <mat-icon class="menu_icon">face_6</mat-icon>
+          <span class="menu_text">Meus dados</span>
+        </button>
+        <button class="menu_button" mat-menu-item tabindex="-1">
+          <mat-icon class="menu_icon">moving</mat-icon>
+          <span class="menu_text">Transferir via pix</span>
+        </button>
+        <button class="menu_button" mat-menu-item (click)="confirmaLogout('400ms', '400ms')">
+          <mat-icon class="menu_icon">exit_to_app</mat-icon>
+          <span class="menu_text">Sair</span>
+        </button>
+      </mat-menu>
+    </div>
+
+  </mat-toolbar>
+
+</div>

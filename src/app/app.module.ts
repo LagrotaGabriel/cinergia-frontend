@@ -29,6 +29,7 @@ import { DatePipe } from '@angular/common';
 import { AssinaturasModule } from './modules/pages/assinaturas/assinaturas.module';
 import { PagamentosModule } from './modules/pages/pagamentos/pagamentos.module';
 import { DashboardModule } from './modules/pages/dashboard/dashboard.module';
+import { LoginModule } from './modules/pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { DashboardModule } from './modules/pages/dashboard/dashboard.module';
     AssinaturasModule,
     PagamentosModule,
     DashboardModule,
+    LoginModule,
     HttpClientModule,
   ],
 

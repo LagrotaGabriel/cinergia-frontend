@@ -1,5 +1,10 @@
 @import '../../../dist/variables.scss';
 
+div {
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     width: 100%;
     padding: 0;
@@ -22,6 +27,45 @@
     justify-content: center;
 }
 
+.coluna_direita {
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.user_details_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0.5rem;
+    padding: 0 1rem;
+    border: 1px solid $dark-grey;
+    height: 50%;
+    cursor: pointer;
+}
+
+.user_details_text {
+    color: $light-grey;
+    font-family: $font-poppins;
+    font-size: 0.8rem;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.valor_saldo {
+    color: $light-white;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.user_details_icon {
+    color: $primary-color;
+    margin-left: 0.1rem;
+}
+
 /* BOTÃO QUE ABRE E FECHA O SIDENAV */
 
 .botao_menu {
@@ -34,6 +78,18 @@
 
 .menu_text {
     font-size: 1rem;
+}
+
+::ng-deep .mat-mdc-menu-content {
+    background-color: $light-black !important;
+}
+
+.menu_text {
+    color: $dark-white;
+}
+
+.menu_icon {
+    color: $primary-color;
 }
 
 @media (max-width: 380px) {

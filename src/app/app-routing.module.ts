@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { VisualizacaoComponent } from './modules/pages/login/visualizacao/visualizacao.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: VisualizacaoComponent
+  },
   {
     path: '',
     component: SidenavComponent,

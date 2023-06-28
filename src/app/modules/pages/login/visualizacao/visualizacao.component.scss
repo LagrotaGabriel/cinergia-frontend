@@ -1,0 +1,142 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+
+div,
+label {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100vh;
+    background-color: $dark-black;
+    background-image: url('../../../../../assets/imgs/login_background_1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login_container {
+    height: calc(100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_block {
+    width: 26rem;
+    padding: 3rem 3rem;
+    background-color: $light-black;
+    border: 1px solid $dark-grey;
+    border-radius: 5px;
+}
+
+.login_titulo {
+    font-family: $font-poppins;
+    color: $medium-grey;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.login_subtitulo {
+    font-family: $font-poppins;
+    color: $light-white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 0.1rem;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.input_block {
+    margin-top: 1.5rem;
+}
+
+.input_label_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.esqueceu_senha {
+    font-family: $font-roboto;
+    font-size: 0.7rem;
+    color: $light-grey;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.esqueceu_senha:hover {
+    color: $primary-color;
+    transition: 0.3s;
+}
+
+label {
+    font-family: $font-roboto;
+    font-size: 0.9rem;
+    color: $light-white;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.input {
+    margin-top: 0.2rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid $dark-grey;
+    border-radius: 5px;
+    outline: none;
+    color: $primary-color;
+    font-family: $font-poppins;
+    font-size: 0.9rem;
+}
+
+.container_botao {
+    margin-top: 1.5rem;
+}
+
+.botao {
+    cursor: pointer;
+    border: 1px solid $primary-color-dark;
+    border-radius: 6px;
+    background-color: $primary-color;
+    color: $light-white;
+    font-family: $font-poppins;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    font-weight: 500;
+}
+
+.botao:hover {
+    background-color: $primary-color-dark;
+    transition: 0.2s;
+}
+
+.registrar {
+    font-family: $font-poppins;
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+    color: $dark-white;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+b {
+    font-weight: 400;
+    color: $light-white;
+}
+
+b:hover {
+    color: $primary-color;
+    transition: 0.3s;
+    cursor: pointer;
+}
