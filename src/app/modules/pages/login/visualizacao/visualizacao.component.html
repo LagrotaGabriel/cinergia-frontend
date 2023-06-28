@@ -1,7 +1,7 @@
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 login_container">
 
-        <div class="row login_block mat-elevation-z8">
+        <form class="row login_block mat-elevation-z8" [formGroup]="dadosLogin" (ngSubmit)="realizarLogin()">
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 login_titulo">
                 BEM-VINDO
@@ -12,19 +12,26 @@
 
             <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_block">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_label_container">
-                    <label>
+                    <label
+                        [ngClass]="{'label_invalida': dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid}">
                         CPF ou CNPJ
                     </label>
                 </div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_container">
+                <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_container">
                     <input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input" type="text"
-                        placeholder="Digite seu CPF ou CNPJ" />
+                        [placeholder]="dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid ? '' : 'Digite seu CPF ou CNPJ'"
+                        formControlName="username" autofocus="on"
+                        [ngClass]="{'input_invalida': dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid}" />
+                    <div [@slideUpDown]
+                        *ngIf="dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid"
+                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mensagem_erro">Campo obrigatório</div>
                 </div>
             </div>
 
             <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_block">
                 <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_label_container">
-                    <label>
+                    <label
+                        [ngClass]="{'label_invalida': dadosLogin.controls['password'].touched && dadosLogin.controls['password'].invalid}">
                         Senha
                     </label>
                     <div class="esqueceu_senha">
@@ -33,12 +40,18 @@
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_container">
                     <input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input"
-                        placeholder="Digite sua senha" type="password" />
+                        [placeholder]="dadosLogin.controls['password'].touched && dadosLogin.controls['password'].invalid ? '' : 'Digite sua senha'"
+                        type="password" formControlName="password" autocomplete="on"
+                        [ngClass]="{'input_invalida': dadosLogin.controls['password'].touched && dadosLogin.controls['password'].invalid}" />
+                    <div [@slideUpDown]
+                        *ngIf="dadosLogin.controls['password'].touched && dadosLogin.controls['password'].invalid"
+                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mensagem_erro">Campo obrigatório</div>
                 </div>
             </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_botao">
-                <button class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 botao" type="button">
+                <button class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 botao"
+                    type="submit">
                     Acesse agora
                 </button>
             </div>
@@ -47,7 +60,7 @@
                 Não possui uma conta? <b>Registre-se</b>
             </div>
 
-        </div>
+        </form>
 
     </div>
 </div>

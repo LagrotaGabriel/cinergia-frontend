@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { ConfirmaLogoutComponent } from './shared/header/confirma-logout/confirma-logout.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,7 +35,6 @@ import { LoginModule } from './modules/pages/login/login.module';
     AppComponent,
     SidenavComponent,
     HeaderComponent,
-    ConfirmaLogoutComponent,
   ],
   imports: [
     BrowserModule,

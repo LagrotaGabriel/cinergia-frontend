@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { VisualizacaoComponent } from './modules/pages/login/visualizacao/visualizacao.component';
+import { EmpresaGuard } from './auth/empresa.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: SidenavComponent,
+    canActivate: [EmpresaGuard],
     children: [
       {
         path: 'dashboard',

@@ -7,19 +7,22 @@ import { API_CONFIG } from 'src/app/config/api-config';
 import { PlanoPageObject } from '../assinaturas/models/PlanoPageObject';
 import { PlanoResponse } from '../assinaturas/models/PlanoResponse';
 import { DadosPlanoResponse } from '../assinaturas/models/DadosPlanoResponse';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanoService {
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient,
+    private _snackBar: MatSnackBar,
+    private router: Router) { }
 
   private httpOptions = {
     params: new HttpParams({
     }),
     headers: new HttpHeaders({
-      'Authorization': API_CONFIG.devToken
+      'Authorization': JSON.parse(localStorage.getItem("Authorization")) || null
     }),
     body: null
   }
@@ -125,12 +128,12 @@ export class PlanoService {
   }
 
   private implementaLogicaDeCapturaDeErroNaListagemDeItens(error) {
-    if (error.status == 403) {
-      /*  Quando implantar ng-guard, implementar meio de não permitir duplicidade de acesso nesse método,
-       pois o de metadados e o de obtenção paginada irão acessa-lo em caso de erro de servidor. Uma boa
-       ideia para resolver esse problema, seria verificar se existe algum token ativo no localstorage para
-       acessar a condição do método */
-      console.log('Sem autorização, elaborar lógica de logout e redirect no método');
+    if (error.status == 403 || error.status == 401) {
+      localStorage.clear();
+      this.router.navigate(['login']);
+      this._snackBar.open('É necessário realizar o login para acessar as funcionalidades do sistema', 'fechar', {
+        duration: 3500
+      })
     }
     else {
       this._snackBar.open("Houve uma falha de comunicação com o servidor", "Fechar", {

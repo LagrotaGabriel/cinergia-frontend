@@ -3,6 +3,7 @@
 
 
 div,
+form,
 label {
     margin: 0;
     padding: 0;
@@ -87,6 +88,11 @@ label {
     user-select: none;
 }
 
+.label_invalida {
+    transition: 0.3s;
+    color: $red;
+}
+
 .input {
     margin-top: 0.2rem;
     padding: 0.5rem 1rem;
@@ -97,6 +103,31 @@ label {
     color: $primary-color;
     font-family: $font-poppins;
     font-size: 0.9rem;
+}
+
+.input_invalida {
+    transition: 0.3s;
+    border: 1px solid $red;
+}
+
+.mensagem_erro {
+    display: flex;
+    justify-content: right;
+    color: $red;
+    font-size: 0.7rem;
+    margin-top: 0.1rem;
+    font-family: $font-poppins;
+    margin-bottom: -0.5rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: $primary-color;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px transparent;
 }
 
 .container_botao {
@@ -116,6 +147,12 @@ label {
 }
 
 .botao:hover {
+    background-color: $primary-color-dark;
+    transition: 0.2s;
+}
+
+.botao:focus {
+    outline: none;
     background-color: $primary-color-dark;
     transition: 0.2s;
 }

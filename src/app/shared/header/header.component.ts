@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SideNavDetails } from '../models/SideNavDetails';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmaLogoutComponent } from './confirma-logout/confirma-logout.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,11 @@ import { ConfirmaLogoutComponent } from './confirma-logout/confirma-logout.compo
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  constructor(public dialog: MatDialog, 
+    private matSnackBar: MatSnackBar,
+    private router: Router) {}
+
   @Output() public enviaAlteracaoEstadoSidebar = new EventEmitter();
   @Input() public sideNavDetails: SideNavDetails;
 
@@ -23,16 +29,11 @@ export class HeaderComponent {
     this.enviaAlteracaoEstadoSidebar.emit(this.sideNavDetails.estadoSidebar);
   }
 
-  confirmaLogout(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string
-  ): void {
-    this.dialog.open(ConfirmaLogoutComponent, {
-      width: '30rem',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']);
+    this.matSnackBar.open('Logout realizado com sucesso', 'Fechar', {
+      duration: 3500
+    })
   }
-
-  constructor(public dialog: MatDialog) {}
 }
