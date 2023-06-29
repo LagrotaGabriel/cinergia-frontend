@@ -1,8 +1,10 @@
+import { EmpresaService } from './../../modules/pages/services/empresa.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SideNavDetails } from '../models/SideNavDetails';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { EmpresaSimplificada } from './models/EmpresaSimplificada';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(public dialog: MatDialog, 
+  constructor(
+    private empresaService: EmpresaService,
+    private dialog: MatDialog, 
     private matSnackBar: MatSnackBar,
     private router: Router) {}
 
@@ -20,6 +24,12 @@ export class HeaderComponent {
 
   public botaoMenuLateralResponsivo: boolean;
 
+  protected empresaSimplificada: EmpresaSimplificada;
+
+  ngAfterViewInit(): void {
+    this.obtemNomeSaldoEmpresa();
+  }
+
   alteraExibicaoSideBar() {
     if (this.sideNavDetails.estadoSidebar) {
       this.sideNavDetails.estadoSidebar = false;
@@ -27,6 +37,14 @@ export class HeaderComponent {
       this.sideNavDetails.estadoSidebar = true;
     }
     this.enviaAlteracaoEstadoSidebar.emit(this.sideNavDetails.estadoSidebar);
+  }
+
+  obtemNomeSaldoEmpresa() {
+    this.empresaService.obtemNomeSaldoEmpresa().subscribe({
+      next: (response) => {
+        this.empresaSimplificada = response;
+      }
+    })
   }
 
   logout() {

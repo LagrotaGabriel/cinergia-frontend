@@ -5,6 +5,8 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { MatIconModule } from '@angular/material/icon';
 
+import { NgApexchartsModule } from 'ng-apexcharts'; 
+
 
 
 @NgModule({
@@ -14,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    NgApexchartsModule
   ]
 })
 export class DashboardModule { }

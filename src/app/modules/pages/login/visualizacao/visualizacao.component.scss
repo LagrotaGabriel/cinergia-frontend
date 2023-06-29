@@ -177,3 +177,39 @@ b:hover {
     transition: 0.3s;
     cursor: pointer;
 }
+
+@media (max-width: 450px) {
+    .login_block {
+        padding: 3rem 2.5rem;
+    }
+    .input_block {
+        margin-top: 1rem;
+    }
+    .login_titulo {
+        font-size: 0.8rem;
+    }
+    .login_subtitulo {
+        font-size: 1rem;
+    }
+    .login_block {
+        width: 23rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .login_block {
+        padding: 3rem 2rem;
+    }
+    .input_block {
+        margin-top: 1rem;
+    }
+    .login_titulo {
+        font-size: 0.8rem;
+    }
+    .login_subtitulo {
+        font-size: 1rem;
+    }
+    .login_block {
+        width: 21rem;
+    }
+}

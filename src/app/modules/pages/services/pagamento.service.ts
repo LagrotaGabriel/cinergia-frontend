@@ -70,6 +70,21 @@ export class PagamentoService {
     )
   }
 
+  public getPagamentosAprovados(pagamentoPageObject: PagamentoPageObject): Observable<PagamentoPageObject> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    this.buildPageableParams(pagamentoPageObject);
+    return this.http.get<PagamentoPageObject>(`${API_CONFIG.baseUrl}/pagamento/aprovados`, this.httpOptions).pipe(
+      map(resposta => new PagamentoPageObject(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
+      retry({ count: 20, delay: 10000 })
+    )
+  }
+
   public obtemRelatorioPagamentos(listaDeIds: number[]): any {
     this.http.post(`${API_CONFIG.baseUrl}/pagamento/relatorio`, listaDeIds, { headers: this.httpOptions.headers, responseType: "blob" })
       .subscribe(

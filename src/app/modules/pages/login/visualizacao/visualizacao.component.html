@@ -20,7 +20,7 @@
                 <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input_container">
                     <input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 input" type="text"
                         [placeholder]="dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid ? '' : 'Digite seu CPF ou CNPJ'"
-                        formControlName="username" autofocus="on"
+                        formControlName="username" autofocus="on" autocomplete="on"
                         [ngClass]="{'input_invalida': dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid}" />
                     <div [@slideUpDown]
                         *ngIf="dadosLogin.controls['username'].touched && dadosLogin.controls['username'].invalid"

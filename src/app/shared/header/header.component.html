@@ -17,7 +17,7 @@
       </button>
 
       <div tabindex="-1" class="row user_details_container" [matMenuTriggerFor]="menu">
-        <div class="user_details_text">Gabriel Lagrota - <b class="valor_saldo">R$ 0,00</b></div>
+        <div class="user_details_text">{{ empresaSimplificada?.nome }}- <b class="valor_saldo">{{ empresaSimplificada?.saldo }}</b></div>
         <mat-icon class="user_details_icon">expand_more</mat-icon>
       </div>
       <mat-menu class="menu" #menu="matMenu">

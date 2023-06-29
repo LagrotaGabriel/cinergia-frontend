@@ -20,20 +20,35 @@ app-paginacao {
     margin-top: 1rem;
 }
 
-.informativos_block, .grafico_block, .transferencias_block, .transacoes_block, .assinaturas_block {
+.informativos_block,
+.grafico_block,
+.transferencias_block,
+.transacoes_block,
+.assinaturas_block,
+.pagamentos_block,
+.comprometimento_block {
     padding: 0.5rem 1rem;
 }
 
-.informativos_content, .grafico_content, .transferencias_content, .transacoes_content, .assinaturas_content {
+.informativos_content,
+.grafico_content,
+.transferencias_content,
+.transacoes_content,
+.assinaturas_content,
+.pagamentos_content,
+.comprometimento_content {
     background-color: $light-black;
 }
 
-.informativos_icone, .informativos_titulo, .informativos_text {
+.informativos_icone,
+.informativos_titulo,
+.informativos_text {
     display: flex;
     justify-content: center;
 }
 
-.informativos_titulo, .informativos_text {
+.informativos_titulo,
+.informativos_text {
     margin-top: 0.2rem;
 }
 
@@ -120,7 +135,12 @@ canvas {
     height: 10rem;
 }
 
-.grafico_titulo, .transferencias_titulo, .transacoes_titulo, .assinaturas_titulo {
+.grafico_titulo,
+.transferencias_titulo,
+.transacoes_titulo,
+.assinaturas_titulo,
+.pagamentos_titulo,
+.comprometimento_titulo {
     color: $dark-white;
     font-size: 1rem;
     font-weight: 700;
@@ -128,10 +148,23 @@ canvas {
     padding-top: 1rem;
 }
 
-.transferencias_container, .transacoes_container {
+.transferencias_container,
+.transacoes_container {
     height: 20rem;
 }
 
-.transferencias_block, .transferencias_content, .transacoes_block, .transacoes_content {
+.transferencias_block,
+.transferencias_content,
+.transacoes_block,
+.transacoes_content {
     height: 100%;
+}
+
+.transacoes_titulo {
+    padding: 0;
+    padding-top: 1rem;
+}
+
+.transacoes_content {
+    padding: 0 1rem;
 }
