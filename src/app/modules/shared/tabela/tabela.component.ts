@@ -24,6 +24,7 @@ export class TabelaComponent {
   @Input() check: boolean = true;
   @Input() options: boolean = true;
   @Input() dblClickEnabled: boolean = true;
+  @Input() isTableHeightAuto: boolean = false;
 
   botaoCheckAllHabilitado: boolean = JSON.parse(localStorage.getItem("checkAll") || 'false');
   itensSelecionadosNaTabela: any[] = JSON.parse(localStorage.getItem("itensSelecionadosNaTabela") || '[]');

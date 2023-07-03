@@ -1,0 +1,160 @@
+@import '../../../../dist/variables.scss';
+@import "../../../../../node_modules/rfs/scss";
+@import '/src/app/modules/shared/custom-inputs/styles/custom-inputs.scss';
+
+div,
+h1,
+hr,
+form,
+button,
+app-custom-input,
+app-custom-select-box,
+app-custom-date-input,
+app-custom-select {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: $light-black;
+    padding: 2rem 2rem;
+    margin: 0;
+}
+
+.titulo {
+    font-family: $font-poppins;
+    color: $dark-white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.hr {
+    background-color: $dark-grey;
+    margin: 1rem 0;
+}
+
+.button_container {
+    display: flex;
+    justify-content: right;
+    padding: 0 1rem;
+    margin-top: 0.5rem;
+}
+
+.button {
+    background-color: transparent;
+    font-family: $font-poppins;
+    padding: 0.7rem 3rem;
+    border-radius: 5px;
+    font-weight: 500;
+    border: 1px solid $primary-color;
+    color: $primary-color !important;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.button:hover {
+    border: 1px solid $primary-color;
+    color: $light-black !important;
+    background-color: $primary-color;
+    transition: 0.5s;
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: none;
+    transition: 0.3s;
+    border: 1px solid $primary-color-dark;
+    color: $primary-color-dark;
+}
+
+// STEPPER
+mat-horizontal-stepper,
+mat-step {
+    background-color: transparent;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 0.5rem !important;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+    border-top-width: 2px !important;
+    border-top-color: $dark-grey;
+}
+
+.fa {
+    font-size: 1rem;
+    color: $light-black;
+}
+
+::ng-deep.mat-step-header .mat-step-icon {
+    background-color: $dark-grey !important;
+}
+
+::ng-deep.mat-step-header .mat-step-icon-selected {
+    background-color: $primary-color !important;
+    color: $primary-color;
+}
+
+::ng-deep.mat-step-header .mat-step-icon-selected .mat-step-icon-content i {
+    animation: pulse 1.2s infinite;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-done,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: $primary-color !important;
+}
+
+::ng-deep .mat-step-header .mat-step-label {
+    padding-top: 0.2rem;
+}
+
+span {
+    color: $dark-grey !important;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: $font-roboto;
+}
+
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active .mat-step-text-label span {
+    color: $primary-color !important;
+    font-weight: 600;
+}
+
+// CONFIRMAÇÃO
+.confirma_pix_block {
+    margin-bottom: 1rem;
+}
+
+.confirma_pix_titulo {
+    font-size: 1.2rem;
+    color: $dark-white;
+    font-family: $font-poppins;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+.confirma_pix_subtitulo {
+    font-size: 1rem;
+    color: $light-grey;
+    font-family: $font-poppins;
+    font-weight: 300;
+    padding: 0 1rem;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.confirma_pix_content_titulo {
+    font-family: $font-poppins;
+    font-size: 1rem;
+    color: $dark-white;
+    margin-bottom: 0.1rem;
+    padding: 0 1rem;
+}
+
+.confirma_pix_content_texto {
+    font-family: $font-poppins;
+    font-size: 0.9rem;
+    color: $light-white;
+    padding: 0 1rem;
+    font-weight: 300;
+}

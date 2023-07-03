@@ -20,6 +20,8 @@ import {
 } from "ng-apexcharts";
 import { TableTh } from 'src/app/modules/shared/models/TableTh';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
+import { TransferenciaPageObject } from '../../transferencias/models/TransferenciaPageObject';
+import { TransferenciaService } from '../../services/transferencia.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -42,13 +44,17 @@ export type ChartOptions = {
 })
 export class VisualizacaoComponent {
 
-  constructor(private empresaService: EmpresaService, private pagamentoService: PagamentoService) { }
+  constructor(
+    private empresaService: EmpresaService,
+    private pagamentoService: PagamentoService,
+    private transferenciaService: TransferenciaService) { }
 
   public dadosDashboardEmpresa: DadosDashBoardEmpresa;
 
   protected faturamentoLineApexChart: ApexChartModel;
 
   protected pagamentosRealizados: PagamentoPageObject;
+  protected transferenciasRealizadas: TransferenciaPageObject;
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -59,6 +65,7 @@ export class VisualizacaoComponent {
 
   ngAfterViewInit(): void {
     this.obtemTransacoesRealizadas();
+    this.obtemTranferenciasRealizadas();
     this.obtemDadosDashBoardEmpresa();
   }
 
@@ -68,6 +75,14 @@ export class VisualizacaoComponent {
         this.dadosDashboardEmpresa = resposta;
       })
     })
+  }
+
+  obtemTranferenciasRealizadas() {
+    this.transferenciaService.getTransferencias(this.transferenciasRealizadas).subscribe({
+      next: (response) => {
+        this.transferenciasRealizadas = response;
+      }
+    });
   }
 
   obtemTransacoesRealizadas() {
@@ -527,7 +542,7 @@ export class VisualizacaoComponent {
 
   }
 
-  obtemThsTabela(): TableTh[] {
+  obtemThsTabelaTransferencias(): TableTh[] {
     let thsTabela: TableTh[] = []
     thsTabela.push(
       {
@@ -551,7 +566,71 @@ export class VisualizacaoComponent {
     return thsTabela;
   }
 
-  obtemTdsTabela(): TableTd[] {
+  obtemTdsTabelaTransferencias(): TableTd[] {
+    let tdsTabela: TableTd[] = []
+    tdsTabela.push(
+      {
+        campo: 'descricao',
+        hidden: null,
+        maxLength: 30,
+        type: 'string',
+        titleCase: true,
+        tableTdCustomClasses: [],
+      },
+      {
+        campo: 'dataPagamento',
+        hidden: null,
+        maxLength: 18,
+        type: 'date',
+        titleCase: false,
+        tableTdCustomClasses: []
+      },
+      {
+        campo: 'valorBruto',
+        hidden: null,
+        maxLength: 14,
+        type: 'money',
+        titleCase: false,
+        tableTdCustomClasses: []
+      },
+      {
+        campo: 'formaPagamento',
+        hidden: null,
+        maxLength: 15,
+        type: 'string',
+        titleCase: false,
+        tableTdCustomClasses: []
+      }
+    );
+
+    return tdsTabela;
+  }
+
+  obtemThsTabelaTransacoes(): TableTh[] {
+    let thsTabela: TableTh[] = []
+    thsTabela.push(
+      {
+        campo: 'Descrição',
+        hidden: null
+      },
+      {
+        campo: 'Data',
+        hidden: null
+      },
+      {
+        campo: 'Valor',
+        hidden: null
+      },
+      {
+        campo: 'Forma de pgto.',
+        hidden: null
+      },
+    );
+
+    return thsTabela;
+  }
+
+  obtemTdsTabelaTransacoes(): TableTd[] {
     let tdsTabela: TableTd[] = []
     tdsTabela.push(
       {

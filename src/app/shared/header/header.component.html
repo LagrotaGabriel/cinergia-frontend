@@ -17,7 +17,12 @@
       </button>
 
       <div tabindex="-1" class="row user_details_container" [matMenuTriggerFor]="menu">
-        <div class="user_details_text">{{ empresaSimplificada?.nome }}- <b class="valor_saldo">{{ empresaSimplificada?.saldo }}</b></div>
+        <div class="user_details_text">
+          {{ empresaSimplificada?.nome }} -
+          <b class="valor_saldo">
+            {{ empresaSimplificada?.saldo | currency: 'BRL' }}
+          </b>
+        </div>
         <mat-icon class="user_details_icon">expand_more</mat-icon>
       </div>
       <mat-menu class="menu" #menu="matMenu">
@@ -25,7 +30,7 @@
           <mat-icon class="menu_icon">face_6</mat-icon>
           <span class="menu_text">Meus dados</span>
         </button>
-        <button class="menu_button" mat-menu-item tabindex="-1">
+        <button class="menu_button" (click)="openDialog('0ms', '0ms')" mat-menu-item tabindex="-1">
           <mat-icon class="menu_icon">moving</mat-icon>
           <span class="menu_text">Transferir via pix</span>
         </button>

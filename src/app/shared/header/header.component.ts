@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EmpresaSimplificada } from './models/EmpresaSimplificada';
+import { NovaTransferenciaComponent } from './nova-transferencia/nova-transferencia.component';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,9 @@ export class HeaderComponent {
 
   constructor(
     private empresaService: EmpresaService,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private matSnackBar: MatSnackBar,
-    private router: Router) {}
+    private router: Router) { }
 
   @Output() public enviaAlteracaoEstadoSidebar = new EventEmitter();
   @Input() public sideNavDetails: SideNavDetails;
@@ -45,6 +46,15 @@ export class HeaderComponent {
         this.empresaSimplificada = response;
       }
     })
+  }
+
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(NovaTransferenciaComponent, {
+      width: '35rem',
+      enterAnimationDuration,
+      exitAnimationDuration
+    });
   }
 
   logout() {

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
@@ -22,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { ClientesModule } from './modules/pages/clientes/clientes.module';
 import { DatePipe } from '@angular/common';
@@ -29,16 +31,21 @@ import { AssinaturasModule } from './modules/pages/assinaturas/assinaturas.modul
 import { PagamentosModule } from './modules/pages/pagamentos/pagamentos.module';
 import { DashboardModule } from './modules/pages/dashboard/dashboard.module';
 import { LoginModule } from './modules/pages/login/login.module';
+import { NovaTransferenciaComponent } from './shared/header/nova-transferencia/nova-transferencia.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     HeaderComponent,
+    NovaTransferenciaComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatSidenavModule,
     MatIconModule,
@@ -58,7 +65,9 @@ import { LoginModule } from './modules/pages/login/login.module';
     PagamentosModule,
     DashboardModule,
     LoginModule,
+    SharedModule,
     HttpClientModule,
+    MatStepperModule
   ],
 
   providers: [DatePipe, { provide: Window, useValue: window }],

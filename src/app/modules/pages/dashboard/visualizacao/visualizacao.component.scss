@@ -20,23 +20,11 @@ app-paginacao {
     margin-top: 1rem;
 }
 
-.informativos_block,
-.grafico_block,
-.transferencias_block,
-.transacoes_block,
-.assinaturas_block,
-.pagamentos_block,
-.comprometimento_block {
+.block_global {
     padding: 0.5rem 1rem;
 }
 
-.informativos_content,
-.grafico_content,
-.transferencias_content,
-.transacoes_content,
-.assinaturas_content,
-.pagamentos_content,
-.comprometimento_content {
+.content_global {
     background-color: $light-black;
 }
 
@@ -67,17 +55,6 @@ app-paginacao {
 .assinaturas_status_content {
     border-radius: 5px;
     padding: 0.3rem 1rem;
-}
-
-.assinaturas_status_content_ativas {
-    border: 1px solid $primary-color;
-}
-
-.assinaturas_status_content_inativas {
-    border: 1px solid $primary-color;
-}
-
-.assinaturas_status_content_total {
     border: 1px solid $primary-color;
 }
 
@@ -86,15 +63,7 @@ app-paginacao {
     justify-content: center;
 }
 
-.assinatura_status_icon_ativas {
-    color: $primary-color;
-}
-
-.assinatura_status_icon_inativas {
-    color: $primary-color;
-}
-
-.assinatura_status_icon_total {
+.assinatura_status_icon {
     color: $primary-color;
 }
 
@@ -135,17 +104,13 @@ canvas {
     height: 10rem;
 }
 
-.grafico_titulo,
-.transferencias_titulo,
-.transacoes_titulo,
-.assinaturas_titulo,
-.pagamentos_titulo,
-.comprometimento_titulo {
+.titulo_global {
     color: $dark-white;
     font-size: 1rem;
     font-weight: 700;
     padding: 0 1rem;
     padding-top: 1rem;
+    text-align: center;
 }
 
 .transferencias_container,
@@ -165,6 +130,30 @@ canvas {
     padding-top: 1rem;
 }
 
-.transacoes_content {
-    padding: 0 1rem;
+.transacoes_content, .transferencias_content {
+    padding: 0rem 1rem 1rem 1rem;
 }
+
+@media (max-width: 1070px) {
+
+    .block_global {
+        padding: 0.5rem;
+    }
+
+    .informativos_titulo,
+    .assinatura_status_title {
+        font-size: 0.9rem;
+    }
+
+    .informativos_text,
+    .assinatura_status_text {
+        font-size: 1.1rem;
+    }
+
+    .titulo_global {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media (max-width: 576px) {}
