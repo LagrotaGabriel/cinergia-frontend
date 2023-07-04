@@ -5,6 +5,7 @@ export class TransferenciaResponse {
     valor: number;
     chavePix: string;
     tipoChavePix: string;
+    statusTransferencia: string;
 
     constructor(item) {
         this.dataCadastro = item?.dataCadastro;
@@ -13,5 +14,6 @@ export class TransferenciaResponse {
         this.valor = item?.valor;
         this.chavePix = item?.chavePix;
         this.tipoChavePix = item?.tipoChavePix;
+        this.statusTransferencia = item?.statusTransferencia
     }
 }

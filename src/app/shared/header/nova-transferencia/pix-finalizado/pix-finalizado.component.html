@@ -1,0 +1,14 @@
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 check_icon_container">
+    <mat-icon class="icone" [fontIcon]="statusTransferenciaPix.icone" [ngClass]="statusTransferenciaPix.class"
+        *ngIf="statusTransferenciaPix.status != 'Validando'"></mat-icon>
+    <mat-progress-spinner *ngIf="statusTransferenciaPix.status == 'Validando'" class="example-margin"
+        [color]="'#4a47d1'" [mode]="'indeterminate'" [value]="50">
+    </mat-progress-spinner>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_transferencia"
+        [ngClass]="statusTransferenciaPix.class">
+        {{ statusTransferenciaPix.status }}
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 texto_transferencia">
+        {{ statusTransferenciaPix.texto }}
+    </div>
+</div>

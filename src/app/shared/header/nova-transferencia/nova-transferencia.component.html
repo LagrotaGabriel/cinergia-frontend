@@ -6,7 +6,7 @@
 
     <hr class="hr">
 
-    <mat-horizontal-stepper (selectionChange)="mudaPasso($event)" linear #stepper>
+    <mat-horizontal-stepper (selectionChange)="mudaPasso($event)" [linear]="true" #stepper>
 
         <ng-template matStepperIcon="edit">
             <i class="fa fa-check"></i>
@@ -20,112 +20,29 @@
             <ng-template matStepLabel>
                 <span>Transferir</span>
             </ng-template>
-            <form class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [formGroup]="dadosTransferencia">
-
-                <!-- SELECT GROUP TIPO DA CHAVE PIX -->
-                <app-custom-select class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" formControlName="tipoChavePix"
-                    [tabIndex]="1" [titulo]="'Tipo da chave Pix'" (change)="alteraTipoChavePix()"
-                    [disabledGroup]="dadosTransferencia.get('tipoChavePix').disabled" #selectTipoChavePix
-                    [options]="geraOptionsTipoChavePix()"></app-custom-select>
-
-                <!-- INPUT GROUP CHAVE PIX -->
-                <app-custom-input class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12" [titulo]="'Chave Pix destino'"
-                    [disabledGroup]="dadosTransferencia.controls['chavePix'].disabled" [tabIndex]="2"
-                    (input)="realizaTratamentoChavePix($event)" (focusout)="realizaTratamentoChavePix(null)"
-                    [touched]="dadosTransferencia.controls['chavePix'].touched"
-                    [mensagemErro]="'Campo obrigatório inválido'" [maxLength]="maxLengthChavePix"
-                    [valido]="!(dadosTransferencia.controls['chavePix'].touched && dadosTransferencia.controls['chavePix'].invalid)"
-                    formControlName="chavePix"></app-custom-input>
-
-                <!-- INPUT GROUP VALOR -->
-                <app-custom-input class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputValor'"
-                    [titulo]="'Valor'" [tabIndex]="3" [maxLength]="10" (input)="realizaTratamentoValor()"
-                    [touched]="dadosTransferencia.controls['valor'].touched" [customIcon]="'attach_money'"
-                    [disabledGroup]="dadosTransferencia.controls['valor'].disabled"
-                    [valido]="!(dadosTransferencia.controls['valor'].touched && dadosTransferencia.controls['valor'].invalid)"
-                    [mensagemErro]="'Campo obrigatório'" formControlName="valor" #inputValor></app-custom-input>
-
-                <!-- INPUT GROUP DESCRIÇÃO -->
-                <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputDescricao'"
-                    [titulo]="'Descrição da transferência'" [tabIndex]="4" [maxLength]="50"
-                    [touched]="dadosTransferencia.controls['descricao'].touched" [todosCaracteresMaiusculos]="true"
-                    [customIcon]="null" [disabledGroup]="dadosTransferencia.controls['descricao'].disabled"
-                    [valido]="!(dadosTransferencia.controls['descricao'].touched && dadosTransferencia.controls['descricao'].invalid)"
-                    [mensagemErro]="'Campo obrigatório'" formControlName="descricao" #inputNome></app-custom-input>
-
-                <!-- PRIMEIRO CONTAINER DE BOTÃO -->
-                <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="5"
-                        (click)="fechaFormulario()">
-                        Fechar
-                    </button>
-
-                    <button tabindex="6" class="button" type="button" mat-button
-                        (click)="enviaFormulario(stepper)">Próximo</button>
-                </div>
-
-            </form>
+            <app-dados-pix [stepAtual]="stepAtual" [dadosTransferencia]="dadosTransferencia"></app-dados-pix>
+            <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="5"
+                    (click)="fechaFormulario()">
+                    Fechar
+                </button>
+                <button tabindex="6" class="button" type="button" mat-button matStepperNext
+                    (click)="enviaFormulario()">Próximo</button>
+            </div>
         </mat-step>
 
-        <mat-step [stepControl]="dadosTransferencia" editable="true">
+        <mat-step [stepControl]="dadosConfirmacaoTransferencia" editable="true">
             <ng-template matStepLabel>
                 <span>Confirmar</span>
             </ng-template>
-            <div class="row confirma_pix_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="confirma_pix_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    Agora, é só confirmar
-                </div>
-                <div class="confirma_pix_subtitulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    Dados da transferência
-                </div>
-                <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        Valor
-                    </div>
-                    <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {{ getValueAtributoDadosTransferencia('valor') | currency: 'BRL' }}
-                    </div>
-                </div>
-                <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        Data do débito
-                    </div>
-                    <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {{ obtemDataHoje() | date: 'dd/MM/yyyy' }}
-                    </div>
-                </div>
-                <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        Tipo da chave pix
-                    </div>
-                    <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {{ getValueAtributoDadosTransferencia('tipoChavePix') }}
-                    </div>
-                </div>
-                <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        Chave pix
-                    </div>
-                    <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {{ getValueAtributoDadosTransferencia('chavePix') }}
-                    </div>
-                </div>
-                <div class="row confirma_pix_block col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        Descrição
-                    </div>
-                    <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {{ getValueAtributoDadosTransferencia('descricao') }}
-                    </div>
-                </div>
-            </div>
+            <app-confirma-pix [stepAtual]="stepAtual" [dadosTransferencia]="dadosTransferencia"></app-confirma-pix>
             <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="5"
+                <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="7"
                     matStepperPrevious>
                     Voltar
                 </button>
-                <button tabindex="6" class="button" type="button" mat-button
-                    (click)="confirmaEnvioDeFormulario(stepper)">Próximo</button>
+                <button tabindex="6" class="button" type="button" mat-button matStepperNext
+                    (click)="confirmaEnvioDeFormulario(stepper)">Confirmar</button>
             </div>
         </mat-step>
 
@@ -133,6 +50,9 @@
             <ng-template matStepLabel>
                 <span>Finalizado</span>
             </ng-template>
+            <app-pix-finalizado (emiteTransferenciaProcessada)="setaProcessamentoDaTransferenciaParaTrue($event)"
+                [stepAtual]="stepAtual" [dadosTransferencia]="dadosTransferencia"
+                [transferenciaProcessada]="transferenciaProcessada"></app-pix-finalizado>
         </mat-step>
 
     </mat-horizontal-stepper>

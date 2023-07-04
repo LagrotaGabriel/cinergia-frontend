@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ClientesModule } from './modules/pages/clientes/clientes.module';
 import { DatePipe } from '@angular/common';
@@ -33,6 +34,9 @@ import { DashboardModule } from './modules/pages/dashboard/dashboard.module';
 import { LoginModule } from './modules/pages/login/login.module';
 import { NovaTransferenciaComponent } from './shared/header/nova-transferencia/nova-transferencia.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { DadosPixComponent } from './shared/header/nova-transferencia/dados-pix/dados-pix.component';
+import { ConfirmaPixComponent } from './shared/header/nova-transferencia/confirma-pix/confirma-pix.component';
+import { PixFinalizadoComponent } from './shared/header/nova-transferencia/pix-finalizado/pix-finalizado.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,9 @@ import { SharedModule } from './modules/shared/shared.module';
     SidenavComponent,
     HeaderComponent,
     NovaTransferenciaComponent,
+    DadosPixComponent,
+    ConfirmaPixComponent,
+    PixFinalizadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,8 @@ import { SharedModule } from './modules/shared/shared.module';
     LoginModule,
     SharedModule,
     HttpClientModule,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressSpinnerModule
   ],
 
   providers: [DatePipe, { provide: Window, useValue: window }],

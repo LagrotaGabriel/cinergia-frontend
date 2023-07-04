@@ -1,0 +1,55 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+div {
+    margin: 0;
+    padding: 0;
+}
+
+.check_icon_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.icone {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.3rem;
+}
+
+.titulo_transferencia {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: $font-poppins;
+    text-align: center;
+}
+
+.texto_transferencia {
+    color: $dark-white;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: $font-poppins;
+    text-align: center;
+}
+
+.primary {
+    color: $primary-color;
+}
+
+.success {
+    color: $success;
+}
+
+.error {
+    color: $strong-red
+}
+
+::ng-deep mat-progress-spinner {
+    width: 60px !important;
+    height: 60px !important;
+    margin-bottom: 0.5rem !important;
+}

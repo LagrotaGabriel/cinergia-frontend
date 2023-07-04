@@ -1,16 +1,14 @@
 @import '../../../../dist/variables.scss';
 @import "../../../../../node_modules/rfs/scss";
-@import '/src/app/modules/shared/custom-inputs/styles/custom-inputs.scss';
 
 div,
 h1,
 hr,
 form,
 button,
-app-custom-input,
-app-custom-select-box,
-app-custom-date-input,
-app-custom-select {
+app-confirma-pix,
+app-dados-pix,
+app-pix-finalizado {
     margin: 0;
     padding: 0;
 }
@@ -121,40 +119,6 @@ span {
     font-weight: 600;
 }
 
-// CONFIRMAÇÃO
-.confirma_pix_block {
-    margin-bottom: 1rem;
-}
-
-.confirma_pix_titulo {
-    font-size: 1.2rem;
-    color: $dark-white;
-    font-family: $font-poppins;
-    font-weight: 500;
-    padding: 0 1rem;
-}
-
-.confirma_pix_subtitulo {
-    font-size: 1rem;
-    color: $light-grey;
-    font-family: $font-poppins;
-    font-weight: 300;
-    padding: 0 1rem;
-    margin: 1.5rem 0 1rem 0;
-}
-
-.confirma_pix_content_titulo {
-    font-family: $font-poppins;
-    font-size: 1rem;
-    color: $dark-white;
-    margin-bottom: 0.1rem;
-    padding: 0 1rem;
-}
-
-.confirma_pix_content_texto {
-    font-family: $font-poppins;
-    font-size: 0.9rem;
-    color: $light-white;
-    padding: 0 1rem;
-    font-weight: 300;
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
 }

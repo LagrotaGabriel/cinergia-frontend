@@ -1,0 +1,45 @@
+@import '../../../../../dist/variables.scss';
+@import "../../../../../../node_modules/rfs/scss";
+
+div,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+.confirma_pix_block {
+    margin-bottom: 1rem;
+}
+
+.confirma_pix_titulo {
+    font-size: 1rem;
+    color: $dark-white;
+    font-family: $font-poppins;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+.confirma_pix_subtitulo {
+    font-size: 1rem;
+    color: $light-grey;
+    font-family: $font-poppins;
+    font-weight: 300;
+    padding: 0 1rem;
+    margin: 1rem 0 1rem 0;
+}
+
+.confirma_pix_content_titulo {
+    font-family: $font-poppins;
+    font-size: 1rem;
+    color: $dark-white;
+    margin-bottom: 0.1rem;
+    padding: 0 1rem;
+}
+
+.confirma_pix_content_texto {
+    font-family: $font-poppins;
+    font-size: 0.9rem;
+    color: $light-white;
+    padding: 0 1rem;
+    font-weight: 300;
+}

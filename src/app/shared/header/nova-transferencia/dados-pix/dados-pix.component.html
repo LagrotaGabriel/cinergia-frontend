@@ -1,0 +1,33 @@
+<form class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [formGroup]="dadosTransferencia">
+
+    <!-- SELECT GROUP TIPO DA CHAVE PIX -->
+    <app-custom-select class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" formControlName="tipoChavePix"
+        [tabIndex]="1" [titulo]="'Tipo da chave Pix'" (change)="alteraTipoChavePix()"
+        [disabledGroup]="dadosTransferencia.get('tipoChavePix').disabled" #selectTipoChavePix
+        [options]="geraOptionsTipoChavePix()"></app-custom-select>
+
+    <!-- INPUT GROUP CHAVE PIX -->
+    <app-custom-input class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12" [titulo]="'Chave Pix destino'"
+        [disabledGroup]="dadosTransferencia.controls['chavePix'].disabled" [tabIndex]="2"
+        (input)="realizaTratamentoChavePix($event)" (focusout)="realizaTratamentoChavePix(null)"
+        [touched]="dadosTransferencia.controls['chavePix'].touched" [mensagemErro]="'Campo obrigatório inválido'"
+        [maxLength]="maxLengthChavePix"
+        [valido]="!(dadosTransferencia.controls['chavePix'].touched && dadosTransferencia.controls['chavePix'].invalid)"
+        formControlName="chavePix"></app-custom-input>
+
+    <!-- INPUT GROUP VALOR -->
+    <app-custom-input class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputValor'" [titulo]="'Valor'"
+        [tabIndex]="3" [maxLength]="10" (input)="realizaTratamentoValor()"
+        [touched]="dadosTransferencia.controls['valor'].touched" [customIcon]="'attach_money'"
+        [disabledGroup]="dadosTransferencia.controls['valor'].disabled"
+        [valido]="!(dadosTransferencia.controls['valor'].touched && dadosTransferencia.controls['valor'].invalid)"
+        [mensagemErro]="'Campo obrigatório'" formControlName="valor" #inputValor></app-custom-input>
+
+    <!-- INPUT GROUP DESCRIÇÃO -->
+    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputDescricao'"
+        [titulo]="'Descrição da transferência'" [tabIndex]="4" [maxLength]="50"
+        [touched]="dadosTransferencia.controls['descricao'].touched" [todosCaracteresMaiusculos]="true"
+        [customIcon]="null" [disabledGroup]="dadosTransferencia.controls['descricao'].disabled"
+        [valido]="!(dadosTransferencia.controls['descricao'].touched && dadosTransferencia.controls['descricao'].invalid)"
+        [mensagemErro]="'Campo obrigatório'" formControlName="descricao" #inputNome></app-custom-input>
+</form>

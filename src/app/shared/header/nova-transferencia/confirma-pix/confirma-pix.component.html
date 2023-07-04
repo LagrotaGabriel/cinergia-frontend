@@ -1,0 +1,48 @@
+<div class="row confirma_pix_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="confirma_pix_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        Agora, é só confirmar
+    </div>
+    <div class="confirma_pix_subtitulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        Dados da transferência
+    </div>
+    <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Valor
+        </div>
+        <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ getValueAtributoDadosTransferencia('valor') | currency: 'BRL' }}
+        </div>
+    </div>
+    <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Data do débito
+        </div>
+        <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ obtemDataHoje() | date: 'dd/MM/yyyy' }}
+        </div>
+    </div>
+    <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Tipo da chave pix
+        </div>
+        <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ getValueAtributoDadosTransferencia('tipoChavePix') }}
+        </div>
+    </div>
+    <div class="row confirma_pix_block col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Chave pix
+        </div>
+        <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ getValueAtributoDadosTransferencia('chavePix') }}
+        </div>
+    </div>
+    <div class="row confirma_pix_block col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="confirma_pix_content_titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            Descrição
+        </div>
+        <div class="confirma_pix_content_texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {{ getValueAtributoDadosTransferencia('descricao') }}
+        </div>
+    </div>
+</div>
