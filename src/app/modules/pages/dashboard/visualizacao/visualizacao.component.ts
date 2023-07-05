@@ -59,6 +59,11 @@ export class VisualizacaoComponent {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
+  dadosGraficoFaturamento: Array<any> = [];
+  dadosGraficoFaturamentoValorBruto = [];
+  dadosGraficoFaturamentoValorTaxa = [];
+  dadosGraficoFaturamentoValorLiquido = [];
+
   ngOnInit(): void {
     this.geraChartFaturamento();
   }
@@ -67,6 +72,7 @@ export class VisualizacaoComponent {
     this.obtemTransacoesRealizadas();
     this.obtemTranferenciasRealizadas();
     this.obtemDadosDashBoardEmpresa();
+    this.obtemDadosGraficoFaturamentoEmpresa();
   }
 
   obtemDadosDashBoardEmpresa() {
@@ -93,86 +99,59 @@ export class VisualizacaoComponent {
     });
   }
 
+  obtemDadosGraficoFaturamentoEmpresa() {
+    this.empresaService.obtemDadosGraficoFaturamentoEmpresa().subscribe({
+      next: (response) => {
+        Object.keys(response).forEach(key => {
+          var obj1 = response[key];
+          Object.keys(obj1).forEach(key1 => {
+            if (key1 == 'valorBruto') this.dadosGraficoFaturamentoValorBruto.push(obj1[key1])
+            else if (key1 == 'valorTaxa') this.dadosGraficoFaturamentoValorTaxa.push(obj1[key1]);
+            else if (key1 == 'valorLiquido') this.dadosGraficoFaturamentoValorLiquido.push(obj1[key1]);
+            this.dadosGraficoFaturamento.push({ k: key, l: key1, m: obj1[key1] });
+          })
+        })
+      },
+      complete: () => {
+        console.log(this.faturamentoLineApexChart.series);
+        this.faturamentoLineApexChart.series = [
+          {
+            name: 'Faturamento bruto',
+            color: '#4a47d1',
+            data: this.dadosGraficoFaturamentoValorBruto
+          },
+          {
+            name: 'Taxas',
+            color: '#e83c78',
+            data: this.dadosGraficoFaturamentoValorTaxa
+          },
+          {
+            name: 'Faturamento líquido',
+            color: '#1d97c7',
+            data: this.dadosGraficoFaturamentoValorLiquido
+          },
+        ]
+      }
+    });
+  }
+
   geraChartFaturamento() {
     this.faturamentoLineApexChart = {
       series: [
         {
           name: 'Faturamento bruto',
           color: '#4a47d1',
-          data: [
-            { x: 'Dia 1', y: 30 },
-            { x: 'Dia 2', y: 24 },
-            { x: 'Dia 3', y: 32 },
-            { x: 'Dia 4', y: 36 },
-            { x: 'Dia 5', y: 30 },
-            { x: 'Dia 6', y: 21 },
-            { x: 'Dia 7', y: 27 },
-            { x: 'Dia 8', y: 18 },
-            { x: 'Dia 9', y: 29 },
-            { x: 'Dia 10', y: 39 },
-            { x: 'Dia 11', y: 41 },
-            { x: 'Dia 12', y: 42 },
-            { x: 'Dia 13', y: 36 },
-            { x: 'Dia 14', y: 31 },
-            { x: 'Dia 15', y: 25 },
-            { x: 'Dia 16', y: 30 },
-            { x: 'Dia 17', y: 22 },
-            { x: 'Dia 18', y: 24 },
-            { x: 'Dia 19', y: 18 },
-            { x: 'Dia 20', y: 27 },
-          ]
+          data: []
         },
         {
           name: 'Taxas',
           color: '#e83c78',
-          data: [
-            { x: 'Dia 1', y: 2 },
-            { x: 'Dia 2', y: 3 },
-            { x: 'Dia 3', y: 1 },
-            { x: 'Dia 4', y: 2.5 },
-            { x: 'Dia 5', y: 3.5 },
-            { x: 'Dia 6', y: 1.5 },
-            { x: 'Dia 7', y: 2 },
-            { x: 'Dia 8', y: 3 },
-            { x: 'Dia 9', y: 0.5 },
-            { x: 'Dia 10', y: 1 },
-            { x: 'Dia 11', y: 2 },
-            { x: 'Dia 12', y: 3.5 },
-            { x: 'Dia 13', y: 6 },
-            { x: 'Dia 14', y: 4 },
-            { x: 'Dia 15', y: 2.0 },
-            { x: 'Dia 16', y: 3.5 },
-            { x: 'Dia 17', y: 1 },
-            { x: 'Dia 18', y: 5 },
-            { x: 'Dia 19', y: 10 },
-            { x: 'Dia 20', y: 1.4 },
-          ]
+          data: []
         },
         {
           name: 'Faturamento líquido',
           color: '#1d97c7',
-          data: [
-            { x: 'Dia 1', y: 28 },
-            { x: 'Dia 2', y: 21 },
-            { x: 'Dia 3', y: 29 },
-            { x: 'Dia 4', y: 33.5 },
-            { x: 'Dia 5', y: 26.5 },
-            { x: 'Dia 6', y: 19.5 },
-            { x: 'Dia 7', y: 25 },
-            { x: 'Dia 8', y: 15 },
-            { x: 'Dia 9', y: 28.5 },
-            { x: 'Dia 10', y: 38 },
-            { x: 'Dia 11', y: 39 },
-            { x: 'Dia 12', y: 38.5 },
-            { x: 'Dia 13', y: 30 },
-            { x: 'Dia 14', y: 27 },
-            { x: 'Dia 15', y: 23 },
-            { x: 'Dia 16', y: 26.5 },
-            { x: 'Dia 17', y: 21 },
-            { x: 'Dia 18', y: 19 },
-            { x: 'Dia 19', y: 16 },
-            { x: 'Dia 20', y: 25.6 },
-          ]
+          data: []
         },
       ],
       chart: {
@@ -220,7 +199,7 @@ export class VisualizacaoComponent {
       },
       xaxis: {
         type: 'category',
-        categories: [],
+        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         tickAmount: undefined,
         tickPlacement: 'on',
         min: 1,
@@ -469,7 +448,7 @@ export class VisualizacaoComponent {
         }
       },
       legend: {
-        show: true,
+        show: false,
         showForSingleSeries: false,
         showForNullSeries: false,
         showForZeroSeries: false,

@@ -1,4 +1,4 @@
-import { Observable, catchError, tap, throwError, map } from 'rxjs';
+import { Observable, catchError, throwError, map } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -65,6 +65,15 @@ export class EmpresaService {
   public obtemDadosEstatisticosEmpresa(): Observable<DadosDashBoardEmpresa> {
     return this.http.get<DadosDashBoardEmpresa>(`${API_CONFIG.baseUrl}/empresa/dashboard`, this.httpOptions).pipe(
       map((resposta) => new DadosDashBoardEmpresa(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      })
+    );
+  }
+
+  public obtemDadosGraficoFaturamentoEmpresa(): Observable<DadosDashBoardEmpresa> {
+    return this.http.get<DadosDashBoardEmpresa>(`${API_CONFIG.baseUrl}/empresa/grafico-faturamento`, this.httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(error);
         return throwError(() => new HttpErrorResponse(error));

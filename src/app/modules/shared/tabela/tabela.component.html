@@ -1,4 +1,5 @@
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 table_container table-responsive" [ngClass]="{'table_container_height_auto': isTableHeightAuto}">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 table_container table-responsive"
+    [ngClass]="{'table_container_height_auto': isTableHeightAuto}">
 
     <table class="table table-borderless table-hover" *ngIf="objetos != null, else loadBarTabela">
 
@@ -100,7 +101,10 @@
 
         <ng-template #tabelaVazia>
             <div class="tabela_vazia_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                Nenhum item encontrado
+                <mat-icon fontIcon="description" class="icone_nada_encontrado"></mat-icon>
+                <div class="text_nada_encontrado col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Nenhum item encontrado
+                </div>
             </div>
         </ng-template>
 

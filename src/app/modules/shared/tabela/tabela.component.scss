@@ -74,7 +74,7 @@ input[type=checkbox] {
 .tabela_vazia_container {
     width: 100%;
     padding: 0;
-    margin: 3rem 0 2rem 0;
+    margin: 4.5rem 0 2rem 0;
     font-size: 0.90rem;
     color: $dark-white;
     font-weight: 400;
@@ -169,6 +169,17 @@ input[type=checkbox] {
     align-items: center;
     margin-right: 1rem;
     color: $dark-white;
+}
+
+.icone_nada_encontrado {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.3rem;
+}
+
+.text_nada_encontrado {
+    font-size: 0.9rem;
 }
 
 @media (max-width: 1200px) {}
