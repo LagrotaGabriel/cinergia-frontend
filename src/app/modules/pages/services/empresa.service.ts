@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Util } from '../../utils/Util';
 import { EmpresaSimplificada } from 'src/app/shared/header/models/EmpresaSimplificada';
 import { DadosDashBoardEmpresa } from '../dashboard/models/DadosDashBoardEmpresa';
+import { Notificacao } from 'src/app/shared/header/models/Notificacao';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,24 @@ export class EmpresaService {
         return throwError(() => new HttpErrorResponse(error));
       }),
     )
+  }
+
+  public obtemNotificacoesEmpresa(): Observable<Notificacao[]> {
+    return this.http.get<Notificacao[]>(`${API_CONFIG.baseUrl}/notificacao`, this.httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      })
+    );
+  }
+
+  public setaNotificacoesComoLidas(): Observable<any> {
+    console.log(this.httpOptions);
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/notificacao`, this.httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new HttpErrorResponse(error));
+      })
+    );
   }
 
   public obtemNomeSaldoEmpresa(): Observable<EmpresaSimplificada> {

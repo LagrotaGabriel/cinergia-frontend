@@ -8,8 +8,42 @@
     </div>
 
     <div class="row coluna_direita">
-      <button tabindex="-1" mat-icon-button class="icon" matTooltip="Avisos" matTooltipPosition="below">
-        <mat-icon>notifications</mat-icon>
+      <button tabindex="-1" mat-icon-button class="icon" [matMenuTriggerFor]="menuNotificacoes">
+        <mat-icon [matBadge]="notificacoes.length > 0 ? notificacoes.length : null" matBadgeSize="small"
+          matBadgeColor="accent">notifications</mat-icon>
+        <mat-menu class="menu_notificacoes" #menuNotificacoes="matMenu" matTooltipPosition="above"
+          (click)="$event.stopPropagation()">
+          <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 menu_notificacoes_container">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 menu_notificacoes_titulo">
+              Notificações
+            </div>
+            <hr class="menu_notificacoes_hr col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div *ngIf="notificacoes.length > 0, else notificacoesVazias"
+              class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 menu_notificacoes_content">
+              <div class="marcar_notificacoes_como_lido" (click)="setaNotificacoesComoLidas()">
+                Marcar como lido
+              </div>
+              <a *ngFor="let notificacao of notificacoes" [href]="notificacao.uri" target="_blank"
+                [matBadge]="!notificacao.lida ? '!' : null" matBadgeSize="small" [matBadgePosition]="'after'"
+                class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 menu_notificacoes_item">
+                <div class="menu_notificacoes_text">
+                  {{ notificacao.descricao }}
+                </div>
+              </a>
+            </div>
+            <ng-template #notificacoesVazias>
+              <div
+                class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 menu_notificacoes_content menu_notificacoes_content_vazio">
+                <mat-icon class="icone_nenhuma_notificacao">
+                  folder_open
+                </mat-icon>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 texto_nenhuma_notificacao">
+                  Não há nenhuma notificação
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </mat-menu>
       </button>
 
       <button tabindex="-1" mat-icon-button class="icon" matTooltip="Acionar o suporte" matTooltipPosition="below">

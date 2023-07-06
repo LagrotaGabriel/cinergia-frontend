@@ -74,7 +74,6 @@ export class PixFinalizadoComponent {
         error: (error: HttpErrorResponse) => {
           let text = 'Ops! Ocorreu uma falha na transferência. Tente novamente mais tarde';
           if (Util.isNotEmptyString(error?.error?.error)) text = error.error.error
-          //this.dadosTransferencia.reset();
           this.statusTransferenciaPix = {
             status: 'Erro',
             icone: 'cancel',

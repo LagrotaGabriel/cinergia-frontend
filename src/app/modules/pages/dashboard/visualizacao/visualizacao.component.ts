@@ -537,7 +537,11 @@ export class VisualizacaoComponent {
         hidden: null
       },
       {
-        campo: 'Forma de pgto.',
+        campo: 'Chave pix',
+        hidden: null
+      },
+      {
+        campo: '',
         hidden: null
       },
     );
@@ -557,7 +561,7 @@ export class VisualizacaoComponent {
         tableTdCustomClasses: [],
       },
       {
-        campo: 'dataPagamento',
+        campo: 'dataCadastro',
         hidden: null,
         maxLength: 18,
         type: 'date',
@@ -565,7 +569,7 @@ export class VisualizacaoComponent {
         tableTdCustomClasses: []
       },
       {
-        campo: 'valorBruto',
+        campo: 'valor',
         hidden: null,
         maxLength: 14,
         type: 'money',
@@ -573,7 +577,15 @@ export class VisualizacaoComponent {
         tableTdCustomClasses: []
       },
       {
-        campo: 'formaPagamento',
+        campo: 'chavePix',
+        hidden: null,
+        maxLength: 15,
+        type: 'string',
+        titleCase: false,
+        tableTdCustomClasses: []
+      },
+      {
+        campo: 'tipoChavePix',
         hidden: null,
         maxLength: 15,
         type: 'string',

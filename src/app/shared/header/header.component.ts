@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EmpresaSimplificada } from './models/EmpresaSimplificada';
 import { NovaTransferenciaComponent } from './nova-transferencia/nova-transferencia.component';
+import { Notificacao } from './models/Notificacao';
 
 @Component({
   selector: 'app-header',
@@ -26,9 +27,11 @@ export class HeaderComponent {
   public botaoMenuLateralResponsivo: boolean;
 
   protected empresaSimplificada: EmpresaSimplificada;
+  protected notificacoes: Notificacao[] = [];
 
   ngAfterViewInit(): void {
     this.obtemNomeSaldoEmpresa();
+    this.obtemNotificacoesEmpresa();
   }
 
   alteraExibicaoSideBar() {
@@ -48,6 +51,18 @@ export class HeaderComponent {
     })
   }
 
+  obtemNotificacoesEmpresa() {
+    this.empresaService.obtemNotificacoesEmpresa().subscribe({
+      next: (response) => {
+        this.notificacoes = response;
+      }
+    })
+  }
+
+  setaNotificacoesComoLidas() {
+    this.empresaService.setaNotificacoesComoLidas().subscribe({})
+    window.location.reload();
+  }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(NovaTransferenciaComponent, {
