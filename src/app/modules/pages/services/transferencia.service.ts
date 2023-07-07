@@ -45,6 +45,11 @@ export class TransferenciaService {
     this.httpOptions.body = null;
     return this.http.post<TransferenciaResponse>(`${API_CONFIG.baseUrl}/transferencia`, transferenciaRequest, this.httpOptions).pipe(
       map(resposta => new TransferenciaResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 

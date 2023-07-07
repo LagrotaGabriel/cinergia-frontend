@@ -63,6 +63,11 @@ export class PlanoService {
     this.httpOptions.body = null;
     return this.http.delete<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idPlano}`, this.httpOptions).pipe(
       map(resposta => new PlanoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 
@@ -70,6 +75,11 @@ export class PlanoService {
     this.httpOptions.body = null;
     return this.http.post<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idCliente}`, planoRequest, this.httpOptions).pipe(
       map(resposta => new PlanoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 
@@ -77,6 +87,11 @@ export class PlanoService {
     this.httpOptions.body = null;
     return this.http.put<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idPlano}`, planoRequest, this.httpOptions).pipe(
       map(resposta => new PlanoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 
@@ -100,7 +115,12 @@ export class PlanoService {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
     return this.http.get<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${id}`, this.httpOptions).pipe(
-      map((resposta) => new PlanoResponse(resposta))
+      map((resposta) => new PlanoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 
@@ -108,7 +128,12 @@ export class PlanoService {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
     return this.http.get<DadosPlanoResponse>(`${API_CONFIG.baseUrl}/plano/dados/${id}`, this.httpOptions).pipe(
-      map((resposta) => new DadosPlanoResponse(resposta))
+      map((resposta) => new DadosPlanoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 

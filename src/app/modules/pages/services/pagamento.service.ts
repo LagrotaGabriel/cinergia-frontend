@@ -90,6 +90,11 @@ export class PagamentoService {
     this.httpOptions.body = null;
     return this.http.delete<PagamentoResponse>(`${API_CONFIG.baseUrl}/pagamento/${idPagamento}`, this.httpOptions).pipe(
       map(resposta => new PagamentoResponse(resposta)),
+      catchError((error: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaListagemDeItens(error);
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error));
+      }),
     )
   }
 

@@ -10,13 +10,16 @@ import { EmpresaSimplificada } from 'src/app/shared/header/models/EmpresaSimplif
 import { DadosDashBoardEmpresa } from '../dashboard/models/DadosDashBoardEmpresa';
 import { Notificacao } from 'src/app/shared/header/models/Notificacao';
 import { PlanoResponse } from '../assinaturas/models/PlanoResponse';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient,
+    private _snackBar: MatSnackBar,
+    private router: Router) { }
 
   httpOptionsLogin = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -56,18 +59,18 @@ export class EmpresaService {
 
   public obtemNotificacoesEmpresa(): Observable<Notificacao[]> {
     return this.http.get<Notificacao[]>(`${API_CONFIG.baseUrl}/notificacao`, this.httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return throwError(() => new HttpErrorResponse(error));
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
       })
     );
   }
 
   public setaNotificacoesComoLidas(): Observable<any> {
     return this.http.get<any>(`${API_CONFIG.baseUrl}/notificacao/marcar-como-lido`, this.httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return throwError(() => new HttpErrorResponse(error));
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
       })
     );
   }
@@ -75,9 +78,9 @@ export class EmpresaService {
   public obtemNomeSaldoEmpresa(): Observable<EmpresaSimplificada> {
     return this.http.get<EmpresaSimplificada>(`${API_CONFIG.baseUrl}/empresa/simplificado`, this.httpOptions).pipe(
       map((resposta) => new EmpresaSimplificada(resposta)),
-      catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return throwError(() => new HttpErrorResponse(error));
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
       })
     );
   }
@@ -85,19 +88,39 @@ export class EmpresaService {
   public obtemDadosEstatisticosEmpresa(): Observable<DadosDashBoardEmpresa> {
     return this.http.get<DadosDashBoardEmpresa>(`${API_CONFIG.baseUrl}/empresa/dashboard`, this.httpOptions).pipe(
       map((resposta) => new DadosDashBoardEmpresa(resposta)),
-      catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return throwError(() => new HttpErrorResponse(error));
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
       })
     );
   }
 
   public obtemDadosGraficoFaturamentoEmpresa(): Observable<DadosDashBoardEmpresa> {
     return this.http.get<DadosDashBoardEmpresa>(`${API_CONFIG.baseUrl}/empresa/grafico-faturamento`, this.httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(error);
-        return throwError(() => new HttpErrorResponse(error));
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
       })
     );
+  }
+
+  private implementaLogicaDeCapturaDeErroNaExclusaoDeItens(error: HttpErrorResponse) {
+    if (error.status == 403 || error.status == 401) {
+      localStorage.clear();
+      this.router.navigate(['login']);
+      this._snackBar.open('É necessário realizar o login para acessar as funcionalidades do sistema', 'fechar', {
+        duration: 3500
+      })
+    }
+    else if (error.status == 400) {
+      this._snackBar.open(error.error.error, "Fechar", {
+        duration: 3500
+      });
+    }
+    else {
+      this._snackBar.open("Houve uma falha de comunicação com o servidor", "Fechar", {
+        duration: 3500
+      });
+    }
   }
 }

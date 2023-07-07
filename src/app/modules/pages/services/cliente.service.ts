@@ -82,6 +82,10 @@ export class ClienteService {
     this.httpOptions.body = null;
     return this.http.post<ClienteResponse>(`${API_CONFIG.baseUrl}/cliente`, clienteRequest, this.httpOptions).pipe(
       map(resposta => new ClienteResponse(resposta)),
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
+      })
     )
   }
 
@@ -89,6 +93,10 @@ export class ClienteService {
     this.httpOptions.body = null;
     return this.http.put<ClienteResponse>(`${API_CONFIG.baseUrl}/cliente/${idCliente}`, clienteRequest, this.httpOptions).pipe(
       map(resposta => new ClienteResponse(resposta)),
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
+      })
     )
   }
 
@@ -137,7 +145,7 @@ export class ClienteService {
           tagUrlRelatorio.download = 'relatorio-clientes-' + new Date().getTime().toString() + '.pdf';
           document.body.appendChild(tagUrlRelatorio);
           tagUrlRelatorio.click();
-        })
+        }),
       );
   }
 
@@ -145,7 +153,11 @@ export class ClienteService {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
     return this.http.get<ClienteResponse>(`${API_CONFIG.baseUrl}/cliente/${id}`, this.httpOptions).pipe(
-      map((resposta) => new ClienteResponse(resposta))
+      map((resposta) => new ClienteResponse(resposta)),
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        this.implementaLogicaDeCapturaDeErroNaExclusaoDeItens(httpErrorResponse);
+        return throwError(() => new HttpErrorResponse(httpErrorResponse));
+      })
     )
   }
 
@@ -172,11 +184,11 @@ export class ClienteService {
 
   private implementaLogicaDeCapturaDeErroNaListagemDeItens(error) {
     if (error.status == 403 || error.status == 401) {
-       localStorage.clear();
-       this.router.navigate(['login']);
-       this._snackBar.open('É necessário realizar o login para acessar as funcionalidades do sistema', 'fechar', {
+      localStorage.clear();
+      this.router.navigate(['login']);
+      this._snackBar.open('É necessário realizar o login para acessar as funcionalidades do sistema', 'fechar', {
         duration: 3500
-       })
+      })
     }
     else {
       this._snackBar.open("Houve uma falha de comunicação com o servidor", "Fechar", {
@@ -190,9 +202,9 @@ export class ClienteService {
       localStorage.clear();
       this.router.navigate(['login']);
       this._snackBar.open('É necessário realizar o login para acessar as funcionalidades do sistema', 'fechar', {
-       duration: 3500
+        duration: 3500
       })
-   }
+    }
     else if (error.status == 400) {
       this._snackBar.open(error.error.error, "Fechar", {
         duration: 3500
