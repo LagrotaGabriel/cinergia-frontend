@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TableTd } from 'src/app/modules/shared/models/TableTd';
 import { TableTh } from 'src/app/modules/shared/models/TableTh';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 import { PlanoResponse } from '../models/PlanoResponse';
 import { PlanoPageObject } from '../models/PlanoPageObject';
 import { PlanoService } from '../../services/plano.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-visualizacao',
@@ -40,6 +41,7 @@ export class VisualizacaoComponent {
     if (this.getPlanos$ != undefined) this.getPlanos$.unsubscribe();
     if (this.removePlano$ != undefined) this.removePlano$.unsubscribe();
     if (this.geraRelatorio$ != undefined) this.geraRelatorio$.unsubscribe();
+    if (this.removePlano$ != undefined) this.removePlano$.unsubscribe();
   }
 
   invocaRequisicaoHttpGetParaAtualizarObjetos() {
@@ -98,7 +100,7 @@ export class VisualizacaoComponent {
         campo: 'Status',
         hidden: null
       },
-      );
+    );
 
     return thsTabela;
   }
@@ -151,6 +153,10 @@ export class VisualizacaoComponent {
           },
           {
             value: 'Inativo',
+            className: 'yellow_span'
+          },
+          {
+            value: 'Removido',
             className: 'red_span'
           },
         ]
@@ -188,5 +194,21 @@ export class VisualizacaoComponent {
 
   recebeSolicitacaoDeRelatorio(ids: number[]) {
     this.geraRelatorio$ = this.planoService.obtemRelatorioPlanos(ids);
+  }
+
+  recebeSolicitacaoDeExclusao(id: number) {
+    this.removePlano$ = this.planoService.removePlano(id).subscribe({
+      error: (httpErrorResponse: HttpErrorResponse) => {
+        this._snackBar.open(httpErrorResponse.error?.error, 'Fechar', {
+          duration: 5000
+        })
+      },
+      complete: () => {
+        this.invocaRequisicaoHttpGetParaAtualizarObjetos();
+        this._snackBar.open("Plano removido com sucesso", "Fechar", {
+          duration: 5000
+        })
+      }
+    });
   }
 }

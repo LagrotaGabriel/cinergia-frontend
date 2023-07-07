@@ -8,6 +8,7 @@ import { PagamentoPageObject } from '../../assinaturas/models/pagamentos/Pagamen
 import { PagamentoService } from '../../services/pagamento.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-visualizacao',
@@ -18,6 +19,7 @@ import { fadeInOutAnimation } from 'src/app/shared/animations';
 export class VisualizacaoComponent {
   getPagamentos$: Subscription;
   geraRelatorio$: Subscription;
+  removePagamento$: Subscription;
 
   buscaPagamentos: FormControl = new FormControl();
 
@@ -37,6 +39,7 @@ export class VisualizacaoComponent {
   ngOnDestroy(): void {
     if (this.getPagamentos$ != undefined) this.getPagamentos$.unsubscribe();
     if (this.geraRelatorio$ != undefined) this.geraRelatorio$.unsubscribe();
+    if (this.removePagamento$ != undefined) this.removePagamento$.unsubscribe();
   }
 
   invocaRequisicaoHttpGetParaAtualizarObjetos() {
@@ -170,6 +173,10 @@ export class VisualizacaoComponent {
             className: 'red_span'
           },
           {
+            value: 'Cancelado',
+            className: 'red_span'
+          },
+          {
             value: 'Pendente',
             className: 'yellow_span'
           },
@@ -208,5 +215,21 @@ export class VisualizacaoComponent {
 
   recebeSolicitacaoDeRelatorio(ids: number[]) {
     this.geraRelatorio$ = this.pagamentoService.obtemRelatorioPagamentos(ids);
+  }
+
+  recebeSolicitacaoDeExclusao(id: number) {
+    this.removePagamento$ = this.pagamentoService.removePagamento(id).subscribe({
+      error: (httpErrorResponse: HttpErrorResponse) => {
+        this._snackBar.open(httpErrorResponse.error?.error, 'Fechar', {
+          duration: 5000
+        })
+      },
+      complete: () => {
+        this.invocaRequisicaoHttpGetParaAtualizarObjetos();
+        this._snackBar.open("Pagamento removido com sucesso", "Fechar", {
+          duration: 5000
+        })
+      }
+    });
   }
 }

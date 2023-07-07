@@ -9,7 +9,8 @@
         [itensSelecionadosNaTabela]="planosSelecionadosNaTabela" [modulo]="'assinaturas'"
         [inputPlaceholder]="'Busca por descrição...'" [botaoCriarHabilitado]="false"></app-cabecalho>
 
-    <app-tabela (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
+    <app-tabela (emiteSolicitacaoDeExclusaoDoItem)="recebeSolicitacaoDeExclusao($event)"
+        (emiteAlteracaoDoEstadoDeCheckDaTabela)="recebeAtualizacaoNosChecksDaTabela($event)" [@fadeInOut]
         [tbodies]="obtemTdsTabela()" [theads]="obtemThsTabela()" [objetos]="planoPageObject?.content"
         [modulo]="'assinaturas'"></app-tabela>
 

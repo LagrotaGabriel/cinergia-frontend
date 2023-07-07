@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { EmpresaSimplificada } from './models/EmpresaSimplificada';
 import { NovaTransferenciaComponent } from './nova-transferencia/nova-transferencia.component';
 import { Notificacao } from './models/Notificacao';
+import { Subscription, distinctUntilChanged, mergeMap, share, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,8 @@ export class HeaderComponent {
 
   protected empresaSimplificada: EmpresaSimplificada;
   protected notificacoes: Notificacao[] = [];
+
+  private notificacoesEmpresaSubscription$: Subscription;
 
   ngAfterViewInit(): void {
     this.obtemNomeSaldoEmpresa();
@@ -52,16 +55,20 @@ export class HeaderComponent {
   }
 
   obtemNotificacoesEmpresa() {
-    this.empresaService.obtemNotificacoesEmpresa().subscribe({
+    this.notificacoesEmpresaSubscription$ = timer(0, 30000).pipe(
+      distinctUntilChanged(),
+      mergeMap(() => this.empresaService.obtemNotificacoesEmpresa()),
+      share(),
+    ).subscribe({
       next: (response) => {
         this.notificacoes = response;
       }
-    })
+    });
   }
 
   setaNotificacoesComoLidas() {
-    this.empresaService.setaNotificacoesComoLidas().subscribe({})
-    window.location.reload();
+    this.empresaService.setaNotificacoesComoLidas().subscribe({});
+    this.obtemNotificacoesEmpresa();
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {

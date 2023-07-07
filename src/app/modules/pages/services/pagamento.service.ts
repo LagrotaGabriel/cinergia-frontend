@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { API_CONFIG } from 'src/app/config/api-config';
 import { PagamentoPageObject } from '../assinaturas/models/pagamentos/PagamentoPageObject';
 import { Router } from '@angular/router';
+import { PagamentoResponse } from '../assinaturas/models/pagamentos/PagamentoResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,13 @@ export class PagamentoService {
         return throwError(() => new HttpErrorResponse(error));
       }),
       retry({ count: 20, delay: 10000 })
+    )
+  }
+
+  public removePagamento(idPagamento: number): Observable<PagamentoResponse> {
+    this.httpOptions.body = null;
+    return this.http.delete<PagamentoResponse>(`${API_CONFIG.baseUrl}/pagamento/${idPagamento}`, this.httpOptions).pipe(
+      map(resposta => new PagamentoResponse(resposta)),
     )
   }
 

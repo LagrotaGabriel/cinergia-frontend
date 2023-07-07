@@ -130,6 +130,10 @@ export class DetalhesComponent {
             className: 'red_span'
           },
           {
+            value: 'Cancelado',
+            className: 'red_span'
+          },
+          {
             value: 'Pendente',
             className: 'yellow_span'
           },

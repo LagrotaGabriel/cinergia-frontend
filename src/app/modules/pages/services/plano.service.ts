@@ -59,6 +59,13 @@ export class PlanoService {
     )
   }
 
+  public removePlano(idPlano: number): Observable<PlanoResponse> {
+    this.httpOptions.body = null;
+    return this.http.delete<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idPlano}`, this.httpOptions).pipe(
+      map(resposta => new PlanoResponse(resposta)),
+    )
+  }
+
   public novoPlano(planoRequest: PlanoRequest, idCliente: number): Observable<PlanoResponse> {
     this.httpOptions.body = null;
     return this.http.post<PlanoResponse>(`${API_CONFIG.baseUrl}/plano/${idCliente}`, planoRequest, this.httpOptions).pipe(

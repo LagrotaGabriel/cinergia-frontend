@@ -1,4 +1,4 @@
-import { Observable, catchError, throwError, map } from 'rxjs';
+import { Observable, catchError, throwError, map, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +9,7 @@ import { Util } from '../../utils/Util';
 import { EmpresaSimplificada } from 'src/app/shared/header/models/EmpresaSimplificada';
 import { DadosDashBoardEmpresa } from '../dashboard/models/DadosDashBoardEmpresa';
 import { Notificacao } from 'src/app/shared/header/models/Notificacao';
+import { PlanoResponse } from '../assinaturas/models/PlanoResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -63,9 +64,9 @@ export class EmpresaService {
   }
 
   public setaNotificacoesComoLidas(): Observable<any> {
-    console.log(this.httpOptions);
-    return this.http.post<any>(`${API_CONFIG.baseUrl}/notificacao`, this.httpOptions).pipe(
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/notificacao/marcar-como-lido`, this.httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log(error);
         return throwError(() => new HttpErrorResponse(error));
       })
     );
