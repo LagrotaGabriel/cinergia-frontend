@@ -12,6 +12,7 @@ import { Telefone } from 'src/app/shared/models/Telefone';
 import { SelectOption } from 'src/app/modules/shared/custom-inputs/models/select-option';
 import { CustomInputComponent } from 'src/app/modules/shared/custom-inputs/custom-input/custom-input.component';
 import { ClienteResponse } from '../../models/ClienteResponse';
+import { Mask } from 'src/app/modules/utils/Mask';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -27,7 +28,7 @@ export class DadosPessoaisComponent {
     private ref: ChangeDetectorRef) { }
 
   // Validations
-  inputLengthCpfCnpj: number = 11;
+  inputLengthCpfCnpj: number = 14;
   inputPatternCpfCnpj: any = /^\d{3}.?\d{3}.?\d{3}-?\d{2}/;
 
   // Tags html
@@ -149,13 +150,13 @@ export class DadosPessoaisComponent {
   atualizaTipoPessoa() {
 
     if (this.getValueAtributoDadosCliente('tipoPessoa') == 'FISICA') {
-      this.inputLengthCpfCnpj = 11;
-      this.inputPatternCpfCnpj = /^\d{3}.?\d{3}.?\d{3}-?\d{2}/;
+      this.inputLengthCpfCnpj = 14;
+      this.inputPatternCpfCnpj = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
       this.dadosCliente.controls['dataNascimento'].enable();
     }
     else if (this.getValueAtributoDadosCliente('tipoPessoa') == 'JURIDICA') {
-      this.inputLengthCpfCnpj = 14;
-      this.inputPatternCpfCnpj = /^\d{2}\d{3}\d{3}\d{4}\d{2}/
+      this.inputLengthCpfCnpj = 18;
+      this.inputPatternCpfCnpj = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
       this.dadosCliente.controls['dataNascimento'].disable();
     }
     this.dadosCliente.controls['cpfCnpj'].setValidators([Validators.maxLength(this.inputLengthCpfCnpj),
@@ -165,21 +166,26 @@ export class DadosPessoaisComponent {
     this.setValueParaAtributoDadosCliente('cpfCnpj', '')
   }
 
-  realizaTratamentoCpfCnpj() {
-    this.setValueParaAtributoDadosCliente('cpfCnpj', this.getValueAtributoDadosCliente('cpfCnpj')
-      .replace(/[&\/\\#,+@=!"_ªº¹²³£¢¬()$~%.;':*?<>{}-]/g, "")
-      .replace(/[^0-9.]/g, '')
-      .trim());
+  realizaTratamentoCpfCnpj(tecla) {
+
+    if (this.getValueAtributoDadosCliente('tipoPessoa') == 'FISICA' && tecla?.inputType != 'deleteContentBackward'
+      || this.getValueAtributoDadosCliente('tipoPessoa') == 'FISICA' && tecla == null) {
+      this.setValueParaAtributoDadosCliente('cpfCnpj', Mask.cpfMask(this.getValueAtributoDadosCliente('cpfCnpj')));
+    }
+    else if (this.getValueAtributoDadosCliente('tipoPessoa') == 'JURIDICA' && tecla?.inputType != 'deleteContentBackward'
+      || this.getValueAtributoDadosCliente('tipoPessoa') == 'JURIDICA' && tecla == null) {
+      this.setValueParaAtributoDadosCliente('cpfCnpj', Mask.cnpjMask(this.getValueAtributoDadosCliente('cpfCnpj')));
+    }
     this.invocaValidacaoDuplicidadeCpfCnpj();
   }
 
   invocaValidacaoDuplicidadeCpfCnpj() {
     if (
       this.getValueAtributoDadosCliente('tipoPessoa') == 'JURIDICA'
-      && this.getValueAtributoDadosCliente('cpfCnpj').length == 14
+      && this.getValueAtributoDadosCliente('cpfCnpj').length == 18
       && this.dadosCliente.controls['cpfCnpj'].valid ||
       this.getValueAtributoDadosCliente('tipoPessoa') == 'FISICA'
-      && this.getValueAtributoDadosCliente('cpfCnpj').length == 11
+      && this.getValueAtributoDadosCliente('cpfCnpj').length == 14
       && this.dadosCliente.controls['cpfCnpj'].valid) {
 
       if (this.setupDadosAtualizacao != null) {
@@ -205,7 +211,8 @@ export class DadosPessoaisComponent {
   }
 
   obtemDadosDoClientePeloCnpj() {
-    this.obtemDadosClientePeloCnpjSubscription$ = this.brasilApiService.obtemDadosClientePeloCnpj(this.getValueAtributoDadosCliente('cpfCnpj')).subscribe({
+    let cnpjRequest = this.getValueAtributoDadosCliente('cpfCnpj').replace('-', '').replace('/', '').replace('.', '')
+    this.obtemDadosClientePeloCnpjSubscription$ = this.brasilApiService.obtemDadosClientePeloCnpj(cnpjRequest).subscribe({
       next: retornoApi => this.setaClienteComInformacoesObtidasPeloCnpj(retornoApi),
       error: error => {
         this._snackBar.open('Ocorreu um erro na obtenção das informações do CNPJ', "Fechar", {
@@ -244,7 +251,6 @@ export class DadosPessoaisComponent {
   }
 
   private setaClienteComInformacoesDeTelefoneObtidasPeloCnpj(cnpjResponse: CnpjResponse) {
-    console.log(cnpjResponse)
     if (Util.isNotEmptyString(cnpjResponse.telefonePrincipal)) {
       let telefones: Telefone[] = [];
       telefones.push({
@@ -303,13 +309,13 @@ export class DadosPessoaisComponent {
 
   atualizaValidatorsTipoPessoaSetupAtualizacao() {
     if (this.getValueAtributoDadosCliente('tipoPessoa') == 'FISICA') {
-      this.inputLengthCpfCnpj = 11;
-      this.inputPatternCpfCnpj = /^\d{3}.?\d{3}.?\d{3}-?\d{2}/;
+      this.inputLengthCpfCnpj = 14;
+      this.inputPatternCpfCnpj = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
       this.dadosCliente.controls['dataNascimento'].enable();
     }
     else if (this.getValueAtributoDadosCliente('tipoPessoa') == 'JURIDICA') {
-      this.inputLengthCpfCnpj = 14;
-      this.inputPatternCpfCnpj = /^\d{2}\d{3}\d{3}\d{4}\d{2}/
+      this.inputLengthCpfCnpj = 18;
+      this.inputPatternCpfCnpj = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
       this.dadosCliente.controls['dataNascimento'].disable();
     }
     this.dadosCliente.controls['cpfCnpj'].setValidators([Validators.maxLength(this.inputLengthCpfCnpj),
