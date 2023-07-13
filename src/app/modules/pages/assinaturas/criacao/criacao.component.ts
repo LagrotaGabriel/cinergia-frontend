@@ -1,6 +1,6 @@
 import { SelectBox } from './../../../shared/custom-inputs/models/SelectBox';
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { PlanoService } from '../../services/plano.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -38,8 +38,6 @@ export class CriacaoComponent {
 
   ngAfterViewInit(): void {
 
-    console.log(Util.getHojeUs());
-
     this.obtemClienteSubscription$ = this.clienteService.obtemClientePorId(parseInt(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe({
       next: (response: ClienteResponse) => {
         this.cliente = response;
@@ -47,7 +45,7 @@ export class CriacaoComponent {
       }
     })
   }
-  
+
   ngOnDestroy(): void {
     if (Util.isNotObjectEmpty(this.obtemClienteSubscription$)) this.obtemClienteSubscription$.unsubscribe();
   }
@@ -57,12 +55,13 @@ export class CriacaoComponent {
       cliente: [''],
       descricao: ['', [Validators.required, Validators.maxLength(50)]],
       valor: ['0,00', [Validators.required]],
-      dataInicio: [Util.getHojeUs()],
+      dataInicio: [Util.getHojeUs(), [this.realizaTratamentoDataInicio()]],
       periodicidade: ['MENSAL', [Validators.required]],
     });
   }
 
   protected getValueAtributoDadosPlano(atributo: string): any {
+    if (Util.isObjectEmpty(this.dadosPlano)) return null;
     return this.dadosPlano.controls[atributo].value;
   }
 
@@ -155,6 +154,18 @@ export class CriacaoComponent {
     return options;
   }
 
+  realizaTratamentoValor() {
+    this.setValueParaAtributoDadosPlano('valor', this.getValueAtributoDadosPlano('valor')
+      .replace(/[&\/\\#+@=!"_ªº¹²³£¢¬()$~%;':*?<>{}-]/g, "")
+      .replace('.', ',')
+      .replace(/[^0-9,]/g, '')
+      .trim());
+
+    let valor = this.getValueAtributoDadosPlano('valor');
+    if ((valor.match(new RegExp(",", "g")) || []).length > 1)
+      this.setValueParaAtributoDadosPlano('valor', this.getValueAtributoDadosPlano('valor').replace(',', ''));
+  }
+
   realizaTratamentoCpfCnpj() {
     this.setValueParaAtributoDadosPlano('cpfCnpjPortador', this.getValueAtributoDadosPlano('cpfCnpjPortador')
       .replace(/[&\/\\#,+@=!"_ªº¹²³£¢¬()$~%.;':*?<>{}-]/g, "")
@@ -167,6 +178,36 @@ export class CriacaoComponent {
       .replace(/[&\/\\#,+@=!"_ªº¹²³£¢¬()$~%.;':*?<>{}-]/g, "")
       .replace(/[^0-9.]/g, '')
       .trim());
+  }
+
+  realizaTratamentoDataInicio(): ValidatorFn {
+
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+
+      if (this.getValueAtributoDadosPlano('dataInicio') == null) return null;
+
+      let today: Date = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      let maxDate: Date = new Date();
+      maxDate.setFullYear(today.getFullYear() + 50);
+
+      let splittedDataInput: any[] = this.getValueAtributoDadosPlano('dataInicio').split('-');
+      let dataInicioInput = new Date(splittedDataInput[0], splittedDataInput[1] - 1, splittedDataInput[2]);
+
+      if (dataInicioInput < today
+        || dataInicioInput.getFullYear() > maxDate.getFullYear()
+        || dataInicioInput.toString() == 'Invalid Date') {
+        return { nameWrong: true };
+      }
+
+      return null;
+    }
+  }
+
+  atualizaValidatorDataInicio() {
+    this.dadosPlano.controls['dataInicio'].setValidators(this.realizaTratamentoDataInicio());
+    this.dadosPlano.controls['dataInicio'].updateValueAndValidity();
   }
 
   getHojeUs(): string {

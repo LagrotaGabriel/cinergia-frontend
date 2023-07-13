@@ -24,20 +24,22 @@
         <!-- INPUT GROUP VALOR -->
         <app-custom-input class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" [id]="'inputValor'" [titulo]="'Valor'"
             [tabIndex]="2" [maxLength]="10" [touched]="dadosPlano.controls['valor'].touched"
-            [customIcon]="'attach_money'" [disabledGroup]="dadosPlano.controls['valor'].disabled"
+            (input)="realizaTratamentoValor()" [customIcon]="'attach_money'"
+            [disabledGroup]="dadosPlano.controls['valor'].disabled"
             [valido]="!(dadosPlano.controls['valor'].touched && dadosPlano.controls['valor'].invalid)"
             [mensagemErro]="'Campo obrigatório'" formControlName="valor" #inputValor></app-custom-input>
 
         <!-- INPUT GROUP DATA DE INÍCIO -->
         <app-custom-date-input class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" [id]="'inputDataInicio'"
             [titulo]="'Data de início'" [tabIndex]="3" formControlName="dataInicio" [minDate]="getHojeUs()"
+            [valido]="!(dadosPlano.controls['dataInicio'].touched && dadosPlano.controls['dataInicio'].invalid)"
+            [mensagemErro]="'Data inválida'" (input)="atualizaValidatorDataInicio()"
             #inputDataInicio></app-custom-date-input>
 
         <!-- INPUT GROUP PERIODICIDADE DE COBRANÇA -->
         <app-custom-select class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" formControlName="periodicidade"
-            [tabIndex]="4" [titulo]="'Periodicidade'"
-            [disabledGroup]="dadosPlano.get('periodicidade').disabled" #selectAcessoSistemaAtivo
-            [options]="geraOptionsPeriodicidadeCobranca()"></app-custom-select>
+            [tabIndex]="4" [titulo]="'Periodicidade'" [disabledGroup]="dadosPlano.get('periodicidade').disabled"
+            #selectAcessoSistemaAtivo [options]="geraOptionsPeriodicidadeCobranca()"></app-custom-select>
 
         <!-- INPUT FORMA DE PAGAMENTO -->
         <app-custom-select-box class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
@@ -54,13 +56,13 @@
         <!-- PRIMEIRO CONTAINER DE BOTÃO -->
         <div class="button_container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-                <button class="button botaoHabilitado" type="button"
-                    #botaoRetorno mat-button tabindex="6" (click)="retornaParaVisualizacaoDePlanos()">
-                    Voltar
-                </button>
+            <button class="button botaoHabilitado" type="button" #botaoRetorno mat-button tabindex="6"
+                (click)="retornaParaVisualizacaoDePlanos()">
+                Voltar
+            </button>
 
-                <button tabindex="7" class="button" type="button"
-                    mat-button (click)="realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano()">Enviar</button>
+            <button tabindex="7" class="button" type="button" mat-button
+                (click)="realizaAcionamentoDoMetodoDeCriacaoDeObjetoPlano()">Enviar</button>
 
         </div>
 

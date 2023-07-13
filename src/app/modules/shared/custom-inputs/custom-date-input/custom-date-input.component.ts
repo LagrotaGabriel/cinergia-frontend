@@ -19,6 +19,8 @@ export class CustomDateInputComponent implements ControlValueAccessor {
 
   @Input() id: string = '';
   @Input() titulo: string = '';
+  @Input() valido: boolean;
+  @Input() mensagemErro: string;
   @Input() tabIndex: number;
   @Input() minDate: string;
   @Input() maxDate: string;

@@ -23,7 +23,7 @@
         [titulo]="getValueAtributoDadosCliente('tipoPessoa') == 'FISICA' ? 'Cpf' : 'Cnpj'" [tabIndex]="4"
         [maxLength]="20" [touched]="dadosCliente.controls['cpfCnpj'].touched" [todosCaracteresMaiusculos]="false"
         [customIcon]="'badge'" (input)="realizaTratamentoCpfCnpj($event)"
-        [disabledGroup]="dadosCliente.controls['cpfCnpj'].disabled"
+        [disabledGroup]="dadosCliente.controls['cpfCnpj'].disabled" [maxLength]="inputLengthCpfCnpj"
         [valido]="!(dadosCliente.controls['cpfCnpj'].touched && dadosCliente.controls['cpfCnpj'].invalid)"
         [mensagemErro]="'Mínimo de ' + inputLengthCpfCnpj + ' caracteres numéricos'" formControlName="cpfCnpj"
         #inputCpfCnpj></app-custom-input>
