@@ -4,7 +4,7 @@
     <!-- INPUT GROUP PREFIXO -->
     <app-custom-input class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12" [id]="'prefixo'" [titulo]="'Prefixo'"
         [tabIndex]="11" [maxLength]="2" [touched]="dadosTelefone.controls['prefixo'].touched"
-        [todosCaracteresMaiusculos]="false" customIcon="null"
+        [todosCaracteresMaiusculos]="false" customIcon="null" (input)="realizaTratamentoPrefixo()"
         [disabledGroup]="dadosTelefone.controls['prefixo'].disabled"
         [valido]="!(dadosTelefone.controls['prefixo'].invalid)" [mensagemErro]="'Mínimo de 2 caracteres numéricos'"
         formControlName="prefixo" #inputPrefixo></app-custom-input>

@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange
 import { Router } from '@angular/router';
 import { Util } from 'src/app/modules/utils/Util';
 import { ClienteService } from '../../../services/cliente.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, debounceTime } from 'rxjs';
 import { CnpjResponse } from 'src/app/shared/brasil-api/models/cnpj-response';
@@ -96,13 +96,14 @@ export class DadosPessoaisComponent {
         Validators.required]],
       email: ['', [Validators.email, Validators.maxLength(50)]],
       senha: [''],
-      dataNascimento: [''],
+      dataNascimento: ['', [this.realizaTratamentoDataNascimento()]],
       statusCliente: ['COMUM', Validators.required],
       observacao: ['']
     });
   }
 
   protected getValueAtributoDadosCliente(atributo: string): any {
+    if (Util.isObjectEmpty(this.dadosCliente)) return null;
     return this.dadosCliente.controls[atributo].value;
   }
 
@@ -275,22 +276,41 @@ export class DadosPessoaisComponent {
     this.emissorDeEnderecoEncontradoNoCnpj.emit(endereco);
   }
 
-  validaDataNascimento() {
+  realizaTratamentoDataNascimento(): ValidatorFn {
 
-    if (this.getValueAtributoDadosCliente('dataNascimento') == '') {
-      return;
-    }
+    return (formGroup: AbstractControl): ValidationErrors | null => {
 
-    let dataNascimentoSplitada = this.getValueAtributoDadosCliente('dataNascimento').split("-");
-    if (dataNascimentoSplitada.length == 3) {
-      if (parseInt(dataNascimentoSplitada[0]) > 2023 || parseInt(dataNascimentoSplitada[0]) < 1900) {
-        this.setValueParaAtributoDadosCliente('dataNascimento', '');
-        this._snackBar.open("Data de nascimento inválida", "Fechar", {
-          duration: 3500
-        })
-        return;
+      if (this.getValueAtributoDadosCliente('dataNascimento') == null)
+        return null;
+
+      if (Util.isEmptyString(this.getValueAtributoDadosCliente('dataNascimento'))) {
+        this.dadosCliente.controls['dataNascimento'].setValidators([]);
+        this.dadosCliente.controls['dataNascimento'].updateValueAndValidity();
+        return null;
       }
+
+      let today: Date = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      let minDate: Date = new Date();
+      minDate.setFullYear(1900);
+
+      let splittedDataInput: any[] = this.getValueAtributoDadosCliente('dataNascimento').split('-');
+      let dataNascimentoInput = new Date(splittedDataInput[0], splittedDataInput[1] - 1, splittedDataInput[2]);
+
+      if (dataNascimentoInput > today
+        || dataNascimentoInput.getFullYear() < minDate.getFullYear()
+        || dataNascimentoInput.toString() == 'Invalid Date') {
+        return { nameWrong: true };
+      }
+
+      return null;
     }
+  }
+
+  atualizaValidatorDataInicio() {
+    this.dadosCliente.controls['dataNascimento'].setValidators(this.realizaTratamentoDataNascimento());
+    this.dadosCliente.controls['dataNascimento'].updateValueAndValidity();
   }
 
   realizaSetupDados(cliente: ClienteResponse) {

@@ -149,11 +149,16 @@ export class DadosPixComponent {
   }
 
   protected realizaTratamentoValor() {
-    this.dadosTransferencia.controls['valor']
-      .setValue(this.getValueAtributoDadosTransferencia('valor')
-        .replace(/[&\/\\#,+@=!"_ªº¹²³£¢¬()$~%;':*?<>{}-]/g, "")
-        .replace(/[^0-9.]/g, '')
-        .trim())
+    let valor = this.getValueAtributoDadosTransferencia('valor');
+    if ((valor.match(new RegExp(",", "g")) || []).length > 0) {
+      this.setValueParaAtributoDadosTransferencia('valor', this.getValueAtributoDadosTransferencia('valor').replace(',', ''));
+    }
+
+    this.setValueParaAtributoDadosTransferencia('valor', this.getValueAtributoDadosTransferencia('valor')
+    .replace(/[&\/\\#+@=!"_ªº¹²³£¢¬()$~%;':*?<>{}-]/g, "")
+    .replace('.', ',')
+    .replace(/[^0-9,]/g, '')
+    .trim());
   }
 
 }

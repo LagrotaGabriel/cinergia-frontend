@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Telefone } from 'src/app/shared/models/Telefone';
-import { CustomSelectComponent } from 'src/app/modules/shared/custom-inputs/custom-select/custom-select.component';
 import { Util } from 'src/app/modules/utils/Util';
 import { CustomInputComponent } from 'src/app/modules/shared/custom-inputs/custom-input/custom-input.component';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
